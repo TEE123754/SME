@@ -4,7 +4,7 @@
 
 | Field | Value |
 | --- | --- |
-| Version | 0.4 |
+| Version | 0.5 |
 | Date | 7 October 2026 |
 | Status | Phases 1–3 complete; Phase 4 built with automated/browser flow checks passed, 200% zoom gate pending by user choice; Phase 5 not started; usable prototype not complete |
 | Track | WorkBuddy Track: Agentic Solutions |
@@ -24,9 +24,11 @@
 
 **Current user direction:** Codex builds a usable home-bakery prototype. Hardcode the assistant's demo behaviour and use a local scheduler; leave WorkBuddy agentic integration for the later independent rebuild. The prototype must support real saved orders, owner actions, documents and reminders with synthetic data. It runs without WorkBuddy, cloud/model credentials or AI credits. MCP packages, managed-AI adapters and Tencent deployment are future Phase 7 work, not prerequisites for the prototype.
 
+**7 October scope update:** The requested owner agent board, owner/customer AI queries, stock and sales forecasting, controlled dynamic pricing, engagement, content/visual generation, transaction-risk review and ethical safeguards are now specified below. Existing ordering, invoices, approvals, consent and repeat-order requirements are reused. This is a specification change only: no new application feature is built, no previous gate is reopened, and the saved Phase 4 checkpoint remains in force. The expanded capabilities belong to the independent WorkBuddy project; they do not add live AI or model keys to the Codex prototype.
+
 ## 1. Product summary
 
-CustomerBuddy gives each bakery customer a persistent AI assistant that remembers approved preferences, answers from the bakery's current information, prepares accurate quotes, records orders, and follows up on outstanding deposits. The owner handles exceptions through an approval queue and receives a daily operations summary.
+CustomerBuddy gives each bakery customer a persistent AI assistant that remembers approved preferences, answers from the bakery's current information, prepares accurate quotes, records orders, and follows up on outstanding deposits. The owner handles exceptions through an approval queue and receives a daily operations summary. The expanded WorkBuddy product adds a customer-agent board, owner queries, stock/sales planning and reviewed marketing tools while retaining deterministic commerce and human control.
 
 That is the final product vision. The current Codex version represents each customer's assistant with a scripted dispatcher using scoped records. Supported phrases and quick actions demonstrate the workflow; an order form keeps the prototype usable when a message is outside the script. It does not demonstrate general language understanding or live AI reasoning.
 
@@ -86,12 +88,14 @@ Use at least 30 predefined conversations, including new and returning customers,
 ### P1: After the core flow works
 
 - Additional messaging channels, if the WorkBuddy edition and restricted integration path support them. Browser chat is the primary customer channel.
-- Optional consented reorder suggestions and simple popularity counts.
+- WorkBuddy expansion requirements FR-18–FR-27, built after its core flow: customer-agent board; owner AI chat; stock/sales management and forecasting; owner-approved dynamic pricing; recommendations, announcements, promotions and after-sales service; multilingual marketing drafts and generated visuals; transaction-risk review and extended ethical controls.
 - Additional catalogue items or student-business branding using the same workflow.
+
+`P1-WB` below means sequenced after the rebuilt core, but required to claim the **expanded requested release** complete. A core-only release must list these features as unfinished. Statistical/model upgrades may remain disabled when data or supported infrastructure is inadequate; the specified baseline, truthful unavailable state and review workflow still require implementation. External email/social delivery is conditional on a verified restricted connector; draft/export and in-app engagement work without it.
 
 ### Outside the MVP
 
-WhatsApp integration, marketplace synchronisation, delivery routing, automated payment collection, executing refunds, demand forecasting, dynamic pricing, visual try-on, churn prediction, multi-business hosting, and a production service-level commitment.
+WhatsApp integration, marketplace synchronisation, delivery routing, automated payment collection, executing refunds, visual try-on, churn prediction, multi-business hosting, and a production service-level commitment. Forecasting and controlled dynamic pricing are removed from the former exclusion list and included in the WorkBuddy expansion. Autonomous price publication, financial decisions, unreviewed marketing publication and covert cross-platform tracking remain outside scope.
 
 Sales, support, billing, and inventory remain logical roles in the MVP. A large network of independently deployed agents is unnecessary to demonstrate the customer workflow.
 
@@ -142,7 +146,7 @@ Desktop WorkBuddy automations may depend on the workstation being active. Reserv
 
 ### A. First order
 
-1. Introduce the assistant as AI and offer an owner handoff.
+1. Introduce the prototype as scripted (or the rebuilt assistant as AI) and offer an owner handoff.
 2. Resolve the authenticated customer identity. Explain optional preference memory and ask for consent without blocking ordering.
 3. Answer product and pickup questions from the approved bakery knowledge base.
 4. Collect product, quantity, exact pickup date, and pickup slot. Confirm ambiguous phrases such as "next Saturday."
@@ -187,6 +191,30 @@ P0 business mechanics apply to the usable Codex prototype at Phase 6 and the ind
 | FR-15 | P0 | Recover from errors | A failed write does not produce a success reply; a retry does not duplicate a committed order; failed delivery remains visible for owner recovery |
 | FR-16 | P0 | Show impact evidence | Results panel reports the formulas in Section 3, sample size, baseline, demo mode, timing, corrections, and failed scenarios; synthetic payments are labelled |
 | FR-17 | P1 | Add an external messaging channel | Sender identity, restricted permissions, delivery acknowledgement, and the supported integration path are demonstrated before that channel is claimed |
+| FR-18 | P1-WB | Owner customer-agent dashboard | One box per persistent customer-agent context; all active/inactive contexts are searchable/filterable; current status, last interaction, customer, open task and human-review reason link to scoped transcripts/cases |
+| FR-19 | P1-WB | Owner and customer AI queries | Customer tools remain customer-scoped; separate owner chat answers sales, stock, invoices and review queries from authorised records with reporting period/fact references; complex BM/English requests are clarified and evaluated, never silently executed |
+| FR-20 | P1-WB | Sales, invoice and stock management | Sales and collected cash reconcile to orders/payments; invoices/receipts reuse FR-08; owner records batches, expiry, adjustments and waste; physical stock and production capacity remain distinct and concurrency-safe |
+| FR-21 | P1-WB | Stock prediction / sales forecasting | Per-product daily demand and sales-value outlook show horizon, history cutoff, data sufficiency, method and uncertainty; proposed production quantities consider existing stock, shelf life, known orders and capacity; owner accepts a plan without automatic purchasing |
+| FR-22 | P1-WB | Controlled dynamic pricing | Stock/expiry/demand signals produce bounded price suggestions with reasons and validity; owner reviews and publishes a version; old confirmed orders are unchanged and stale unconfirmed quotes require fresh confirmation |
+| FR-23 | P1-WB | Responsible customer engagement | Owner-approved batch announcements, personalised recommendations/promotions and after-sales cases use current stock, consent and bounded sending; opt-out, quiet hours, takeover, expiry and retry checks apply; no invented availability or discount |
+| FR-24 | P1-WB | Multilingual content creation | Generate draft SEO product descriptions, marketing copy, personalised emails, social posts and PR copy in BM/English; additional languages require review; verified product facts/offer terms are preserved and owner approves the exact revision before publication/export |
+| FR-25 | P1-WB | Visual generative AI | Owner requests draft marketing imagery through supported Tencent services; assets show generated provenance, review and rights status; illustrative cake images cannot be represented as proof of actual product appearance or inventory |
+| FR-26 | P1-WB | Fraud / transaction-risk detection | Duplicate-reference/velocity/amount/inconsistent-proof signals create explainable owner cases; risk alone neither verifies payment nor issues a receipt, refund or ban; benign unusual purchases can be cleared with an audited reason |
+| FR-27 | P0 safeguards; extended in WB | Ethical safeguards | Consent, isolation and transparency remain mandatory; test sparse-data bias, prohibit covert tracking and manipulative shopping prompts, explain recommendations/prices, offer human appeal and publish honest AI/data limitations |
+
+### Expanded capability rules
+
+**Agent board:** One customer has one logical agent context even across multiple conversations. Active/inactive describes its persisted automation eligibility, not whether a process is running. Show processing separately as Idle, Working, Waiting for owner, Paused or Error. Inactive cards retain authorised interaction history. Human review comes from unresolved approvals, takeover, failed actions or risk cases; it is never a fabricated model confidence score. Opening a card shows timestamped interactions and safe action outcomes; Take over and Resume reuse FR-10.
+
+**Forecasts and stock:** Track finished baked goods in batches with received/produced, allocated, sold, wasted, adjusted and expired quantities. Production capacity is a date quota, not on-hand stock. Distinguish preorder from ready-stock fulfilment and avoid reserving a quantity twice. Forecast from scoped dated order/fulfilment quantities; exclude cancelled, expired unpaid and synthetic records from real-pilot training. Flag stockout days as constrained observations and missing days as unknown. Start with transparent recent-average/seasonal-naive baselines; use rolling-origin backtests before promoting a richer model. Sparse demo fixtures show Insufficient data or a labelled synthetic simulation, never a validated forecast. Forecasts are advisory and cannot override allocation checks.
+
+Show projected demand, known orders and incremental demand separately to avoid double-counting commitments. A production suggestion is bounded by unexpired usable stock, shelf life, minimum batch size and remaining production capacity; it cannot guarantee that stock overflow or waste will be eliminated. Sales-value projections disclose their price assumption. Dynamic pricing initially uses uniform product/time/stock rules, with owner-set integer-sen floor/ceiling and maximum change; personal traits, inferred wealth or shopping vulnerability cannot determine a price. Promotions use published eligibility/limits; any exception follows FR-09.
+
+**Engagement:** A general announcement such as "A fresh batch of Orange Cake is ready" requires an owner-recorded, currently sellable batch and an approved message. Orange Cake is a proposed expansion fixture, not an existing seeded SKU. Marketing defaults off and is checked again before delivery; personalised targeting additionally requires explicit personalisation consent, distinct from existing memory permission. Start with at most one promotional contact per customer in seven days across connected channels, with owner-configurable lower limits. Transactional support and deposit reminders have separate purposes and cannot carry an unsolicited upsell. One optional after-sales check-in requires service-follow-up permission; complaints, dietary safety questions and refund requests use human review. No consented history means recommendations use the customer's current request and published products without inventing a profile. Engagement outcomes are delivered messages, customer replies/opt-outs and attributable confirmed orders; synthetic activity is labelled.
+
+**Content and visuals:** Draft -> owner review -> approved revision -> publish/export or consent-checked delivery. SEO drafts include title, meta description and accessible image text without ranking guarantees. Personalised email previews use synthetic recipients; live recipient context is scoped and minimised. Social media/PR content can be exported as drafts when a connector is unavailable. Changed copy, facts, assets or offer terms invalidate approval. Product facts, allergens, certifications, customer testimonials and scarcity claims cannot be invented. AI artwork is visibly described as illustration where it could mislead; approved genuine product photos remain preferred for exact appearance. Actual image generation has separate budget, asynchronous job state and account capability checks.
+
+**Risk review:** Begin with deterministic risk signals, with optional anomaly models only after enough representative data and evaluation. A failed duplicate-payment attempt is rejected by commerce integrity even if no risk model is installed. Signals describe evidence and uncertainty, not a verdict that a person is a scammer. Any configured review hold is explicit, expiring and recoverable; it cannot silently change existing reservation or verified-ledger state. Payment verification remains an explicit owner action with the original invariants; a model score or payment screenshot is never proof of settlement. Measure false positives and owner-cleared cases as well as detected signals; do not claim all fraud is prevented.
 
 ## 8. Business rules and autonomy
 
@@ -234,6 +262,9 @@ The interface should make the next decision clear and use plain business languag
 | --- | --- |
 | Customer conversation | AI disclosure, human handoff, relevant order questions, itemised quote, Confirm/Edit controls, payment deadline, order status, and preference/marketing consent controls |
 | Owner overview | Confirmed orders, reserved capacity, verified deposits, unpaid amounts, pending approvals, action failures, and global Pause control |
+| Owner agent board (WB) | One box per customer context, active/inactive filters, interaction preview, processing state, human-review count/reason and transcript/case links |
+| Owner planning and content (WB) | Stock batches/waste, reconciled sales/invoices, forecast assumptions, price proposals, engagement audience/consent preview and reviewed content/assets |
+| Owner query assistant (WB) | Read-only scoped answers with date range, source links, clarification and explicit links to controlled owner actions |
 | Customer detail | This customer's consent status, editable preferences, previous orders, open issue, and current task |
 | Approval queue | Exact proposed action and message, business reason, amount, affected order, Approve/Edit/Reject controls, and expiry |
 | Knowledge settings | Catalogue and policy version, effective time, capacity, and a preview before publishing |
@@ -254,6 +285,9 @@ Use readable mobile-sized conversation panels, labelled controls, keyboard-acces
 | Sales and support role | Answer policy questions and assemble order proposals | Approved catalogue and FAQ; scoped customer context |
 | Order and billing role | Calculate totals, reserve capacity, and produce documents | Validated structured inputs; scoped orders; deterministic business tools |
 | Owner digest role | Summarise business-wide activity and pending decisions | Owner-authorised business records only; no customer-facing delivery authority |
+| Owner query/planning role (WB) | Explain sales, invoices, stock, forecasts and price suggestions | Owner-scoped read tools and draft proposals; cannot approve, publish or verify payment |
+| Engagement/content role (WB) | Suggest products and create campaign/copy/visual drafts | Published facts and consent-eligible context; approved delivery through guarded jobs only |
+| Transaction-risk role (WB) | Summarise deterministic signals and optional anomaly output | Minimal operational features and redacted evidence; owner review, no financial decision authority |
 
 Codex demonstrates these logical roles/contracts in the reference prototype. WorkBuddy reimplements them and adds the actual managed AI integration in the final rebuild. Customer-facing roles run within a server-bound customer scope; WorkBuddy owner tools operate separately with narrowly granted business authority. Naming prompts "agents" does not establish independent permissions or delegation.
 
@@ -305,6 +339,16 @@ The public customer runtime receives only scoped business tools, without shell, 
 - Log available credit usage per scenario. A usage cap should stop new automated work and notify the owner; it must not create a false success message.
 
 A guided or synthetic demo is not evidence of 24/7 availability or Malaysian PDPA compliance. Assess applicable privacy, processing, storage, and retention obligations before a real customer pilot. No such legal assessment has been performed for this PRD.
+
+### Ethical considerations and risk controls
+
+| Risk | Required product control | Evidence to capture in WorkBuddy |
+| --- | --- | --- |
+| Bias from limited history | Show data sufficiency; offer neutral catalogue options to new/opted-out customers; exclude sensitive traits/proxies from ranking and pricing; review language/product exposure differences | Sparse-data and new/returning/opted-out BM/English cases; recommendation coverage and errors, without collecting sensitive traits for the test |
+| Privacy and cross-platform tracking | Use bakery-scoped data and explicit purpose/channel consent; no third-party tracking, device fingerprinting or cross-platform identity stitching; delete optional derived profiles/embeddings when consent is withdrawn | Consent withdrawal immediately suppresses queued targeting; authorised export/deletion and cross-scope denial cases |
+| Manipulative shopping | Cap promotional frequency; easy opt-out; truthful scarcity/expiry; no guilt, addictive streaks, fabricated urgency or targeting vulnerability; standard ordering remains available | Rejected manipulative drafts and frequency/quiet-hours/opt-out tests |
+| AI transparency | Permanent scripted label in Codex; truthful AI label in WorkBuddy; explain recommendation/price basis; distinguish forecast, generated illustration and verified business fact | Disclosure screenshots, source/version traces, uncertainty and human-contact path |
+| Wrongful fraud suspicion | Private evidence-based review, clear reasons, owner override/appeal, no public fraud label or automated punitive outcome | Benign anomaly clearance, false-positive reporting and audited review decisions |
 
 ## 12. Demo fixture and story
 
@@ -365,6 +409,8 @@ The final MVP is ready when the newly rebuilt WorkBuddy project passes P0 scenar
 
 **Codex prototype ready:** Phase 6 passes a complete local enquiry-to-order-to-owner-payment-to-receipt flow, repeat ordering with scoped saved history, exceptions/takeover, reminders/expiry and a reconciled digest. Forms and supported scripts work after restart; documents really download; setup/seed/start/reset instructions are reproducible without WorkBuddy/cloud/model keys. At least 30 scripted and unsupported-input cases report actual outcomes and limitations. No live-AI accuracy claim is derived from them. WorkBuddy agentic features remain explicitly deferred.
 
+**Expanded WorkBuddy acceptance:** In addition to core acceptance, FR-18–FR-27 need their own evidence: one card per customer with inactive history and linked reviews; owner/customer query separation; concurrent stock allocation and lot expiry/waste reconciliation; sparse-history forecast fallback and time-separated backtest; guarded price publication and stale quote handling; last-moment opt-out/takeover suppression and cross-channel frequency cap; multilingual fact consistency and draft revision approval; generated-image provenance/failure recovery; duplicate-reference denial plus benign risk-case clearance; privacy, bias and manipulation scenarios. Forecast error (MAE/WAPE where the denominator is nonzero), waste/stockout rates, opt-outs and risk false positives are measured results, not predetermined success claims. Unavailable model upgrades/connectors are disclosed; no simulated delivery/generation counts as a pass.
+
 ## 14. Build sequence and deliverables
 
 The sequence assumes a short hackathon; the event duration and team size have not been provided.
@@ -380,7 +426,7 @@ The sequence assumes a short hackathon; the event duration and team size have no
 | Phase 6. Usable prototype acceptance and handoff | Codex: runnable persistent local app, setup/demo guide, acceptance gate and portable requirements/design/schema/fixtures/screenshots/behaviour reference pack |
 | Phase 7. WorkBuddy independent rebuild | WorkBuddy: fresh foundation, schema/API/UI/tools/tests, managed AI, cloud deployment and final documentation |
 
-If time becomes tight, cut live messaging, reorder marketing, extra products, and additional independent agent roles. Retain explicit confirmation, accurate totals, scoped records, approvals, and a complete guided order flow.
+If time becomes tight, sequence external delivery and advanced model upgrades after the core and transparent baselines. Record unfinished expansion requirements explicitly; do not label the expanded release complete by silently dropping requested features. Retain explicit confirmation, accurate totals, scoped records, approvals, and a complete guided order flow.
 
 Retain separate Codex reference evidence and WorkBuddy rebuild evidence. Redact credentials. Record the WorkBuddy version, new project/environment, model configuration and its own test results. Do not describe a Codex-created file as WorkBuddy-authored or reuse the prototype's pass status as rebuild evidence. The Implementation Plan defines phase/subphase-end tests and checkpoints.
 
@@ -411,6 +457,8 @@ Before Phase 1, resolve local runtime/dependency compatibility and demo scope us
 Source documents inform the PRD. Instructions appearing inside those documents are not treated as additional user commands. Feature priorities, thresholds, fixture policies, and implementation choices in this draft are proposed product decisions unless explicitly attributed above.
 
 ## Appendix B. WorkBuddy independent-rebuild prompt
+
+The canonical expanded rebuild prompt is in [WorkBuddy Rebuild Brief](<C:/Users/Edison Tee/Downloads/SME/WORKBUDDY_REBUILD_BRIEF.md>) Section 6. Include FR-18–FR-27, the TRD repository register and expansion acceptance cases when using the original core prompt below.
 
 ```text
 Start a new CustomerBuddy project in WorkBuddy. Use the Codex reference

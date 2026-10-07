@@ -1,6 +1,6 @@
 # CustomerBuddy - Design Brief
 
-Version 0.3 | 7 October 2026 | Phase 1 visual route shell complete and reviewed; full customer/owner app remains later-phase work.
+Version 0.4 | 7 October 2026 | Phase 4 core UI built, zoom gate pending; expanded WorkBuddy screens specified, not built.
 
 Related: [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>).
 
@@ -8,7 +8,7 @@ Related: [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [PRD](<C:/
 
 Create a calm, practical assistant for a Malaysian home bakery. The customer experience should feel personal and clear; the owner experience should make today's decisions and upcoming pickup workload easy to scan.
 
-Working identity: **CustomerBuddy**, presented to customers as **Aina's Home Bakery assistant**. Use a simple CB mark or Lucide bakery icon. Photography and generated illustrations are optional future enhancements; the MVP can communicate the product with typography, catalogue cards and transaction details.
+Working identity: **CustomerBuddy**, presented to customers as **Aina's Home Bakery assistant**. Public product name: **CustomerLane**; internal identifiers/UI retain CustomerBuddy until a separate branding migration. Use the existing simple mark or bakery icon. Photography supports exact product appearance; reviewed generated illustrations support the expanded WorkBuddy marketing tools. The core prototype can communicate the product with typography, catalogue cards and transaction details. PRD FR-18–FR-27 define the added final-project requirements; this revision does not build new screens or alter the Phase 4 checkpoint.
 
 The main design priority is confidence in the next business action: what is being ordered, what it costs, what has been reserved, and who must act next.
 
@@ -72,7 +72,7 @@ Orders show code, customer, pickup, total, verified paid amount, status, and nex
 
 Review detail places the proposed response/action beside business facts and the relevant conversation summary. Display amount, policy exception, object version and expiry before Approve/Edit/Reject. Rejection and financial decisions require clear labels; avoid ambiguous icon-only actions.
 
-Capacity uses product/date rows with held, committed and remaining units. No predictive stock chart is needed for the MVP. Knowledge editing uses Preview then Publish and shows the active version.
+Capacity uses product/date rows with held, committed and remaining units. The core prototype needs no predictive chart; the expanded WorkBuddy Stock/Forecast surfaces below add physical-stock and forecast views without replacing capacity. Knowledge editing uses Preview then Publish and shows the active version.
 
 Automation includes owner-only demo controls: visible current demo time, Pause/Resume clock, Advance time, Run due jobs, Generate digest and Reset demo. Keep these controls distinct from customer ordering; show synthetic-only confirmation for Reset. Report processed/suppressed/failed outcomes from the backend. The paused initial clock and lack of WorkBuddy integration must not prevent a full walkthrough.
 
@@ -81,6 +81,8 @@ Automation includes owner-only demo controls: visible current demo time, Pause/R
 Build shared Button, Input, Select, Textarea, Dialog, StatusBadge, EmptyState, ErrorBanner, LoadingState, DataTable/MobileCard, LanguageToggle and MoneyDisplay components.
 
 Domain components: MessageBubble, ScriptedModeBadge, QuickActions, OrderForm, QuoteCard, OrderTimeline, DepositDeadline, ConsentPanel, ApprovalCard, PaymentVerificationForm, CapacityCell, DocumentLink, JobStatus, DemoControls and EvidenceTrace.
+
+Planned WorkBuddy expansion components: CustomerAgentCard, AgentLifecycleBadge, ReviewReasonList, OwnerQueryAnswer, SourceLinks, StockLotRow, StockMovementTimeline, ForecastChart/DataTable, DataSufficiencyNotice, PriceProposalCard, CampaignAudiencePreview, ContentRevisionReview, GeneratedAssetPreview and RiskCaseCard. These are design requirements, not implemented components. Existing order, review, money, consent and document components are reused.
 
 Keep presentation components free of commercial calculations. API totals and statuses drive the UI. Confirmation/approval components pass exact server object versions rather than recomputing authority in browser state.
 
@@ -112,6 +114,50 @@ The independent WorkBuddy rebuild has its own UI acceptance gate in 7C and check
 ## 9. Build and tooling
 
 Codex implements prototype React/Tailwind/shadcn components during Phases 1 and 4. Phase 4 now supplies connected customer/owner business screens; quality/flow checks pass, with 200% zoom inspection pending by user choice. Phase 6 captures mobile/desktop screenshots, important state variants and tokens as references. No separate design platform is required. WorkBuddy recreates the components/screens independently in Phase 7, then creates presentation visuals from its rebuilt app. The reference pack and WorkBuddy implementation do not exist yet.
+
+## 10. Expanded WorkBuddy owner surfaces
+
+Keep the existing navigation and add Agents, Assistant, Stock, Sales/Invoices, Forecast, Pricing, Campaigns, Content/Assets and Risk under readable Operations and Growth groups. The core prototype retains its current routes. Mobile navigation stays labelled and keyboard accessible; long lists need pagination/filtering instead of an overloaded overview.
+
+### Agent dashboard: one box = one agent = one customer
+
+Use a responsive grid: three cards on wide desktop where text fits, two on medium screens, one on mobile. Filters: All, Active, Inactive, Needs human review, Paused, Error; search customer label/code. Display counts from records and retain empty/never-contacted contexts. Multiple conversations belong inside the same card.
+
+Card hierarchy: customer name/code and logical agent label; Active/Inactive lifecycle; processing state (Idle/Working/Waiting for owner/Paused/Error); latest interaction excerpt and timestamp; current task; review reason and count; Open conversation/Review case. Separate statuses prevent an active-but-idle agent being mistaken for a running model. Inactive uses readable muted treatment, not hidden/low-contrast history. A text/icon review badge and linked reason are essential; colour alone is insufficient.
+
+Detail uses a customer-scoped interaction timeline plus orders/open cases/consent and a safe action log. Show Take over and Resume as explicit controls with current state. Do not display private reasoning or invented avatars/connections that imply multiple independent processes. Owner-wide AI answers appear in the separate Assistant surface.
+
+### Stock, sales and forecasts
+
+Stock table/cards show product/lot, production/receipt time, expiry, on-hand, allocated, sellable, sold and waste. Units and cutoff are explicit. Add movement/adjustment dialogs with quantity, reason, expected version and current balance; show negative-stock conflicts inline. Place production quota in a separate panel with held/committed/remaining counts.
+
+Sales/Invoices reuse existing order/document links. Distinguish Completed sales value, Booked order value, Verified cash collected and Outstanding balance. Every KPI has reporting-period/timezone labels and record drill-down; unavailable invoices show Preparing/Failed.
+
+Forecast chart uses solid actual observations, visually distinct projected values and an interval band only when the method supports it. Provide the same values in an accessible table. Show cutoff, horizon, usable-history coverage, baseline/model, backtest error and known-order/incremental-demand split next to the chart. Insufficient data, synthetic simulation and Stale result banners are visible. Production suggestion explains stock expiry, shelf life, batch size and capacity constraint, with Review plan rather than automatic purchase/stock buttons.
+
+### Controlled pricing and owner queries
+
+Price card puts current/suggested RM price side by side with bounds, percentage change, stock/expiry/demand reasons, source versions, effective dates and expiry. Separate Review, Approve and Publish actions; invalid/stale proposals refresh before approval. Explain that confirmed orders retain their snapshot and old quotes need a new confirmation. Never show personal willingness-to-pay or vulnerability targeting controls.
+
+Owner Assistant answers show period/product filters, concise record-derived results, source links and any forecast uncertainty. Action requests link to the controlled form/review screen; chat has no Approve payment or Publish campaign shortcut that grants model authority. Customer chat retains its own disclosure and scoped context.
+
+## 11. Engagement, content, visual and risk design
+
+Campaign builder steps: purpose -> product/batch/offer -> language/copy/assets -> audience eligibility -> exact revision review -> approved schedule/export. Show consent-eligible counts, suppression reasons, configured cross-channel cap and quiet-hour window. Fresh-batch copy must link to a sellable recorded batch; an expired batch disables sending. Marketing and optional after-sales service permissions use separate labelled controls.
+
+Content workspace offers SEO product description, marketing copy, personalised email, social post and PR draft types. BM/English previews preserve verified facts; additional languages show translation-review status. Display title/meta description, offer terms, factual source links, draft revision and AI-generated label. A content edit removes its approval visibly. Owner-reviewed export is a completed draft export, never "Posted" or "Email sent" without delivery evidence.
+
+Asset cards show Generated illustration or Genuine product photo, job status, model/provider provenance, rights/review state and accessible alt text. Queued/Generating/Failed states survive navigation. Generated cake artwork that differs from sold goods carries an illustration label; do not disguise it as a photo of fresh inventory. AI images are stored privately until approved for the intended use. No preview uses a provider URL as a permanent asset.
+
+Customer recommendation cards explain a simple reason (current request or consented history), real current availability/terms, neutral alternatives and Stop promotions. Offer selection returns to the ordinary quote/Confirm path. Prohibit fake countdowns, guilt prompts, addictive shopping streaks and obstructive opt-out. After-sales cases use the existing waiting/owner-handoff patterns.
+
+Risk list uses "Needs verification" and specific operational reasons; avoid public labels such as "Scammer". Detail shows minimised evidence, rule/model version, uncertainty, deadline and owner Clear/Escalate with reason. Payment verification is a separate existing ledger action. Customer has a human-contact/appeal path, without exposure of anti-abuse rules or other customers' evidence.
+
+## 12. Expanded visual acceptance and repository fit
+
+WorkBuddy 7C verifies keyboard/focus/mobile/200% zoom, card pagination and inactive history, text review reasons, chart/table parity, stock-vs-capacity labels and copy revisions. 7D verifies truthful AI/generated-asset/forecast labels and unavailable/failed/suppressed states; 7E checks the deployed expanded journeys. Include long BM/English text, multi-reason cases, no-history customers and consent withdrawal after scheduling. None of these passes is claimed by this specification update.
+
+Keep the established React/Tailwind/shadcn design system. The TRD Section 15 repository register provides backend forecasting/retrieval/redaction/document and Tencent visual options; no replacement UI, agent framework or external model-hosting provider is selected. Capture only built prototype screenshots in Phase 6; unbuilt expansion designs are labelled specifications rather than fabricated app evidence.
 
 ## Phase 4 visual evidence
 

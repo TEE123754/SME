@@ -1,16 +1,30 @@
 # CustomerLane
 
-**Customer relationships. Clear orders. Confident operations.**
+**1 Customer, 1 Agent. Personal service with business control.**
 
-CustomerLane is a customer and order management platform for small businesses. It brings customer conversations, preferences, quotes, orders, payment records and owner decisions into one connected workspace, helping owners spend less time reconstructing details and more time serving customers.
+CustomerLane is a customer relationship and order management platform built around **one persistent agent context for every customer**. Conversations, consented preferences, order history and follow-up tasks stay connected to that customer, helping a small business provide consistent personal service as it grows.
+
+The product vision combines dedicated customer assistance with an owner workspace for agent oversight, sales, invoices, stock and customer engagement. Connected customer and order workflows are available locally today; AI assistance and the expanded capabilities are planned in the roadmap below.
 
 The first vertical is Malaysian home bakeries, where personal service, repeat orders, pickup schedules and limited production capacity all matter.
+
+## 1 Customer, 1 Agent
+
+A customer should not have to start from zero with every message. Their agent carries the relevant context from the first enquiry through repeat orders and after-sales support, while the owner retains control over business decisions.
+
+- **One customer relationship:** Multiple conversations share the same customer identity and relevant history.
+- **Personal service:** Consented preferences support useful recommendations and repeat-order proposals.
+- **Private context:** Each customer's records remain scoped to that customer and the business.
+- **Owner oversight:** The planned agent dashboard shows **one box = one agent = one customer**, including active and inactive contexts and clear human-review reasons.
+- **Human support:** Customers can ask for the owner; takeover pauses conflicting automation until the owner resumes it.
+
+An agent represents a persistent customer context. Shared infrastructure can serve many contexts; each customer does not need a separate AI account or a continuously running process. Optional personalisation never replaces customer confirmation or owner authority.
 
 ## Why CustomerLane
 
 For a small business, an order often starts as a conversation. Prices, pickup details and preferences become scattered across messages, while deposits and production commitments require separate tracking.
 
-CustomerLane connects these steps through a shared business record. Customers review an exact quote before committing. Owners see what needs attention, manage capacity and retain authority over exceptions and payment verification.
+CustomerLane connects these steps through the customer's history and authoritative business records. Customers review an exact quote before committing. Owners see what needs attention, manage capacity and retain authority over exceptions and payment verification. The expanded roadmap extends that relationship into stock planning, recommendations, promotions and after-sales service.
 
 | Business need | CustomerLane approach |
 | --- | --- |
@@ -30,6 +44,8 @@ CustomerLane connects these steps through a shared business record. Customers re
 - **Customers** who want transparent prices, clear pickup details and access to their order history.
 
 ## Product capabilities
+
+The following customer, owner and business controls are connected to the current local application. The expanded agent and AI features are listed separately in the roadmap.
 
 ### Customer workspace
 
@@ -71,19 +87,46 @@ Requests outside standard policy move to owner review. Approved price changes re
 
 The current interface retains the earlier CustomerBuddy working name. CustomerLane is the product name adopted for this repository; internal package names and application branding have not yet been migrated.
 
-## Current release and roadmap
+## Current release
 
 The current release includes connected customer and owner interfaces, persistent customer records, consent settings, conversations, quotes, order confirmation, capacity management, owner reviews, payment-record verification and operational reporting.
 
-| Available now | Planned |
-| --- | --- |
-| Customer profiles, preferences and consent | Automated assistance for routine enquiries and repeat orders |
-| Catalogue, quotes and confirmed orders | Downloadable invoices and receipts |
-| Capacity holds and owner-controlled exceptions | Scheduled reminders and daily operational digests |
-| Saved conversations and owner replies | Production identity and hosted deployment |
-| Payment records and dashboard reporting | Additional customer communication channels |
-
 The repository currently runs locally with fixture accounts and synthetic payment records. Account selection is intended for local evaluation; production authentication, live payment processing and external message delivery are not included. Services currently restrict access to local addresses.
+
+## Expanded product roadmap
+
+These features are specified and planned; they are not available in the current local release. Existing customer records, order services, approvals and payment controls provide their foundation.
+
+| Planned capability | What it adds |
+| --- | --- |
+| **Customer-agent dashboard** | One card per customer-agent context, with active/inactive filters, interaction history, current task and human-review reasons; owner takeover and resume |
+| **Customer and owner AI chat** | BM/English and mixed-language queries, clarification of complex requests and answers grounded in current records; separate customer-scoped and owner-authorised tools |
+| **Sales, invoices and stock** | Downloadable invoices/receipts, reconciled sales and cash views, finished-goods batches, expiry, stock allocation, waste and audited adjustments |
+| **Stock prediction and sales forecasting** | Product demand and sales outlooks with history coverage, uncertainty and proposed production quantities to help reduce excess stock and waste |
+| **Controlled dynamic pricing** | Stock, expiry and demand-based price suggestions within business limits; owner review and publication, with confirmed order prices preserved |
+| **Customer engagement** | Recorded fresh-batch announcements, personalised recommendations and promotions, and permission-based after-sales check-ins with human support |
+| **Multilingual content creation** | Reviewed SEO product descriptions, marketing copy, personalised emails, social posts and PR drafts in BM/English; additional languages subject to review |
+| **Visual generative AI** | Marketing illustration drafts with generation provenance, rights review and owner approval; clear distinction from genuine product photography |
+| **Fraud and transaction-risk review** | Explainable suspicious-transaction signals and private owner cases; payment verification and financial decisions remain under owner control |
+| **Responsible AI controls** | Sparse-data bias checks, purpose/channel consent, privacy boundaries, easy opt-out, promotional frequency limits and transparent AI/forecast labels |
+| **Reliable follow-ups and deployment** | Guarded reminders, daily digests, durable background jobs, production identity and hosted services; additional channels after integration verification |
+
+Physical stock is tracked separately from production capacity. Forecasts support planning and show insufficient-data or stale-result states. Published pricing rules and recommendations use current business facts; customers still confirm an exact quote before an order is placed.
+
+Marketing requires current consent and respects quiet hours, frequency limits, takeover and opt-out. Content and imagery require approval of the exact revision before publication or delivery. External email/social delivery is enabled only after a supported restricted integration is verified; exporting a draft is not a delivery result.
+
+Risk signals support investigation and can be cleared by the owner. They do not prove fraud, verify a payment or authorise a refund. Recommendations and pricing exclude sensitive-trait targeting, covert cross-platform tracking and manipulative shopping prompts.
+
+### A returning customer's planned agent journey
+
+1. The customer returns to their existing agent and requests a repeat order.
+2. The agent uses permitted history, asks for missing details and checks current prices and availability.
+3. The customer reviews and confirms a new quote; business services record the order.
+4. The owner sees the interaction in that customer's agent card and reviews any exception.
+5. Eligible reminders and after-sales support continue within the customer's permissions.
+6. Future recommendations or promotions remain optional and never authorise another purchase.
+
+The [product requirements](PRD.md) define acceptance for these features. The [technical requirements](TRD.md#15-github--hugging-face-candidate-register) include researched GitHub/Hugging Face candidates, licences and integration limits; runtime compatibility and account access still require verification before adoption.
 
 ## Run locally
 

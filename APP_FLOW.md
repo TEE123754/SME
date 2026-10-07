@@ -1,10 +1,12 @@
 # CustomerBuddy - App Flow
 
-Version 0.3 | 7 October 2026 | Usable scripted prototype flows and future independent WorkBuddy rebuild.
+Version 0.4 | 7 October 2026 | Core prototype flows plus specified WorkBuddy expansion; new flows not implemented.
 
 Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [TRD](<C:/Users/Edison Tee/Downloads/SME/TRD.md>), [Design Brief](<C:/Users/Edison Tee/Downloads/SME/DESIGN_BRIEF.md>).
 
 **Current mode:** Codex implements these flows with hardcoded assistant intent rules/templates and real saved business state. Live AI, MCP and WorkBuddy Automation are Phase 7 work. Chat always shows "Demo assistant — scripted responses"; forms and quick actions provide reliable paths without free-text recognition.
+
+**Expanded target:** The following added routes/journeys implement PRD FR-18–FR-27 in the independent WorkBuddy project after its core flow. They are planned requirements, not existing prototype pages. Invoice/payment/approval flows above are reused rather than duplicated. The current documentation request does not start implementation or change the saved Phase 4 gate.
 
 ## 1. Entry points and routes
 
@@ -25,6 +27,18 @@ Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [TRD](<C:/Users/Edis
 | `/owner/capacity` | Production capacity by product and pickup date |
 | `/owner/automation` | Pause, local reminder/digest configuration, job health, owner-only demo clock/Run due jobs/Generate digest/reset controls |
 | `/owner/evidence` | Demonstration mode, timings, failures and tool traces |
+| `/owner/agents` (WB planned) | One box per customer-agent context; all active/inactive agents, interaction previews and human-review filters |
+| `/owner/agents/:agentCode` (WB planned) | Scoped interaction timeline, open cases, safe outcomes and takeover/resume |
+| `/owner/assistant` (WB planned) | Separate owner AI queries with period, sources and links to controlled actions |
+| `/owner/stock` (WB planned) | Finished-goods batches, expiry, allocation, waste and audited adjustments |
+| `/owner/sales`, `/owner/invoices` (WB planned) | Reconciled sales/cash and existing invoice/document views |
+| `/owner/forecast` (WB planned) | Product/horizon selection, data sufficiency, forecasts and proposed production plan |
+| `/owner/pricing` (WB planned) | Bounded price suggestions, exact-version review and explicit publication |
+| `/owner/campaigns` (WB planned) | Announcements/promotions, eligible audience preview and guarded sending |
+| `/owner/content` (WB planned) | Multilingual SEO, email, marketing, social and PR draft review/export |
+| `/owner/assets` (WB planned) | Visual generation jobs, rights/provenance, reviewed assets and downloads |
+| `/owner/risk` (WB planned) | Private transaction-risk evidence, owner clearance and appeal |
+| `/account/support` (WB planned) | Own after-sales cases and service-follow-up choices |
 
 Slugs and display codes locate resources; the server still enforces access. No role switcher is available in a real cloud deployment. A synthetic local demo selector is explicitly labelled and isolated from production authentication.
 
@@ -147,9 +161,65 @@ For Codex, a local worker processes persisted jobs. The owner can select Run due
 | Document/job failure | Existing business state remains visible; owner sees retry details |
 | Scope denied | Generic not-found/access result without revealing another customer's existence |
 
-## 10. Phase mapping
+## 10. Expanded owner agent board and query flow (WorkBuddy)
+
+1. Owner opens Agents. Load one persisted customer-agent context per customer, including inactive contexts and those with no interactions. Filter Active, Inactive, Needs human review, Paused or Error; paginate without duplicating an agent across conversations.
+2. Each box shows customer label, lifecycle, processing state, last interaction/time, open task and outstanding review reason/count. Active describes automation eligibility; Working describes an actual in-flight run. No always-running process or model session is implied.
+3. Open a box to see authorised customer/assistant/owner interactions, safe action results and linked review/order/support/risk cases. Inactive history remains readable under retention policy. Owner queries are kept in a separate owner transcript.
+4. Select a human-review item to reuse the exact-proposal approval/payment/support flow. Take over pauses conflicting sends/runs; Resume is an explicit owner action. Inactive/pause state cannot be overridden by model text.
+5. In Owner assistant, ask "Which invoices are unpaid this week?" or a complex BM/English stock/sales question. Resolve timezone/report period and business scope outside the model. Clarify ambiguity, then fetch read-only summaries and show record links, cutoff and assumptions.
+6. A request to change a price, verify payment or publish a campaign opens the corresponding controlled screen/draft. An answer or draft does not execute that decision. Customer chat retains only customer-scoped tools and cannot navigate into owner records through prompt instructions.
+
+## 11. Stock, forecast and controlled pricing flow (WorkBuddy)
+
+```mermaid
+flowchart TD
+    A[Recorded batches, orders and ledger] --> B[Reconciled stock and sales views]
+    B --> C[Choose product and forecast horizon]
+    C --> D{Enough usable dated history?}
+    D -->|No| E[Insufficient data or disclosed baseline]
+    D -->|Yes| F[Forecast with cutoff, backtest and uncertainty]
+    E --> G[Owner planning view]
+    F --> G
+    G --> H[Compare known orders, usable stock and capacity]
+    H --> I[Owner accepts a production plan]
+    H --> J[Bounded price suggestion]
+    J --> K[Owner reviews exact revision]
+    K --> L[Publish authoritative price version]
+    L --> M[Requote stale unconfirmed proposals]
+```
+
+Stock receives explicit production/receipt records, lot expiry and owner-entered waste/corrections. Show physical on-hand/allocated/sellable separately from production held/committed/remaining quota. Ready-stock ordering allocates unexpired lots atomically; preorder completion records actual production/stock consumption. A stockout or failed movement reports the current committed order state and recovery path. Never invent a batch from an AI announcement or forecast.
+
+Forecasts show actual vs projected series, data cutoff, history coverage, methodology and known commitments vs incremental demand. Synthetic simulation, stale result and Insufficient data are explicit states. Owner accepts a proposed plan; no automatic purchasing, production record or stock adjustment is created by forecasting. A richer model needs time-separated evaluation against the baseline.
+
+Pricing shows current price, suggested price, stock/expiry/demand reasons, configured floor/ceiling/change limit and validity. Owner reviews/publishes the exact revision. A stale stock/price/policy basis requires refresh. Confirmed orders retain their original snapshots; a displayed old quote must be regenerated and accepted again. Uniform published rules and explicit promotion eligibility remain visible to customers.
+
+## 12. Engagement, content and generated-visual flow (WorkBuddy)
+
+1. Owner records a real batch (for example the proposed Orange Cake fixture), then chooses Batch announcement, Product recommendation, Promotion or After-sales service. Standard deposit reminders remain their existing separate workflow.
+2. Create a draft from approved product facts/available stock and selected BM/English language. SEO content includes title/meta description; email, social post and PR variants preserve the same facts/terms. Generate a visual only through supported Tencent server jobs; show Queued, Generating, Failed or Draft available with cost/capability limits.
+3. Preview copy, image, provenance, offer validity and audience eligibility. Real product appearance/ingredients/certifications cannot be invented. Changes create a new revision and invalidate prior approval; generated illustrative artwork is labelled.
+4. Owner approves the exact content/assets/offer and audience policy. Export approved social/PR/email drafts, or schedule in-app delivery. External delivery exists only when the restricted connector, recipient identity and acknowledgement path are verified; an export is not a sent message.
+5. Before delivery, recheck marketing/personalisation/channel consent, cross-channel cap (initially one promotion in seven days), quiet hours, takeover/global pause, content/offer/batch validity and deduplication. Record Delivered, Suppressed with reason, Failed or Delivery uncertain accurately.
+6. Customer sees a concise announcement/recommendation, why it was suggested, relevant terms and Stop promotions. Opening an offer prepares a current quote; no recommendation authorises purchase. Opt-out immediately suppresses queued promotions and removes optional derived targeting data.
+7. After a completed order, one permitted service check-in can open the customer's scoped support case. Complaints, safety questions and refund requests hand off to the owner. Cross-sell content follows marketing consent rather than borrowing service-follow-up permission.
+
+## 13. Transaction-risk and ethical review flow (WorkBuddy)
+
+1. Operational rules flag duplicate references, excessive attempts, mismatched amounts or inconsistent submitted proof. Commerce independently rejects invalid duplicates; an optional anomaly score is advisory.
+2. A private owner case shows reason codes, source records, rule/model version, uncertainty and any explicit review deadline. Customer copy says "Needs verification" without labelling the person fraudulent.
+3. Owner inspects evidence and clears or escalates the case with a reason. Payment verification remains a separate explicit action. A risk flag alone cannot create a receipt, execute refund, erase a verified payment or ban a customer.
+4. A benign unusual transaction can be cleared; provide a customer human-contact/appeal path. Expired holds still follow normal expiry/capacity rules, never an invisible risk lock.
+5. Preferences separates memory, personalisation, marketing by channel, operational reminders and service follow-up. Declining optional targeting still allows ordering. No covert cross-platform tracking is introduced. Owner content review rejects fabricated urgency, guilt/addictive prompts, sensitive-trait pricing and misleading AI imagery.
+
+Additional state acceptance: empty agent history, inactive context with past interactions, multiple review reasons, stale forecast, insufficient history, expired lot, conflicting stock allocation, out-of-bound/stale price proposal, withdrawn consent after scheduling, revised unapproved draft, unavailable visual service, uncertain external delivery and owner-cleared risk case. These must be reviewable without fabricated model/connector success.
+
+## 14. Phase mapping
 
 Codex Phases 1-5 build usable local flows: route shells, scoped saved data, business transitions, forms/UI, generated documents, local jobs and hardcoded assistant scripts. Phase 6 accepts a runnable prototype and captures its portable reference pack, screenshots and expected behaviour. Phase 6 can complete with Phase 7 still Not started. WorkBuddy later recreates every flow in a fresh Phase 7 project, adds actual managed AI/owner integration and deploys that new implementation. Each rebuild subphase has its own end gate; prototype passes are reference expectations only.
+
+Expanded journeys are included as specification/contracts/scenarios in the Phase 6 reference pack, clearly labelled unbuilt where no prototype screen exists. WorkBuddy 7A defines their schema, 7B their deterministic services, 7C the UI/jobs/documents and 7D the scoped AI/retrieval/forecast/content/risk integrations. 7E verifies the expanded release and records unfinished/unsupported optional model or channel upgrades. See the TRD candidate register for repository choices; no third-party framework replaces WorkBuddy orchestration.
 
 ## Phase 4 implementation checkpoint
 

@@ -1,6 +1,6 @@
 # CustomerBuddy - Technical Requirements Document
 
-Version 0.4 | 7 October 2026 | Phase 4 connected UI built; automated/flow checks pass, 200% zoom pending; usable prototype/WorkBuddy rebuild not complete; no deployment.
+Version 0.5 | 7 October 2026 | Phase 4 checkpoint preserved; requested WorkBuddy expansion specified, not implemented; no deployment.
 
 Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [Backend Schema](<C:/Users/Edison Tee/Downloads/SME/BACKEND_SCHEMA.md>), [Implementation Plan](<C:/Users/Edison Tee/Downloads/SME/IMPLEMENTATION_PLAN.md>).
 
@@ -11,6 +11,8 @@ Codex builds a local reference prototype and prepares a portable behaviour/desig
 **Current build boundary:** The Codex prototype is a usable local application. Hardcode assistant intent rules and language templates; persist actual customer/order/payment/approval/job/document records and call real domain services. Use a local scheduler and owner demo controls in place of WorkBuddy Automation. Do not implement a live LLM, CloudBase AI adapter, MCP server/connector or Tencent deployment in Phases 1-6. No WorkBuddy account, AI credits or model/cloud keys are required for the prototype. Phase 6 completion is independent of the later rebuild.
 
 The final target is WorkBuddy's CloudBase-backed application services. The reference app remains a separate local artifact. WorkBuddy consumes the specifications/screenshots/fixtures as inputs and authors the final implementation; it does not merely import or publish the Codex app. Account access, runtime support and resource charges remain verification gates.
+
+**Expansion boundary:** PRD FR-18–FR-27 extend the fresh WorkBuddy project after its core flow, within 7A-7E. All are required for the expanded requested release; optional ML upgrades and external delivery require separate capability/data evidence. The current request updates specifications only. No expansion endpoint, migration, model, library installation or UI is implemented by this revision; Phases 1–4 evidence is unchanged.
 
 ## 2. Proposed tech stack
 
@@ -159,6 +161,8 @@ This section specifies future permissions only. Defer all MCP package/manifest/S
 
 Expose `get_owner_digest`, `list_pending_reviews`, `list_unpaid_orders`, `get_capacity_summary`, `enqueue_due_followups`, and `get_job_status`. These operate on the integration credential's fixed business scope. Enqueueing a follow-up does not bypass delivery eligibility checks.
 
+For the expanded project, add business-fixed read summaries for agents, sales/invoices, stock, forecasts and risk counts, plus `enqueue_approved_campaign` only after explicit owner approval of the exact campaign revision/audience policy. That bounded enqueue rechecks approval/version/window and all delivery guards; it cannot approve content, select arbitrary recipients, publish prices or verify payments. Keep build-time CloudBase administrative tooling separate from this runtime package.
+
 Use read-only owner summaries and bounded operations. Keep owner approval, payment verification, arbitrary SQL, arbitrary shell/file execution, and connector-management tools out of this package. Never forward raw customer instructions as trusted WorkBuddy owner-task instructions.
 
 ## 10. Jobs, documents, and scheduling
@@ -215,6 +219,71 @@ Reviewed 7 October 2026. Platform capabilities below do not establish entitlemen
 - [React with Vite](https://react.dev/learn/build-a-react-app-from-scratch): prototype frontend building blocks. [MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk): future WorkBuddy integration only.
 
 No connected WorkBuddy authoring/deployment tool is available in the current Codex session. This document plans the independent rebuild; it does not claim it was executed.
+
+## 14. Expanded WorkBuddy services and contracts
+
+Keep WorkBuddy as authoring/orchestration and CloudBase/Tencent as the deployment/managed-AI boundary. Optional statistical, retrieval and redaction packages sit behind narrow backend services; none receives customer identity/owner authority through model-supplied arguments. The customer tool registry and owner query registry are separate, request-local and bound to authenticated scope.
+
+| Service | Contract and authority |
+| --- | --- |
+| Agent board | Owner-only projection over customers, persistent agent contexts, conversations, runs and cases. Exactly one box per `(business_id,customer_id)`; paginate all active/inactive contexts, including those with no messages. Lifecycle eligibility and processing state are separate. Derive human-review reasons/counts from unresolved authorised cases; no hidden reasoning or invented model activity |
+| Owner query assistant | Read-only `get_sales_summary`, `get_invoice_status`, `get_stock_summary`, `get_agent_review_summary`, `get_forecast` tools, with required period/product filters and source IDs/cutoff. Defaults to clarify ambiguous dates. Proposals are separate drafts; decisions, publishing and payment verification require explicit owner UI actions |
+| Stock/sales | Immutable finished-goods lot movements and scoped order-item allocations; preorder/ready-stock paths share order transactions. Separate physical lot availability from daily production quota. Sales views distinguish completed-order value, booked order value, verified cash, unpaid balance, waste and adjustments |
+| Forecast | Asynchronous bounded job consumes per-business/product dated quantity aggregates, availability/stockout flags and known future orders; outputs horizon, cutoff, method/version, sample coverage, units, sales-price assumption, intervals where valid, backtest errors and freshness. Exclude pilot synthetic/cancelled/expired unpaid activity. Thin history returns `INSUFFICIENT_DATA` plus a transparent baseline only where defensible |
+| Price proposal | Deterministic rules use stock age, expiry and forecast signals within owner-configured floor/ceiling/change limits. Immutable proposal binds product, active price/policy versions, reason, effective window and hash. Explicit owner review/publish creates a new authoritative price version; customer confirmation rechecks it. No trait-based individual prices |
+| Recommendation/engagement | Current-request suggestions use published products/available service results. Historical targeting requires current personalisation consent. Owner-approved campaigns reference exact content/offer/batch versions; delivery job rechecks marketing and channel consent, frequency, quiet hours, takeover/global pause, expiry and available stock immediately before commit/send |
+| Content/visual drafts | Managed text generation produces structured title/body/SEO metadata/language/fact references; image generation is an asynchronous Tencent server-side operation with per-job cost/time bounds and private asset storage. Draft revision hash binds facts, offer terms, asset and audience policy; edits invalidate approval. Publication/export/delivery use approved revisions, not raw model output |
+| Risk review | Deterministic duplicate reference, request velocity, amount mismatch and inconsistent proof rules create redacted reason-coded signals/cases; optional scikit-learn anomaly score is advisory. Rule-based abuse throttling is bounded and auditable. No model payment verification, refund or customer ban; case clearance is explicit owner action |
+
+Apply the existing bounded-call/deadline policy to owner/customer synchronous chat. Long forecasting or image work returns a job ID with queued/running/failed/available state; it cannot keep the ordinary 25-second chat request open. Workers use leases, idempotent action keys and separate service credentials. Model output is untrusted structured data validated against Zod; authoritative values render from service results. Forecast/risk explanations store safe facts, not hidden chain-of-thought.
+
+### 14.1 Planned API families (not current routes)
+
+All paths retain `/api/v1`; owner mutations require a real owner session/CSRF (or verified bearer equivalent), expected version/hash and idempotency key. Restricted MCP credentials cannot use decision/publish/verify endpoints.
+
+| Endpoint / family | Actor | Required behaviour |
+| --- | --- | --- |
+| `GET /owner/agents`, `GET /owner/agents/:id` | Owner | Lifecycle/processing/review filters, stable pagination, interaction/case links within business scope |
+| `POST /owner/queries` | Owner | Persist scoped owner query and return sourced answer/clarification; separate owner conversation model, never attach to a customer transcript |
+| `/owner/stock/lots`, `/owner/stock/movements`, `/owner/stock/adjustments` | Owner | Record production/receipt/waste/expiry/corrections with reason/version; reject negative availability and duplicate movements |
+| `GET /owner/sales`, `GET /owner/invoices` | Owner | Reconciled period/product/status views derived from existing orders/payments/documents; no second invoice or payment ledger |
+| `POST /owner/forecasts`, `GET /owner/forecasts/:id` | Owner; bounded worker | Enqueue/read forecast result; compare freshness, backtest and usable-stock assumptions |
+| `/owner/pricing/proposals`, `POST /owner/pricing/proposals/:id/decision`, `POST /owner/pricing/proposals/:id/publish` | Owner | Propose then explicitly decide/publish exact immutable price revision; stale proposal rejected |
+| `/owner/campaigns`, `/owner/campaigns/:id/preview`, `/owner/campaigns/:id/decision`, `/owner/campaigns/:id/schedule` | Owner | Preview eligible audience/counts with reasons, approve revision, schedule guarded delivery; no arbitrary recipient IDs from customer prompts |
+| `/owner/content/drafts`, `/owner/content/drafts/:id/decision`, `/owner/content/drafts/:id/export` | Owner | Generate/edit/review exact multilingual draft; export only approved revision; social/email delivery uses verified connectors and guarded campaigns |
+| `/owner/assets/generate`, `GET /owner/assets/:id` | Owner | Bounded visual job, private asset review/rights/provenance and safe scoped download |
+| `/owner/risk/cases`, `/owner/risk/cases/:id/decision` | Owner | Evidence, expiry, appeal/clearance and immutable decision audit; no payment-state side effect |
+| `/me/recommendations`, `/me/support-cases`, `/me/notification-preferences` | Customer | Own suggestions/service cases/purpose-channel opt-outs only; general catalogue path remains usable |
+
+Additional errors: `INSUFFICIENT_DATA`, `FORECAST_STALE`, `STOCK_UNAVAILABLE`, `PRICE_PROPOSAL_STALE`, `CONTENT_APPROVAL_REQUIRED`, `CONSENT_REQUIRED`, `CAMPAIGN_SUPPRESSED`, `RISK_REVIEW_REQUIRED`, `CAPABILITY_UNAVAILABLE`. Distinguish suppression from delivery failure and never claim an unacknowledged external message was delivered.
+
+### 14.2 Deterministic stock, price and delivery boundaries
+
+- Ready-stock confirmation locks the same business/date boundary and lot rows in stable expiry/id order; validate sellable/unexpired lots, reserve enough units, and commit order/capacity (where applicable)/allocation/jobs together. Preorders reserve production quota; their later recorded production/fulfilment creates and consumes stock through explicit services. Completion consumes the matching lot allocation exactly once. Expiry/cancellation releases holds once; later lot expiry does not erase recorded sales. Existing date capacity cannot be used as proof of physical inventory.
+- Forecast planning separately reports known commitments and estimated incremental demand. Subtract unexpired usable stock, apply shelf life/batch size and remaining quota, and show unmet demand. No auto procurement or stock adjustment. Price suggestions have integer-sen bounds; publication synchronises the authoritative price version used by quoting and invalidates old unconfirmed proposals. Published prices and applicable offers snapshot into confirmed orders/invoices.
+- Campaign approval binds content/assets/offer, audience rule, purpose/channel, expiry and maximum sends. Resolve live recipients under business scope, then perform all consent/pause/cap checks at delivery. Use a shared per-customer cross-channel promotional counter/lock; default one promotional contact in seven days. Count uncertain external delivery attempts conservatively until reconciled, and never blind-resend them. Opt-out suppresses pending sends and deletes optional derived targeting data.
+- Safe support updates are distinct from marketing. An after-sales survey/check-in requires service-follow-up permission; adding a cross-sell makes it a marketing campaign. Recommendation outputs filter actual service availability and include a simple reason, eligible terms and neutral alternatives. Risk models consume minimised operational aggregates; no sensitive traits, behavioural tracking across platforms or raw payment secrets.
+
+## 15. GitHub / Hugging Face candidate register
+
+Primary repositories/model cards reviewed **7 October 2026**. These are candidates and source references, not installed integrations or proof of the team's WorkBuddy entitlement. The architecture keeps third-party utilities behind Tencent-hosted backend services, so they do not replace WorkBuddy orchestration, CloudBase identity/data or owner approval. Runtime support, transitive licences, region, costs and actual account behaviour must be verified in 7A/7D. A permissive software licence does not cover a managed service's terms or prove competition eligibility.
+
+| Candidate and primary source | Features / licence shown by source | WorkBuddy fit and selection limit |
+| --- | --- | --- |
+| [Tencent CloudBase AI Toolkit](https://github.com/TencentCloudBase/CloudBase-AI-Toolkit) | WorkBuddy/cloud build integration; MIT | Prefer official supported WorkBuddy CloudBase setup. Authoring/deployment tooling only; its admin MCP is never the public customer runtime. Do not install a second overlapping connector if WorkBuddy already provides it |
+| [Official MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) | Typed owner integration; current README states Apache-2.0 for new contributions, existing code MIT | Existing planned 7D choice; select/pin the connector-supported major and inspect its exact licence. Narrow business-fixed tools only; no generic shell/SQL, approvals, payment verification, price/content publication or unrestricted sends |
+| [Nixtla StatsForecast](https://github.com/Nixtla/statsforecast) | Statistical sales/demand forecasts and intervals; Apache-2.0 | Optional CPU Python batch service on verified Tencent infrastructure; begin with simple baseline. Use open-source package, not Nixtla's separate paid TimeGPT API. No browser Python or per-customer model worker |
+| [scikit-learn](https://github.com/scikit-learn/scikit-learn), [IsolationForest documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html) | Content similarity/ranking and optional anomaly scores; BSD-3-Clause | Optional scoped CPU service once representative data exists. IsolationForest detects unusual observations, not proven fraud; business rules/owner review stay authoritative. Dynamic pricing remains deterministic, without a separate optimisation agent |
+| [FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding), [BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3) | Multilingual embeddings/retrieval; library and model card MIT | Optional retrieval upgrade for published bakery knowledge; BGE-M3 is an embedding model, not a chat replacement. Host privately on supported Tencent compute only after runtime/memory checks. BM/mixed-language quality needs local evaluation; shared indexes must enforce business scope before ranking |
+| [Presidio](https://github.com/data-privacy-stack/presidio) (original Microsoft repository redirects here) | PII detection/redaction; MIT | Optional server-side minimisation before model/log/export use. Custom BM/Malaysian patterns need evaluation; redaction cannot replace scope/consent or guarantee privacy. Current canonical repo is used to avoid the stale ownership link |
+| [pdf-lib](https://github.com/Hopding/pdf-lib) | Invoice/receipt PDFs; MIT | Reuse the already selected library behind document services; no new ERP or competing ledger. Embed licensed fonts for required languages and validate layout; totals come from snapshots/verified payments |
+| [HunyuanImage-3.0 GitHub](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0), [official HF weights](https://huggingface.co/tencent/HunyuanImage-3.0), [licence](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/blob/main/LICENSE) | Marketing visuals; custom Tencent Hunyuan Community Licence, not MIT/Apache | Reference/evaluation candidate only. Base repo recommends at least 3 x 80 GB VRAM; it is unsuitable as a default bakery/local prototype dependency. Custom territory/use/redistribution terms require review for the intended release. Prefer the documented managed CloudBase image path below; open weights do not prove identical hosted models or entitlement |
+
+**Preferred text/visual runtime:** Use the currently supported official `@cloudbase/node-sdk` in WorkBuddy's server environment. Tencent documents managed text and Hunyuan image calls, with image generation server-only; the image guide currently lists SDK >=3.18.3 and account/credit prerequisites. Select actual supported model IDs from the account catalogue, not a guessed Hugging Face name. [Node AI integration](https://docs.cloudbase.net/en/ai/model/nodejs-access), [Hunyuan image Node SDK](https://docs.cloudbase.net/en/ai/image-model/node-sdk). These are documented capabilities; this account's access, region and charges remain unverified. Use asynchronous asset jobs and store accepted outputs privately instead of treating temporary provider URLs as permanent documents.
+
+**Excluded default choices:** The [CloudBase JS SDK GitHub mirror](https://github.com/TencentCloudBase/cloudbase-js-sdk) and [Node SDK mirror](https://github.com/TencentCloudBase/node-sdk) are marked archived; obtain supported distributions through current Tencent documentation rather than building from those mirrors. No LangChain/CrewAI/AutoGen replacement orchestrator, unrestricted community MCP server, external HF inference endpoint, paid model API or alternate-cloud backend is selected. No pretrained financial fraud dataset/model is assumed applicable to bakery payments. Optional Python/GPU services remain disabled until verified Tencent packaging is available; supported TypeScript baselines and honest unavailable states remain part of acceptance.
+
+For each adopted package/model, WorkBuddy records exact version/commit or model revision, licence/notice, source provenance, package integrity, permitted data, resource budget and capability evidence in its dependency register. Avoid unreviewed remote model code; approve/pin necessary loaders separately. Test adapters at the relevant subphase end gate; document imports as third-party dependencies rather than claiming WorkBuddy authored them. Repositories are never copied wholesale as the final app.
 
 ### Implemented local Phase 2 boundary
 

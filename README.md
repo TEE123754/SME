@@ -1,220 +1,213 @@
-# CustomerLane
+<div align="center">
+  <h1>CustomerLane</h1>
+  <h3>1 Customer, 1 Agent.</h3>
+  <p><strong>Customer relationships. Clear orders. Confident operations.</strong></p>
+  <p>Personal customer service and connected business operations for small businesses.</p>
+  <p>
+    <a href="#overview">Overview</a> &nbsp;|&nbsp;
+    <a href="#1-customer-1-agent">1 Customer, 1 Agent</a> &nbsp;|&nbsp;
+    <a href="#core-features">Core Features</a> &nbsp;|&nbsp;
+    <a href="#customer-journey">Customer Journey</a> &nbsp;|&nbsp;
+    <a href="#product-roadmap">Product Roadmap</a>
+  </p>
+</div>
 
-**1 Customer, 1 Agent. Personal service with business control.**
+---
 
-CustomerLane is a customer relationship and order management platform built around **one persistent agent context for every customer**. Conversations, consented preferences, order history and follow-up tasks stay connected to that customer, helping a small business provide consistent personal service as it grows.
+## Overview
 
-The product vision combines dedicated customer assistance with an owner workspace for agent oversight, sales, invoices, stock and customer engagement. Connected customer and order workflows are available locally today; AI assistance and the expanded capabilities are planned in the roadmap below.
+CustomerLane brings customer conversations, preferences, orders and owner decisions into one business workspace. Its central idea is **1 Customer, 1 Agent**: a lasting customer relationship with relevant history, personal attention and clear next steps.
 
-The first vertical is Malaysian home bakeries, where personal service, repeat orders, pickup schedules and limited production capacity all matter.
+Small businesses often manage enquiries in one place, orders in another, and payments or production plans somewhere else. CustomerLane connects these activities so customers can review clear proposals and owners can see what needs attention.
+
+The initial focus is Malaysian home bakeries, where repeat customers, pickup schedules, deposits and limited production capacity are part of everyday business.
+
+| Business challenge | CustomerLane's approach |
+| --- | --- |
+| Customers repeat the same details | Keep conversations, order history and permitted preferences connected |
+| Order details get lost in messages | Turn product, quantity, pickup date and time into a clear quote and order |
+| Bookings exceed production capacity | Check availability and hold capacity after customer confirmation |
+| Deposits and balances are difficult to track | Show verified payments, outstanding balances and the next action |
+| Exceptions interrupt routine work | Bring discounts, custom requests and complaints into owner review |
+| Owners need a clearer operating picture | Connect orders, customer activity, payments and pending decisions |
 
 ## 1 Customer, 1 Agent
 
-A customer should not have to start from zero with every message. Their agent carries the relevant context from the first enquiry through repeat orders and after-sales support, while the owner retains control over business decisions.
+**One customer. One continuing relationship.**
 
-- **One customer relationship:** Multiple conversations share the same customer identity and relevant history.
-- **Personal service:** Consented preferences support useful recommendations and repeat-order proposals.
-- **Private context:** Each customer's records remain scoped to that customer and the business.
-- **Owner oversight:** The planned agent dashboard shows **one box = one agent = one customer**, including active and inactive contexts and clear human-review reasons.
-- **Human support:** Customers can ask for the owner; takeover pauses conflicting automation until the owner resumes it.
+A customer may start with a product enquiry, return for another order and later need after-sales support. CustomerLane keeps those interactions connected through the same customer context.
 
-An agent represents a persistent customer context. Shared infrastructure can serve many contexts; each customer does not need a separate AI account or a continuously running process. Optional personalisation never replaces customer confirmation or owner authority.
+The agent experience is designed to remember only permitted information, use current business facts and ask for missing details. Customers remain in control of their preferences and purchases. Owners retain authority over business commitments and financial decisions.
 
-## Why CustomerLane
-
-For a small business, an order often starts as a conversation. Prices, pickup details and preferences become scattered across messages, while deposits and production commitments require separate tracking.
-
-CustomerLane connects these steps through the customer's history and authoritative business records. Customers review an exact quote before committing. Owners see what needs attention, manage capacity and retain authority over exceptions and payment verification. The expanded roadmap extends that relationship into stock planning, recommendations, promotions and after-sales service.
-
-| Business need | CustomerLane approach |
+| Principle | What it means for the business |
 | --- | --- |
-| Clear customer records | Profiles, order history and consent-controlled preferences |
-| Accurate pricing | Quotes calculated from the current catalogue and business policy |
-| Reliable bookings | Explicit confirmation, timed capacity holds and availability checks |
-| Payment visibility | Owner-reviewed payment records and outstanding-balance checks |
-| Controlled exceptions | A review queue for discounts, custom requests, cancellations and complaints |
-| Continuity of service | Saved conversations with owner takeover, reply and resume controls |
-| Operational clarity | A dashboard calculated from stored orders, payments and review cases |
+| **Continuity** | Relevant conversations and order history stay with the customer across visits |
+| **Personal service** | Consented preferences can support repeat-order suggestions and relevant recommendations |
+| **Private customer context** | Each customer sees their own records and order details |
+| **Clear commitments** | Every purchase requires acceptance of an exact quote |
+| **Human support** | The owner can take over a conversation, resolve an issue and resume the workflow |
+| **Visible oversight** | The planned agent dashboard gives the owner one card for each customer-agent relationship |
 
-## Who it serves
+Customer records, saved conversations and owner handoff are available today. AI conversations, agent cards and proactive engagement are part of the product roadmap.
 
-- **Home bakery owners** coordinating orders around limited daily production capacity.
-- **Small business teams** bringing customer service and order administration together.
-- **Student entrepreneurs** managing enquiries alongside study and fulfilment.
-- **Customers** who want transparent prices, clear pickup details and access to their order history.
+## Who CustomerLane Serves
 
-## Product capabilities
-
-The following customer, owner and business controls are connected to the current local application. The expanded agent and AI features are listed separately in the roadmap.
-
-### Customer workspace
-
-Customers browse the catalogue, check pickup options, select an item and quantity, and request a quote. Each quote shows the calculated total and required deposit. Customers review and explicitly confirm the proposal before an order is recorded and capacity is held.
-
-The workspace provides saved conversations, order details, reviewed offers, profile settings and preference management. Core customer actions support English and Bahasa Melayu, with separate consent controls for preferences, reminders and marketing.
-
-### Owner workspace
-
-Owners review orders and payment records, inspect outstanding work, maintain catalogue and policy information, and set daily production capacity. Exceptions enter an approval queue before any off-policy commitment.
-
-Owners can take over customer conversations, reply directly and resume the workflow. Cancellation and completion actions enforce business rules, including capacity release and full-balance requirements.
-
-### Business controls
-
-- Monetary calculations use integer sen for consistent totals and deposits.
-- Quotes expire, and confirmations bind to the exact proposal the customer reviewed.
-- Idempotency controls protect against duplicate business actions when requests are retried.
-- Customer records are scoped to the authenticated customer and business.
-- Owner permissions are enforced by the API and database access boundaries.
-- Preference withdrawal removes optional preferences while retaining transaction records.
-- Dashboard figures are calculated from persisted records.
-
-## An order from start to finish
-
-1. The owner publishes products, prices, pickup rules and capacity.
-2. The customer selects an item, quantity, pickup date and time slot.
-3. CustomerLane calculates a quote using the current business rules.
-4. The customer reviews and confirms the exact quote.
-5. The system records the order and places a time-limited capacity hold.
-6. The owner verifies the payment record; a sufficient deposit commits a valid hold.
-7. The owner manages fulfilment and completes the order once the required balance is settled.
-
-Requests outside standard policy move to owner review. Approved price changes require customer acceptance of a revised quote.
-
-## Product preview
-
-![CustomerLane customer and order workspace](docs/evidence/phase4-desktop.png)
-
-The current interface retains the earlier CustomerBuddy working name. CustomerLane is the product name adopted for this repository; internal package names and application branding have not yet been migrated.
-
-## Current release
-
-The current release includes connected customer and owner interfaces, persistent customer records, consent settings, conversations, quotes, order confirmation, capacity management, owner reviews, payment-record verification and operational reporting.
-
-The repository currently runs locally with fixture accounts and synthetic payment records. Account selection is intended for local evaluation; production authentication, live payment processing and external message delivery are not included. Services currently restrict access to local addresses.
-
-## Expanded product roadmap
-
-These features are specified and planned; they are not available in the current local release. Existing customer records, order services, approvals and payment controls provide their foundation.
-
-| Planned capability | What it adds |
+| Customer | Business value |
 | --- | --- |
-| **Customer-agent dashboard** | One card per customer-agent context, with active/inactive filters, interaction history, current task and human-review reasons; owner takeover and resume |
-| **Customer and owner AI chat** | BM/English and mixed-language queries, clarification of complex requests and answers grounded in current records; separate customer-scoped and owner-authorised tools |
-| **Sales, invoices and stock** | Downloadable invoices/receipts, reconciled sales and cash views, finished-goods batches, expiry, stock allocation, waste and audited adjustments |
-| **Stock prediction and sales forecasting** | Product demand and sales outlooks with history coverage, uncertainty and proposed production quantities to help reduce excess stock and waste |
-| **Controlled dynamic pricing** | Stock, expiry and demand-based price suggestions within business limits; owner review and publication, with confirmed order prices preserved |
-| **Customer engagement** | Recorded fresh-batch announcements, personalised recommendations and promotions, and permission-based after-sales check-ins with human support |
-| **Multilingual content creation** | Reviewed SEO product descriptions, marketing copy, personalised emails, social posts and PR drafts in BM/English; additional languages subject to review |
-| **Visual generative AI** | Marketing illustration drafts with generation provenance, rights review and owner approval; clear distinction from genuine product photography |
-| **Fraud and transaction-risk review** | Explainable suspicious-transaction signals and private owner cases; payment verification and financial decisions remain under owner control |
-| **Responsible AI controls** | Sparse-data bias checks, purpose/channel consent, privacy boundaries, easy opt-out, promotional frequency limits and transparent AI/forecast labels |
-| **Reliable follow-ups and deployment** | Guarded reminders, daily digests, durable background jobs, production identity and hosted services; additional channels after integration verification |
+| **Home bakery owners** | Coordinate enquiries, deposits, pickup dates and daily production commitments |
+| **Small business owners** | Bring customer service and order administration into one workspace |
+| **Student entrepreneurs** | Keep customer and order details organised around study and fulfilment |
+| **Returning customers** | Access familiar order history and place a new order with clear terms |
+| **First-time customers** | Understand products, prices, pickup details and how to confirm an order |
 
-Physical stock is tracked separately from production capacity. Forecasts support planning and show insufficient-data or stale-result states. Published pricing rules and recommendations use current business facts; customers still confirm an exact quote before an order is placed.
+## Core Features
 
-Marketing requires current consent and respects quiet hours, frequency limits, takeover and opt-out. Content and imagery require approval of the exact revision before publication or delivery. External email/social delivery is enabled only after a supported restricted integration is verified; exporting a draft is not a delivery result.
+The following capabilities are available in the current product experience.
 
-Risk signals support investigation and can be cleared by the owner. They do not prove fraud, verify a payment or authorise a refund. Recommendations and pricing exclude sensitive-trait targeting, covert cross-platform tracking and manipulative shopping prompts.
+| Feature | What it provides |
+| --- | --- |
+| **Customer profiles and preferences** | Saved customer information, language choices and optional preference management |
+| **Saved conversations** | A continuing record of customer and owner interactions |
+| **Catalogue and pickup options** | Published products, prices, policies and available pickup arrangements |
+| **Itemised quotes** | Clear quantities, total price, required deposit and quote validity |
+| **Confirmed orders** | Explicit customer acceptance followed by a time-limited capacity hold |
+| **Order history and status** | Order details, pickup information, verified payment amounts and remaining balance |
+| **Owner review queue** | Controlled handling of discounts, custom requests, cancellations and complaints |
+| **Human takeover** | Direct owner replies and explicit resume controls |
+| **Payment verification** | Owner-reviewed payment records and deposit confirmation |
+| **Production capacity** | Product/date capacity management with held, committed and remaining quantities |
+| **Business overview** | Order, payment and review figures calculated from saved business records |
+| **English and Bahasa Melayu** | Core customer actions and preference controls in both languages |
 
-### A returning customer's planned agent journey
+### Customer Workspace
 
-1. The customer returns to their existing agent and requests a repeat order.
-2. The agent uses permitted history, asks for missing details and checks current prices and availability.
-3. The customer reviews and confirms a new quote; business services record the order.
-4. The owner sees the interaction in that customer's agent card and reviews any exception.
-5. Eligible reminders and after-sales support continue within the customer's permissions.
-6. Future recommendations or promotions remain optional and never authorise another purchase.
+Customers browse products, choose quantities and pickup details, and review an itemised quote before placing an order. They can revisit their order history, check outstanding balances, manage optional preferences and ask for the owner.
 
-The [product requirements](PRD.md) define acceptance for these features. The [technical requirements](TRD.md#15-github--hugging-face-candidate-register) include researched GitHub/Hugging Face candidates, licences and integration limits; runtime compatibility and account access still require verification before adoption.
+The experience keeps the next step clear: review the quote, confirm the order, check the deposit deadline or wait for an owner decision.
 
-## Run locally
+### Owner Workspace
 
-### Requirements
+Owners manage orders, review payments, maintain catalogue information and set production capacity. Pending exceptions and customer conversations are connected to the relevant business records.
 
-- Windows x64 for the included PostgreSQL setup scripts.
-- Node.js `24.14.0` or later within the Node 24 release line.
-- pnpm `11.2.2` and Git.
-- Approximately 1 GB of free workspace storage for dependencies and PostgreSQL runtime files.
-- Internet access for initial dependency installation and database runtime download.
+The owner can respond directly when a customer needs help, review a proposed exception and retain control over fulfilment and financial decisions.
 
-### Installation
+## Customer Journey
 
-```powershell
-git clone https://github.com/TEE123754/SME.git
-cd SME
-pnpm install --frozen-lockfile
-pnpm db:setup
-pnpm db:migrate
-pnpm db:seed
-pnpm dev
+```mermaid
+flowchart LR
+    A[Customer enquiry] --> B[Products and pickup details]
+    B --> C[Itemised quote]
+    C --> D[Customer confirmation]
+    D --> E[Order and capacity hold]
+    E --> F[Owner verifies deposit]
+    F --> G[Fulfilment and completion]
+    C --> H[Owner reviews exception]
+    H --> C
 ```
 
-Open [the customer and owner workspace](http://127.0.0.1:5173) and choose an available account on the sign-in page. The API health endpoint is [available here](http://127.0.0.1:3001/api/v1/health).
+1. **Discover:** The customer reviews products and pickup information.
+2. **Prepare:** Product, quantity, date and time slot form a clear order request.
+3. **Review:** The customer receives an exact quote with total and deposit amounts.
+4. **Confirm:** Customer acceptance records the order and holds available capacity.
+5. **Verify:** The owner verifies the deposit before a valid hold becomes committed.
+6. **Fulfil:** The owner manages preparation, pickup and completion with payment status visible.
+7. **Return:** The customer's saved history supports the next visit; planned AI assistance will help propose a fresh repeat order.
 
-`db:setup` downloads the PostgreSQL runtime, initializes the database and generates an ignored `.env` file with local credentials. `db:migrate` applies the schema and provisions restricted application roles. `db:seed` inserts fixture records without resetting existing user changes when repeated.
+An exception moves to owner review. A revised commercial offer requires customer acceptance, and an expired or changed quote must be refreshed before confirmation.
 
-`pnpm dev` starts the database if necessary and launches the web and API services. Stopping the development command leaves PostgreSQL running; use `pnpm db:stop` to stop the database separately.
+## Product Preview
 
-### Useful commands
+### Customer Experience
 
-| Command | Purpose |
+![Customer conversation and order workspace](docs/evidence/phase4-desktop.png)
+
+### Owner Experience
+
+![Owner order and payment workspace](docs/evidence/phase4-payment.png)
+
+## Product Roadmap
+
+The following capabilities are planned additions to the customer and owner experience.
+
+### Customer-Agent Dashboard
+
+**1 box = 1 agent = 1 customer.**
+
+The owner will see active and inactive customer-agent relationships in one dashboard. Each card will show the latest interaction, current task, processing state and any reason that human review is needed.
+
+Opening a card will connect the owner to that customer's interaction history, orders and review cases. Several conversations will remain part of the same customer relationship. Takeover and resume controls will keep human involvement clear.
+
+### AI Conversations for Customers and Owners
+
+Customers will be able to ask product, order and support questions in English, Bahasa Melayu and common mixed-language phrasing. The assistant will clarify complex or incomplete requests and ground answers in current business information.
+
+A separate owner assistant will answer business questions about sales, unpaid invoices, stock, forecasts and pending reviews. Financial decisions, price publication and customer commitments will remain subject to the appropriate explicit approval.
+
+### Sales, Invoices and Stock Management
+
+Planned invoice and receipt downloads will connect to existing order and verified payment records. Sales views will distinguish booked order value, completed sales, verified cash collected and outstanding balances.
+
+Finished-goods stock management will track batches, sellable quantities, allocation, expiry, waste and adjustments. Physical stock and future production capacity will remain separately visible.
+
+### Stock Prediction and Sales Forecasting
+
+Demand and sales forecasts will help owners plan production and identify possible excess stock or shortages. Suggested quantities will consider usable stock, shelf life, known orders and remaining capacity.
+
+Forecasts will show their reporting horizon, available history and uncertainty. Limited history will produce a clear insufficient-data state or a disclosed baseline rather than an unsupported prediction.
+
+### Controlled Dynamic Pricing
+
+Stock levels, expiry and demand signals will support price suggestions within owner-defined limits. The owner will review and publish changes before they become available to customers.
+
+Confirmed orders will retain their agreed prices. Customers with an outdated quote will receive a refreshed proposal for acceptance.
+
+### Customer Engagement and After-Sales Service
+
+Planned engagement tools will support:
+
+- **Fresh-batch announcements:** Share a recorded, currently available batch, such as freshly made Orange Cake.
+- **Personalised recommendations:** Suggest relevant products using the customer's current request or explicitly permitted history.
+- **Personalised promotions:** Present approved offers with clear eligibility and validity.
+- **After-sales support:** Offer permitted check-ins and connect complaints or service questions to the owner.
+
+Marketing will respect consent, quiet hours, contact limits and opt-out. A recommendation or promotion will return the customer to the ordinary quote and confirmation journey.
+
+### Content Creation and Visual AI
+
+Owners will be able to prepare multilingual product and marketing drafts for review.
+
+| Content type | Planned use |
 | --- | --- |
-| `pnpm dev` | Start the local application |
-| `pnpm db:status` | Inspect the database status |
-| `pnpm db:start` / `pnpm db:stop` | Start or stop PostgreSQL |
-| `pnpm db:migrate` | Apply database migrations |
-| `pnpm db:seed` | Add initial fixture records |
-| `pnpm typecheck` | Check TypeScript types |
-| `pnpm lint` | Check source quality |
-| `pnpm build` | Build application packages |
-| `pnpm gate:phase4` | Run the current application-flow quality gate |
+| **SEO product descriptions** | Product titles, descriptions and search-friendly summaries grounded in approved facts |
+| **Marketing copy** | Campaign messages and product announcements with accurate offer terms |
+| **Personalised emails** | Relevant customer communication within permitted preferences and marketing choices |
+| **Social media content** | Reviewed posts and promotional copy ready for the selected audience |
+| **PR content** | Business announcements and brand stories |
+| **Generated visuals** | Marketing illustrations with clear origin, rights review and owner approval |
 
-Follow the phase-end verification policy in [the implementation plan](IMPLEMENTATION_PLAN.md). Existing evidence is stored in [docs/evidence](docs/evidence); the accessibility review still has a pending 200% browser zoom check.
+English and Bahasa Melayu will be the initial languages; additional languages will require review. Generated artwork will be identified as illustration where appropriate. Publication or delivery will require approval of the exact content and assets.
 
-## Technology and architecture
+### Fraud and Transaction-Risk Review
 
-CustomerLane uses a TypeScript monorepo with shared contracts and deterministic business services.
+Transaction-risk tools will highlight suspicious patterns such as duplicate payment references, unusual attempts or inconsistent submitted evidence. Private review cases will explain why attention is needed and allow the owner to clear a benign issue.
 
-| Layer | Technology |
-| --- | --- |
-| Web application | React, Vite, React Router and Tailwind CSS |
-| Forms and data fetching | React Hook Form, Zod and TanStack Query |
-| API | Node.js and Express |
-| Database | PostgreSQL, SQL migrations and row-level security |
-| Workspace | pnpm with pinned dependency versions |
+A risk flag will support investigation. Payment verification, receipts and financial decisions will continue to depend on verified business records and owner authority.
 
-| Directory | Responsibility |
-| --- | --- |
-| `apps/web` | Customer and owner interfaces |
-| `apps/api` | Sessions, validated APIs and business operations |
-| `apps/worker` | Background-processing foundation |
-| `packages` | Shared contracts, domain rules, database access and assistance foundations |
-| `scripts` | Database setup, startup and verification |
-| `docs` | Scenarios, review notes and evidence |
+### Responsible Customer Relationships
 
-## Configuration and data handling
+The expanded agent experience will include safeguards for limited-data bias, privacy and AI transparency. Customers will be able to decline optional personalisation and stop promotions while continuing to order.
 
-[.env.example](.env.example) documents the local configuration. Database credentials, runtime data and generated files remain outside version control. Keep credentials on the server; browser code must contain only public configuration.
+Recommendations and pricing will avoid sensitive-trait targeting and covert cross-platform tracking. Marketing will use truthful availability and offer terms, with clear human support and no fabricated urgency or pressure to keep shopping.
 
-The API uses HttpOnly session cookies, CSRF protection, allowed-origin checks and scoped database transactions. Runtime database roles are separated from migration credentials. Production identity, hosting and operational hardening remain future release work.
+### Follow-Ups and Daily Business Summaries
 
-If you change ports, update `API_PORT`, `WEB_PORT` and `ALLOWED_ORIGINS` together. PostgreSQL defaults to `127.0.0.1:54329`, and the web development server proxies `/api` requests to the API.
+Planned reminders will follow up on eligible unpaid orders, with checks for payment, expiry, customer permission and owner takeover. Daily summaries will bring together orders, verified payments, capacity, pending reviews and failed actions.
 
-## Project documentation
+Additional communication channels will extend this experience when supported, with clear delivery status and the same customer permissions.
 
-- [Product requirements](PRD.md)
-- [Technical requirements](TRD.md)
-- [Customer and owner flows](APP_FLOW.md)
-- [Design brief](DESIGN_BRIEF.md)
-- [Database schema](BACKEND_SCHEMA.md)
-- [Implementation progress](IMPLEMENTATION_PLAN.md)
-- [Application review scenarios](docs/PHASE4_SCENARIOS.md)
+---
 
-## Feedback and contributions
-
-Use [GitHub Issues](https://github.com/TEE123754/SME/issues) to report a problem or propose an improvement. Include the affected workflow, steps to reproduce, expected behaviour and relevant screenshots or logs with private information removed.
-
-Before changing the implementation, review the agreed specifications and active checkpoint. Keep business rules, permissions and customer data boundaries consistent, and record meaningful changes and verification evidence in the implementation plan.
-
-No open-source licence has been declared in this repository.
+<div align="center">
+  <strong>1 Customer, 1 Agent.</strong><br/>
+  <em>Customer relationships. Clear orders. Confident operations.</em>
+</div>

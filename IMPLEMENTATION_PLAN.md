@@ -377,6 +377,13 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 - Commit `dbb4a4674da499c4347741f45395ef28ea4d66bc` was pushed successfully to origin/main; `git ls-remote` confirmed GitHub main matches that commit. This follow-up record captures the verified publication result.
 - README/publication request complete. No further implementation is requested; a later implementation turn resumes the deferred Phase 4 checkpoint. Current features and new roadmap items remain accurately separated.
 
+### Business-product README revision - 7 October 2026
+
+- User requested the exact tagline "Customer relationships. Clear orders. Confident operations." and a business-product-only README using the linked 404Hire README as a presentation reference.
+- Rewrote README.md with a centred product identity, internal navigation, business overview, 1 Customer/1 Agent principles, audience/features tables, customer/owner experience, order journey, real existing previews and a clearly labelled product roadmap. Wrote original CustomerLane copy; the reference's competition, author, architecture and setup material was not adopted.
+- Removed technical setup/configuration, package details, implementation phases, provenance, repository administration, dependency references and contribution/licence sections from README. Available and planned product capabilities remain distinguished; no application behaviour or gate status changed.
+- Product-only wording, exact tagline, navigation anchors, image links, balanced fences and whitespace checks passed. Remote main matches local HEAD `9cca13873094f6e83921b1f0641218cbd24af777`. Only README.md and this progress record are changed; no app tests/builds were run. Exact next action: commit/push the revised published README under the existing user-authorised GitHub workflow and verify remote main.
+
 ### Template for later checkpoints
 
 ```text

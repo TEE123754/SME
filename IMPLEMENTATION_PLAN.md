@@ -374,7 +374,8 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 - Updated README.md with the persistent customer-agent concept, one-box-per-customer owner oversight, scoped history/consent/human takeover, and an explicitly planned roadmap covering FR-18–FR-27. Current local capabilities, setup and implementation status remain accurate.
 - Publication scope is README.md plus the seven specification updates from the preceding request. No application source, migration, dependency or prior gate evidence changes are included.
 - README local-link/fence checks and git diff whitespace review passed. Remote main matches local HEAD `b3ec8a26ce7007941d03d4d43d349c5c1ed18079`; a normal push can proceed. No application tests, lint, typecheck or build were run for this documentation-only change.
-- Exact next action: commit the eight reviewed Markdown files, push without force, and verify the remote commit; then record publication completion. Preserve the deferred Phase 4 checkpoint.
+- Commit `dbb4a4674da499c4347741f45395ef28ea4d66bc` was pushed successfully to origin/main; `git ls-remote` confirmed GitHub main matches that commit. This follow-up record captures the verified publication result.
+- README/publication request complete. No further implementation is requested; a later implementation turn resumes the deferred Phase 4 checkpoint. Current features and new roadmap items remain accurately separated.
 
 ### Template for later checkpoints
 

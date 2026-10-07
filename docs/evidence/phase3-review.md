@@ -1,0 +1,11 @@
+# Phase 3 completion evidence
+
+7 October 2026 — Codex local synthetic reference. Phase 4 has not started.
+
+Migrations 002 and 003 are applied; 001/002 checksums were preserved when a shared-trigger issue required follow-up correction. Ten synthetic customer fixtures and prior history remain in the real demo database. Commerce writes use restricted cb_runtime, trusted scope, CSRF/origin protection, explicit idempotency and per-business/date database advisory locks.
+
+Final compiler, ESLint and production build pass. All 25 scenarios in phase3-integration.json pass: integer prices/deposits, lead time, challenge/quote expiry/edit, forged scope, duplicate confirmation, last-unit contention, duplicate/partial payment, lazy expiry, expiry/payment race, late-payment capacity review, exact discount approval, stale/rejected approvals, takeover/resume, preserved snapshots, cancellation/payment retention, balance/fulfilment, capacity version checks, publication invalidation, RLS/owner authority, transactional outbox and HTTP quote-to-order persistence. The disposable DB was removed.
+
+The initial batch stopped at compiler errors, repaired by an explicit cached type dependency and offer narrowing. Database verification then found customer ON CONFLICT insertion requiring outbox read visibility and shared-trigger field access on non-capacity rows. Plain write-only outbox insertion and new migration 003 fixed those boundaries. A later denial assertion was changed to capture a synchronous owner guard. Failed/affected checks were rerun; the integration runner reconstructs its dependent workflow setup in a fresh disposable DB. Prior Phase 1/2 suites were preserved, not repeated. Final quality/build rerun was justified by the production outbox correction and status-copy edits.
+
+The API health reports phase 3 and a connected restricted database through the web proxy at http://127.0.0.1:5173. The two React copy updates retain existing structure/hooks/accessibility; no new UI flow or browser acceptance is claimed. Full customer/owner screens are Phase 4. Outbox events are queued intents; files, actual reminder delivery, scripted dispatch and demo clock controls are Phase 5. Complex refund/custom/complaint reviews do not silently alter paid snapshots or issue refunds. No cloud, live AI, WorkBuddy integration or real payment/customer data was used.

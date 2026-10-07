@@ -1,0 +1,29 @@
+{
+  "recordedAt": "2026-10-07T09:17:20.755Z",
+  "phase": 3,
+  "implementation": "Codex local synthetic reference",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "name": "P3-01 fresh migration and checksummed replay",
+      "status": "passed"
+    },
+    {
+      "name": "P3-02 RM78/RM39 and RM48/RM24 use integer server pricing",
+      "status": "passed"
+    },
+    {
+      "name": "P3-03 exact pickup lead time, unknown products and duplicate lines denied",
+      "status": "passed"
+    },
+    {
+      "name": "P3-04 forged confirmation, wrong customer and changed hash denied",
+      "status": "passed"
+    },
+    {
+      "name": "P3-05 quote expiry, challenge expiry and edit invalidate old acceptance",
+      "status": "failed",
+      "error": "42703"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "customerbuddy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.2.2",
+  "engines": {
+    "node": ">=24.14.0 <25",
+    "pnpm": "11.2.2"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "db:setup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/postgres.ps1 setup",
+    "db:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/postgres.ps1 start",
+    "db:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/postgres.ps1 stop",
+    "db:status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/postgres.ps1 status",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint apps packages scripts --max-warnings 0",
+    "format": "prettier --write apps packages scripts package.json tsconfig.json eslint.config.js .prettierrc.json pnpm-workspace.yaml",
+    "build": "node scripts/build.mjs",
+    "gate:phase1": "node scripts/gate-phase1.mjs",
+    "db:migrate": "tsx scripts/database.ts migrate",
+    "db:seed": "tsx scripts/database.ts seed",
+    "gate:phase2": "node scripts/gate-phase2.mjs",
+    "gate:phase3": "node scripts/gate-phase3.mjs",
+    "gate:phase4": "node scripts/gate-phase4.mjs"
+  },
+  "devDependencies": {
+    "dotenv": "18.0.6",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.1",
+    "eslint": "10.12.0",
+    "esbuild": "0.28.2",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.13.0",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.1"
+  }
+}

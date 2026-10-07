@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-07T08:25:35.731Z",
+  "implementation": "Codex local scripted reference",
+  "phase": 1,
+  "node": "v24.14.0",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 4112
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 82426
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1802
+    },
+    {
+      "check": "Startup smoke",
+      "status": "passed",
+      "durationMs": 2828
+    }
+  ]
+}

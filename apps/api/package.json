@@ -1,0 +1,22 @@
+{
+  "name": "@customerbuddy/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "dependencies": {
+    "@customerbuddy/contracts": "workspace:*",
+    "@customerbuddy/db": "workspace:*",
+    "cors": "2.8.6",
+    "dotenv": "18.0.6",
+    "express": "5.2.1",
+    "pg": "8.23.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.6"
+  }
+}

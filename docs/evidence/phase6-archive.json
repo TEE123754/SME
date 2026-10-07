@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-07T12:57:12.035063+00:00",
+  "archive": "handoff/customerbuddy-workbuddy-reference.zip",
+  "bytes": 5371559,
+  "sha256": "0675b4be559e9e0be5173781511c9b97df768bc647e687072070eafb3e10c96c",
+  "referenceArtifacts": 104,
+  "status": "passed",
+  "checks": [
+    "ZIP exact manifest entry set",
+    "All archived artifact hashes match reviewed manifest",
+    "No source/build/runtime artifacts"
+  ]
+}

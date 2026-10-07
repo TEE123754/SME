@@ -1,12 +1,27 @@
 # CustomerBuddy - App Flow
 
-Version 0.4 | 7 October 2026 | Core prototype flows plus specified WorkBuddy expansion; new flows not implemented.
+## Expanded local demo E1 (current user authorisation)
+
+The user now explicitly requests a complete Codex local demo without WorkBuddy, using hardcoded/scripted methods. This supersedes earlier specification-only deferrals of expanded features for the local demo. Business profile/catalogue/facts support retail and services; dedicated agent cards, stock/forecasts/pricing, owner/customer assistants, engagement/content/visual templates, risk/ethical controls, calendar/tracking, checkout/members/appointments/sales are implemented with saved scoped records. See [expanded demo contracts and flows](docs/EXPANDED_DEMO.md) and [current checkpoint](IMPLEMENTATION_PLAN.md) for limits and verification status. Future WorkBuddy integration/rebuild remains separate; the existing Phase 6 ZIP is a historical pre-expansion snapshot.
+
+Version 0.6 | 8 October 2026 | Local E1 flows with UX1 navigation and workflow redesign; independent WorkBuddy expansion requirements remain separate.
+
+## UX1 current navigation and workflow (8 October 2026)
+
+- Owner opens Overview → saved metrics, three upcoming orders, stage counts and named priorities → order detail, human reviews or the awaiting-deposit filter.
+- One role-aware sidebar groups Workspace, Business, Growth and collapsed Settings & tools. Customer navigation contains Discover, Your buddy, Checkout / book, orders, updates and preferences; legacy `/b/:bakerySlug` URLs retain the correct page label/selection. Page search uses Ctrl/Meta+K, typed page keywords, Tab/Enter and Escape. Native mobile navigation closes on selection and restores focus on Escape.
+- Orders → search/status filter → explicit order/Open link → unchanged payment, tracking and document controls. Empty filters offer Clear filters. Customers see only their own records and an empty-history booking entry point.
+- Members → searchable directory → Add member modal → real synthetic account saved, form closed and feedback displayed; optional consents remain off. View buddy → `/owner/agents?customer=...` → native interaction drawer → existing authorised transcript/takeover/reply/resume; close clears the parameter and focuses the matching card. No business action occurs merely by opening the drawer.
+- Customer chat → clear booking entry or supported scripted quick action. Owner-help and single-item forms, reviews and facts use native disclosures instead of showing every form initially; existing reviews remain discoverable. Order-again/edit explicitly expand the existing single-item form.
+- Checkout → basket & schedule → Review exact quote → authoritative itemised price/deposit/window, with focus and automatic mobile scroll to review → explicit review checkbox → Confirm booking. Changing basket/date/window clears the quote and review state. Real confirmation authority and capacity checks are unchanged.
+
+UI-only redesign: APIs, schema, scoped access, approvals, synthetic-payment verification, document jobs and WorkBuddy deferral are retained. Screenshots and gate/browser evidence are in [UX1 review](docs/evidence/ux1/review.md). Actual 200% zoom remains pending by user choice.
 
 Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [TRD](<C:/Users/Edison Tee/Downloads/SME/TRD.md>), [Design Brief](<C:/Users/Edison Tee/Downloads/SME/DESIGN_BRIEF.md>).
 
 **Current mode:** Codex implements these flows with hardcoded assistant intent rules/templates and real saved business state. Live AI, MCP and WorkBuddy Automation are Phase 7 work. Chat always shows "Demo assistant — scripted responses"; forms and quick actions provide reliable paths without free-text recognition.
 
-**Expanded target:** The following added routes/journeys implement PRD FR-18–FR-27 in the independent WorkBuddy project after its core flow. They are planned requirements, not existing prototype pages. Invoice/payment/approval flows above are reused rather than duplicated. The current documentation request does not start implementation or change the saved Phase 4 gate.
+**Independent WorkBuddy target (local E1 routes/flows are mapped in the linked demo runbook):** The following added routes/journeys implement PRD FR-18–FR-27 in the independent WorkBuddy project after its core flow. They are planned requirements, not existing prototype pages. Invoice/payment/approval flows above are reused rather than duplicated. The current documentation request does not start implementation or change the saved Phase 4 gate.
 
 ## 1. Entry points and routes
 
@@ -226,3 +241,20 @@ Expanded journeys are included as specification/contracts/scenarios in the Phase
 Sign-in, profile/consent/preferences, saved chat, explicit order form, quote/edit/confirmation, order history/detail and customer approved-offer review now persist through the API. The owner UI connects overview/orders/reviews/customers/knowledge/capacity/automation/evidence; synthetic payment verification and human takeover/reply/resume are active. Customer-to-owner and owner-to-customer private routes show role prompts. Message saving is active; scripted replies/files/jobs remain Phase 5.
 
 Browser B01–B08 passed. Responsive BM/EN, labels, skip link/menu/focus/status and core contrast were inspected; 200% zoom remains pending at user request and 360px runtime requests clamp to 400px. Phase 4 is built, not yet Complete. See IMPLEMENTATION_PLAN.md and docs/evidence/phase4-review.md.
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+Customer sends a saved message → scoped script dispatch → published facts/status or explicit form/preferences controls. Unknown/authority-changing text offers supported choices. Owner help creates a real review and pauses dispatch; messages continue saving until owner resumes. Language templates follow the current profile language. Scripts never confirm a quote or verify payments.
+
+Confirm an exact form quote → jobs generate summary/invoice → owner verifies synthetic deposit → receipt job → customer downloads through authenticated scope. Owner Automation offers paused/resumed/advanced demo time, Run due jobs, Generate digest, reminder pause and typed reset. Eligible reminders defer outside permitted hours and recheck current conditions before one durable in-app delivery. Historical notices link to current order balance. Reset UI requires exact confirmation; Phase5 testing reset only the disposable database.
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.
+
+## S1 — Owner setup and customer shopping (8 October 2026)
+
+Landing → Set up my business → synthetic name/address/industry/fulfilment form → own owner session → Business & collection → Policies → Availability → Preview & finish. Each form persists independently; readiness is derived from published facts, available items and eligible future capacity. Customer: public store → search/type filter → product details → Add to bag → business-specific synthetic sign-in → saved basket → date/window → exact member-priced quote → explicit confirmation → saved order/tracking. Members: explicit join/leave; separate newsletter toggle; My updates inbox. Owner preview stays read-only until customer sign-in.
+

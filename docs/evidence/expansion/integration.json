@@ -1,0 +1,102 @@
+{
+  "recordedAt": "2026-10-07T13:47:10.475Z",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "id": "E01 migrations and RLS cover the expansion",
+      "status": "passed"
+    },
+    {
+      "id": "E02 owner routes deny customers and missing CSRF",
+      "status": "passed"
+    },
+    {
+      "id": "E03 one unique agent card per customer",
+      "status": "passed"
+    },
+    {
+      "id": "E04 configurable non-bakery business publishes facts",
+      "status": "passed"
+    },
+    {
+      "id": "E05 member creation is idempotent and optional consent starts off",
+      "status": "passed"
+    },
+    {
+      "id": "E06 stock receipts retry safely and negative stock is denied",
+      "status": "passed"
+    },
+    {
+      "id": "E07 checkout reservation prevents overselling tracked stock",
+      "status": "passed"
+    },
+    {
+      "id": "E08 fulfilment requires confirmation, tracks preparation and consumes once",
+      "status": "passed"
+    },
+    {
+      "id": "E09 cancellation restores dispatched stock and preserves payments",
+      "status": "passed"
+    },
+    {
+      "id": "E10 forecasting reconciles history and labels sparse data",
+      "status": "passed"
+    },
+    {
+      "id": "E11 pricing approval changes new catalogue but not existing orders",
+      "status": "passed"
+    },
+    {
+      "id": "E12 service products book capacity, have no physical stock and retain snapshots",
+      "status": "passed"
+    },
+    {
+      "id": "E13 customer recommendation respects optional memory and owner pause",
+      "status": "passed"
+    },
+    {
+      "id": "E14 campaign previews and delivery recheck withdrawn consent",
+      "status": "passed"
+    },
+    {
+      "id": "E15 personalised campaigns deliver locally once and obey daily caps",
+      "status": "passed"
+    },
+    {
+      "id": "E16 ethical marketing pause and promotion bounds apply at send time",
+      "status": "passed"
+    },
+    {
+      "id": "E17 after-sales campaigns require completed order",
+      "status": "passed"
+    },
+    {
+      "id": "E18 multilingual content and editable visual persist through approval",
+      "status": "passed"
+    },
+    {
+      "id": "E19 risk cases block verification until human review",
+      "status": "passed"
+    },
+    {
+      "id": "E20 calendar tasks persist and completed orders appear in the agenda",
+      "status": "passed"
+    },
+    {
+      "id": "E21 sales totals reconcile against ledger and order snapshots",
+      "status": "passed"
+    },
+    {
+      "id": "E22 customer scripted recommendations and after-sales create real owner review",
+      "status": "passed"
+    },
+    {
+      "id": "E23 customer cannot read another inbox, risk ledger or tracking",
+      "status": "passed"
+    },
+    {
+      "id": "E24 persisted state survives a new application instance and pool",
+      "status": "passed"
+    }
+  ]
+}

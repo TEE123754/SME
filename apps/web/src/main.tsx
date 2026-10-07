@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import { SessionProvider } from './lib/session';
 import './styles.css';
+import './workspace.css';
+import './shopping.css';
 
 const queryClient = new QueryClient();
 const root = document.getElementById('root');

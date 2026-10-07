@@ -1,0 +1,64 @@
+{
+  "phase": 5,
+  "recordedAt": "2026-10-07T12:26:28.782741+00:00",
+  "status": "passed",
+  "initialAttempt": {
+    "recordedAt": "2026-10-07T11:54:55.302Z",
+    "phase": 5,
+    "node": "v24.14.0",
+    "results": [
+      {
+        "check": "TypeScript",
+        "status": "failed",
+        "message": "Command failed with exit 2: node_modules/typescript/bin/tsc"
+      }
+    ]
+  },
+  "repairHistory": [
+    "TypeScript: unused callback parameter and challenge property corrected",
+    "Lint: mutable declaration corrected",
+    "Worker PDF: narrow quote SELECT grant migration005; reminder query avoids denied order lock",
+    "Test fixtures: preserve seeded preferences, real-time fixture expiry and scoped disposable reset address check",
+    "Browser: reply language follows current profile; PDF pickup uses exact date/slot; clock advance idempotency; historical reminder balance guidance"
+  ],
+  "results": [
+    {
+      "check": "Final pnpm typecheck",
+      "status": "passed"
+    },
+    {
+      "check": "Final pnpm lint",
+      "status": "passed"
+    },
+    {
+      "check": "Final pnpm build",
+      "status": "passed"
+    },
+    {
+      "check": "16 focused integration cases",
+      "status": "passed"
+    },
+    {
+      "check": "Browser workflows and scoped downloads",
+      "status": "passed"
+    },
+    {
+      "check": "Rendered receipt layout",
+      "status": "passed"
+    }
+  ],
+  "integrationEvidence": "phase5-integration.json",
+  "integrationCases": 16,
+  "disposableDatabaseRemoved": true,
+  "affectedRerun": "pnpm exec tsx scripts/test-phase5.ts 1 7; only clock case rerun after idempotency repair; previous passes retained",
+  "warnings": [
+    "Build client chunk522.41kB",
+    "Actual200%zoom pending; requested360px clamps to400px"
+  ],
+  "notClaimed": [
+    "Live AI",
+    "WorkBuddy implementation",
+    "Cloud deployment",
+    "Phase6 acceptance"
+  ]
+}

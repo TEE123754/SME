@@ -23,7 +23,10 @@
     "db:seed": "tsx scripts/database.ts seed",
     "gate:phase2": "node scripts/gate-phase2.mjs",
     "gate:phase3": "node scripts/gate-phase3.mjs",
-    "gate:phase4": "node scripts/gate-phase4.mjs"
+    "gate:phase4": "node scripts/gate-phase4.mjs",
+    "gate:phase5": "node scripts/gate-phase5.mjs",
+    "gate:phase6": "node scripts/gate-phase6.mjs",
+    "reference:pack": "node scripts/pack-phase6.mjs"
   },
   "devDependencies": {
     "dotenv": "18.0.6",

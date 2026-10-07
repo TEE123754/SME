@@ -1,6 +1,10 @@
 # CustomerBuddy - WorkBuddy Independent Rebuild Brief
 
-Version 0.4 | 7 October 2026 | Prototype checkpoint preserved; expanded final requirements specified, not built; rebuild Not started.
+## Expanded local demo E1 (current user authorisation)
+
+The user now explicitly requests a complete Codex local demo without WorkBuddy, using hardcoded/scripted methods. This supersedes earlier specification-only deferrals of expanded features for the local demo. Business profile/catalogue/facts support retail and services; dedicated agent cards, stock/forecasts/pricing, owner/customer assistants, engagement/content/visual templates, risk/ethical controls, calendar/tracking, checkout/members/appointments/sales are implemented with saved scoped records. See [expanded demo contracts and flows](docs/EXPANDED_DEMO.md) and [current checkpoint](IMPLEMENTATION_PLAN.md) for limits and verification status. Future WorkBuddy integration/rebuild remains separate; the existing Phase 6 ZIP is a historical pre-expansion snapshot.
+
+Version 0.5 | 7 October 2026 | Expanded local reference E1 complete; final independent rebuild Not started.
 
 ## 1. Purpose
 
@@ -190,4 +194,14 @@ draft/export/in-app behaviour and measured limitations; no simulated pass.
 
 ## Current Phase 4 references
 
-Connected customer/owner workflows and screenshots are available as behaviour/design references. Six API cases and browser B01–B08 pass, while200% zoom remains pending by user choice; exact360px was clamped to 400px by the browser. These are Codex reference results, not WorkBuddy-authored source or rebuild passes. Phase 5 assistant/files/jobs and Phase 6 acceptance/reference pack are not built yet. Preserve this distinction when preparing the later independent rebuild.
+Connected customer/owner workflows and screenshots are available as behaviour/design references. Six API cases and browser B01–B08 pass, while200% zoom remains pending by user choice; exact360px was clamped to 400px by the browser. These are Codex reference results, not WorkBuddy-authored source or rebuild passes. Phase 5 assistant/files/jobs and Phase 6 acceptance/reference pack are complete. The existing ZIP predates E1; current expanded references are in docs/EXPANDED_DEMO.md and docs/evidence/expansion/. Preserve this distinction when preparing the later independent rebuild.
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+Use Phase5 scenarios, rendered receipt and saved gate results as behaviour expectations only. Independently implement cloud identity/private download delivery, worker leases/idempotency, reminder guards and real managed-AI/tool boundaries. Prototype authenticated streaming and local file archives describe reference choices, not deployed Tencent capabilities. Source import and inherited prototype passes do not count as a WorkBuddy rebuild.
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.

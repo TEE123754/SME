@@ -3,7 +3,14 @@ import { z } from 'zod';
 export const healthSchema = z.object({
   status: z.enum(['ok', 'degraded']),
   service: z.literal('customerbuddy-api'),
-  phase: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+  phase: z.union([
+    z.literal(1),
+    z.literal(2),
+    z.literal(3),
+    z.literal(4),
+    z.literal(5),
+    z.literal(6),
+  ]),
   assistantMode: z.literal('scripted'),
   database: z.enum(['connected', 'unavailable']),
   correlationId: z.uuid(),
@@ -137,7 +144,7 @@ export const decisionRequestSchema = z
   .strict();
 export const statusRequestSchema = z
   .object({
-    state: z.enum(['ready', 'completed', 'cancelled']),
+    state: z.enum(['preparing', 'ready', 'delivering', 'completed', 'cancelled']),
     version: z.number().int().min(1),
     reviewed: z.boolean().optional(),
     note: z.string().trim().min(1).max(500),

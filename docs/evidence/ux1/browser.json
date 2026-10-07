@@ -1,0 +1,23 @@
+{
+  "phase": "UX1",
+  "dateMYT": "2026-10-08",
+  "method": "In-app browser UI with DOM accessibility observations and screenshots",
+  "checks": [
+    {"name": "Saved overview priorities and deposit deep link", "status": "passed", "orders": 7, "activeOrders": 5, "awaitingDeposit": 3, "bookedSen": 55620, "verifiedSyntheticSen": 20400, "reviews": 3},
+    {"name": "Order search, empty result and reset", "status": "passed", "search": "Avery", "matches": 1},
+    {"name": "Member search and saved modal creation", "status": "passed", "fixture": "Demo Morgan", "memberCount": 12, "modalClosedOnSuccess": true},
+    {"name": "Member deep link to Hana interaction and Escape", "status": "passed"},
+    {"name": "CtrlK search, no match, Tab/Enter result and settings", "status": "passed"},
+    {"name": "Modal backward Tab wrap", "status": "initially failed", "observed": "Focus left native interaction dialog"},
+    {"name": "Shared repaired modal focus", "status": "passed", "interactionBackward": "Open approval cases", "interactionForward": "Close interaction", "memberBackward": "Create demo member", "searchBackward": "Stock & forecast", "mobileNavigationFocusInside": true},
+    {"name": "Mobile Escape focus return", "status": "passed", "navigation": "Open navigation", "member": "Add member", "interaction": "agent-open-9a5eceb2-de4f-4a11-a2ea-00ec5c84a42b"},
+    {"name": "Scoped Morgan history and chat disclosures", "status": "passed", "confirmedOrders": 0, "legacySlugLabel": "Your buddy"},
+    {"name": "Authoritative two-item quote and explicit review", "status": "passed", "totalSen": 12600, "depositSen": 6300, "disabledBeforeReview": true, "enabledAfterReview": true, "scheduleChangeClearsQuote": true, "confirmationSubmitted": false},
+    {"name": "Desktop shared screen rendering", "status": "passed", "screens": ["Calendar overview", "Sales and invoices", "Transaction risk review", "Content and visual studio"], "alertBanners": 0, "horizontalDocumentOverflow": false},
+    {"name": "Responsive layouts", "status": "passed within measured viewport", "requestedWidth": 400, "measuredClientWidth": 428, "measuredScrollWidth": 428, "screens": ["Stock", "Orders", "Interaction", "Checkout", "Members", "Overview"], "finalLanguageControlHeight": 44}
+  ],
+  "deferred": ["Actual 200% zoom by user choice", "Exact 360px viewport, tool-clamped"],
+  "fixtures": {"newSyntheticMembers": ["Demo Morgan"], "unconfirmedSyntheticQuotesCreated": true, "newConfirmedOrders": 0, "newPayments": 0, "resets": 0, "externalSends": 0},
+  "finalPreview": "http://127.0.0.1:5173/owner",
+  "defaultDesktopViewportRestored": true
+}

@@ -35,11 +35,13 @@ export function QueryState({
   return <>{children}</>;
 }
 const labels: Record<string, string> = {
-  awaiting_deposit: 'Reserved · awaiting deposit',
-  confirmed: 'Confirmed · production booked',
-  ready: 'Ready for pickup',
+  awaiting_deposit: 'Awaiting deposit',
+  confirmed: 'Confirmed',
+  ready: 'Ready',
   completed: 'Completed',
-  cancelled: 'Cancelled / released',
+  preparing: 'Order preparing',
+  delivering: 'Delivering',
+  cancelled: 'Cancelled',
   pending: 'Waiting for owner',
   approved: 'Approved',
   rejected: 'Rejected',
@@ -71,7 +73,6 @@ export function PageHeading({
   return (
     <div className="page-heading">
       <div>
-        <span className="eyebrow">Aina's Home Bakery</span>
         <h1 tabIndex={-1}>{title}</h1>
         <p>{description}</p>
       </div>

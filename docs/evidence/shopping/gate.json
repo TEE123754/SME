@@ -1,0 +1,47 @@
+{
+  "startedAt": "2026-10-07T18:05:45.827Z",
+  "scope": "S1 complete build: storefront, scoped cart, local onboarding, explicit membership/newsletter and deterministic discounts. Expanded commerce regression justified by quote/confirmation changes.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 4369
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 5540
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1510
+    },
+    {
+      "check": "Shopping integration",
+      "status": "failed",
+      "message": "Command failed with exit 1: C:\\Users\\Edison Tee\\Downloads\\SME\\node_modules\\.pnpm\\tsx@4.23.15\\node_modules\\tsx\\dist\\cli.mjs"
+    },
+    {
+      "check": "Shopping integration",
+      "status": "failed",
+      "message": "Command failed with exit 1: C:\\Users\\Edison Tee\\Downloads\\SME\\node_modules\\.pnpm\\tsx@4.23.15\\node_modules\\tsx\\dist\\cli.mjs"
+    },
+    {
+      "check": "Shopping integration",
+      "status": "failed",
+      "message": "Command failed with exit 1: C:\\Users\\Edison Tee\\Downloads\\SME\\node_modules\\.pnpm\\tsx@4.23.15\\node_modules\\tsx\\dist\\cli.mjs"
+    },
+    {
+      "check": "Shopping integration",
+      "status": "passed",
+      "durationMs": 2685
+    },
+    {
+      "check": "Commerce regression",
+      "status": "passed",
+      "durationMs": 2973
+    }
+  ],
+  "recordedAt": "2026-10-07T18:07:06.207Z"
+}

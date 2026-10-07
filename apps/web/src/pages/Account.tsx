@@ -6,26 +6,44 @@ import { useSession } from '../lib/session-context';
 import { PageHeading, QueryState, Feedback } from '../components/workflow';
 import { Button } from '../components/ui/button';
 import { useData, useAction } from '../lib/hooks';
+import { cartKey, readCart, saveCart } from '../lib/cart';
 export function SignIn() {
   const session = useSession(),
     navigate = useNavigate(),
     [params] = useSearchParams();
   const accounts = useQuery({
-    queryKey: ['accounts'],
+    queryKey: ['accounts', params.get('business')],
     queryFn: () =>
-      api<{ accounts: { account_key: string; label: string; role: string }[] }>('/demo/accounts'),
+      api<{ accounts: { account_key: string; label: string; role: string }[] }>(
+        `/demo/accounts${params.get('business') ? '?business=' + encodeURIComponent(params.get('business')!) : ''}`,
+      ),
     retry: false,
   });
-  const [chosen, setChosen] = useState('farah'),
+  const [chosen, setChosen] = useState(''),
     [pending, setPending] = useState(false),
     [error, setError] = useState<unknown>(null);
+  const selectedAccount =
+    accounts.data?.accounts.find((a) => a.account_key === chosen) ??
+    accounts.data?.accounts.find((a) =>
+      params.get('next')?.startsWith('/owner') ? a.role === 'owner' : a.account_key === 'farah',
+    ) ??
+    accounts.data?.accounts.find((a) => a.role === 'customer') ??
+    accounts.data?.accounts[0];
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     setPending(true);
     setError(null);
     try {
-      const me = await session.signIn(chosen),
+      const me = await session.signIn(selectedAccount?.account_key ?? chosen),
         next = params.get('next');
+      if (me.role === 'customer') {
+        const guest = cartKey(me.business.id),
+          target = cartKey(me.business.id, me.profile?.id);
+        if (readCart(guest).length && !readCart(target).length) {
+          saveCart(target, readCart(guest));
+          saveCart(guest, []);
+        }
+      }
       navigate(
         next?.startsWith('/') &&
           !next.startsWith('//') &&
@@ -34,7 +52,7 @@ export function SignIn() {
           ? next
           : me.role === 'owner'
             ? '/owner'
-            : '/b/ainas-home-bakery/chat',
+            : `/b/${me.business.slug}`,
       );
     } catch (e) {
       setError(e);
@@ -45,7 +63,7 @@ export function SignIn() {
   return (
     <>
       <PageHeading
-        title={session.t('Meet your bakery buddy', 'Kenali pembantu bakeri anda')}
+        title={session.t('Meet your business buddy', 'Kenali pembantu perniagaan anda')}
         description={session.t(
           'Choose a synthetic account for the local demo. Every account has its own saved records.',
           'Pilih akaun sintetik untuk demo tempatan. Setiap akaun mempunyai rekod tersendiri.',
@@ -56,7 +74,10 @@ export function SignIn() {
           <form onSubmit={submit} className="form-stack">
             <label>
               {session.t('Demo account', 'Akaun demo')}
-              <select value={chosen} onChange={(e) => setChosen(e.target.value)}>
+              <select
+                value={selectedAccount?.account_key ?? ''}
+                onChange={(e) => setChosen(e.target.value)}
+              >
                 {accounts.data?.accounts.map((a) => (
                   <option key={a.account_key} value={a.account_key}>
                     {a.label} · {a.role}
@@ -84,13 +105,17 @@ export function SignIn() {
 }
 export function Preferences() {
   const { me, t } = useSession(),
-    prefs = useData<{ preferences: { key: string; value: string }[] }>('/me/preferences');
+    prefs = useData<{ preferences: { key: string; value: string }[] }>('/me/preferences'),
+    catalogue = useData<{ items: import('../lib/types').Product[] }>('/catalogue');
   const action = useAction();
   const [name, setName] = useState(me?.profile?.display_name ?? ''),
     [language, setLanguage] = useState<'en' | 'bm' | undefined>();
-  const [favourite, setFavourite] = useState('brownie-tray'),
+  const [favourite, setFavourite] = useState(''),
     [slot, setSlot] = useState('midday'),
     [packaging, setPackaging] = useState('standard');
+  const selectedFavourite = catalogue.data?.items.some((p) => p.sku === favourite)
+    ? favourite
+    : (catalogue.data?.items[0]?.sku ?? '');
   async function savePreference(key: string, value: string) {
     if (await action.run('/me/preferences', { key, value }, 'PATCH'))
       action.setNotice(t('Preference saved.', 'Pilihan disimpan.'));
@@ -100,7 +125,7 @@ export function Preferences() {
       <PageHeading
         title={t('Your preferences', 'Pilihan anda')}
         description={t(
-          'You decide what the bakery remembers. Consent is separate from ordering.',
+          'You decide what your business buddy remembers. Consent is separate from ordering.',
           'Anda tentukan perkara yang disimpan. Persetujuan berasingan daripada pesanan.',
         )}
       />
@@ -184,8 +209,8 @@ export function Preferences() {
             </label>
           ))}
           <p className="muted">
-            Reminders and marketing delivery remain Phase 5/future work. These controls persist your
-            consent now.
+            Reminders and local campaign messages use these saved consent controls. Optional
+            marketing can be withdrawn at any time.
           </p>
         </section>
       </div>
@@ -220,15 +245,18 @@ export function Preferences() {
           <div>
             <label>
               {t('Favourite product', 'Produk kegemaran')}
-              <select value={favourite} onChange={(e) => setFavourite(e.target.value)}>
-                <option value="brownie-tray">Brownie tray</option>
-                <option value="cupcake-box">Cupcake box</option>
+              <select value={selectedFavourite} onChange={(e) => setFavourite(e.target.value)}>
+                {catalogue.data?.items.map((p) => (
+                  <option key={p.sku} value={p.sku}>
+                    {p.label}
+                  </option>
+                ))}
               </select>
             </label>
             <Button
               variant="secondary"
-              disabled={action.pending || !me?.consents?.preference_memory}
-              onClick={() => savePreference('favourite_product_sku', favourite)}
+              disabled={action.pending || !me?.consents?.preference_memory || !selectedFavourite}
+              onClick={() => savePreference('favourite_product_sku', selectedFavourite)}
             >
               {t('Save favourite', 'Simpan kegemaran')}
             </Button>
@@ -276,7 +304,7 @@ export function Preferences() {
         ) : null}
       </section>
       <Feedback action={action} />
-      <Link className="text-link" to="/b/ainas-home-bakery/chat">
+      <Link className="text-link" to={`/b/${me?.business.slug}/chat`}>
         {t('Back to ordering', 'Kembali ke pesanan')}
       </Link>
     </>

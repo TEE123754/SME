@@ -1,0 +1,58 @@
+{
+  "phase": 5,
+  "recordedAt": "2026-10-07T12:26:28.782741+00:00",
+  "checks": [
+    {
+      "id": "B01",
+      "status": "passed",
+      "observation": "Hana menu/status/fallback persisted; Farah BM then EN reply in existing conversation"
+    },
+    {
+      "id": "B02",
+      "status": "passed",
+      "observation": "Owner help pauses replies while messages save; explicit owner resume restores catalogue reply"
+    },
+    {
+      "id": "B03",
+      "status": "passed",
+      "observation": "Structured quote/order78/deposit39; owner verification; invoice/summary/receipt available"
+    },
+    {
+      "id": "B04",
+      "status": "passed",
+      "observation": "Clock pause/resume/advance and job controls persist; quiet reminders deferred at23:00 then delivered09:00"
+    },
+    {
+      "id": "B05",
+      "status": "passed",
+      "observation": "Digest snapshots reconcile5orders,204 synthetic verified payments,1awaiting,2reminders"
+    },
+    {
+      "id": "B06",
+      "status": "passed",
+      "observation": "Owner and scoped Hana receipt download; final console error list empty"
+    },
+    {
+      "id": "B07",
+      "status": "passed",
+      "observation": "Desktop and actual400px owner/customer views inspected; no horizontal content overflow"
+    },
+    {
+      "id": "B08",
+      "status": "passed",
+      "observation": "Rendered receipt date2026-10-10/12:00\u201314:00MYT,78total/39paid/39balance and synthetic reference; no clipping"
+    }
+  ],
+  "pending": [
+    "Actual200%zoom (Phase4 user deferred)",
+    "Exact360px (browser clamps400px)"
+  ],
+  "mainDemoReset": false,
+  "screenshots": [
+    "phase5-order.png",
+    "phase5-automation.png",
+    "phase5-mobile-owner.png",
+    "phase5-mobile-customer.png",
+    "phase5-receipt-render.png"
+  ]
+}

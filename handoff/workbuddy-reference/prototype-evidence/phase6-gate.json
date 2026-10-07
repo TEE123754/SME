@@ -1,0 +1,75 @@
+{
+  "phase": 6,
+  "recordedAt": "2026-10-07T12:54:31.371525+00:00",
+  "node": "v24.14.0",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 3225
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "command": "pnpm lint (affected repair)"
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1341
+    },
+    {
+      "check": "Identity/persistence regression",
+      "status": "passed",
+      "durationMs": 2334
+    },
+    {
+      "check": "Commerce/concurrency regression",
+      "status": "passed",
+      "durationMs": 2871
+    },
+    {
+      "check": "UI API regression",
+      "status": "passed",
+      "durationMs": 1985
+    },
+    {
+      "check": "Job/document regression",
+      "status": "passed",
+      "durationMs": 2959
+    },
+    {
+      "check": "Scripted acceptance/restart/security",
+      "status": "passed",
+      "durationMs": 2820
+    },
+    {
+      "check": "Portable pack build",
+      "status": "passed",
+      "durationMs": 280
+    },
+    {
+      "check": "Portable pack validation",
+      "status": "passed",
+      "command": "node scripts/check-phase6-pack.mjs (affected repair)"
+    }
+  ],
+  "initialAttempt": "phase6-initial-gate.json",
+  "repairs": [
+    "ESLint unused copyFile import and redundant removed flag fixed; pnpm lint rerun passed. TypeScript retained.",
+    "Phase2/3 migration counts updated to5 and forced-RLS table count33 for current schema; only failed/unrun regressions continued.",
+    "Scripted replay assertion normalizes JSON dates; retainedS01\u2013S18 passes, ranS19\u2013S38 and two unrun acceptance checks.",
+    "Pack includes Idea and replaces external course-PDF absolute link with source attribution; no original course PDF bundled.",
+    "Final affected typecheck/lint passed; pack scripts lint passed after generated-credential scan."
+  ],
+  "status": "passed",
+  "acceptanceCases": 40,
+  "regressionCases": 71,
+  "browserEvidence": "phase6-browser.json",
+  "limits": [
+    "User-deferred actual200%zoom",
+    "Exact360px tool-clamped400",
+    "Scripted only; no liveAI/cloud/WorkBuddy implementation",
+    "522.73kB client chunk warning"
+  ]
+}

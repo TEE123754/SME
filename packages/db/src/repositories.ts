@@ -167,7 +167,7 @@ export function createRepositories(pool: Pool) {
         async (client) =>
           (
             await client.query(
-              `SELECT p.id AS product_id,p.sku,c.label,c.description,c.units_description,c.unit_price_sen::integer,c.knowledge_version_id
+              `SELECT p.id AS product_id,p.sku,p.kind,p.image_key,c.label,c.description,c.units_description,c.unit_price_sen::integer,c.knowledge_version_id
         FROM app.catalogue_items c JOIN app.products p ON p.business_id=c.business_id AND p.id=c.product_id
         JOIN app.businesses b ON b.id=c.business_id AND b.active_knowledge_version_id=c.knowledge_version_id
         WHERE c.business_id=$1 AND c.available AND p.active ORDER BY p.sku`,
@@ -220,7 +220,7 @@ export function createRepositories(pool: Pool) {
     async orders(scope: TrustedScope, id?: string) {
       return withScope(pool, scope, async (client) => {
         const result = await client.query(
-          `SELECT o.id,o.display_code,o.customer_id,o.state,o.version,o.exception_paused,o.pickup_slot_id,o.pickup_date::text,o.total_sen::integer,o.deposit_required_sen::integer,
+          `SELECT o.id,o.display_code,o.customer_id,o.state,o.version,o.exception_paused,o.pickup_slot_id,o.pickup_date::text,o.created_at,o.updated_at,o.total_sen::integer,o.deposit_required_sen::integer,
           (SELECT jsonb_build_object('state',r.state,'expiresAt',r.expires_at) FROM app.reservations r WHERE r.order_id=o.id AND r.business_id=o.business_id) AS reservation,
           (SELECT jsonb_agg(jsonb_build_object('id',p.id,'amountSen',p.amount_sen::integer,'reference',p.reference,'state',p.state,'verifiedAt',p.verified_at)) FROM app.payments p WHERE p.order_id=o.id AND p.business_id=o.business_id) AS payments,
           (SELECT jsonb_agg(jsonb_build_object('id',d.id,'kind',d.kind,'state',d.state)) FROM app.documents d WHERE d.order_id=o.id AND d.business_id=o.business_id) AS documents,

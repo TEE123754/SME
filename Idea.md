@@ -88,3 +88,7 @@ These names describe responsibilities. The Codex prototype uses one scripted dis
 - [ ] Independently rebuild the full agentic project, deploy and author final materials in WorkBuddy Phase 7.
 
 Phases 1–3 are complete with passing gates (Phase 1 includes browser review); Phase 4 is built with passing automated/flow checks and deferred 200% zoom review; Phase 5 has not started and the usable business prototype is not complete. Update the canonical progress checklist in Implementation Plan as each phase is built; run its checks once at phase end, then rerun only failed/affected checks after fixes.
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).

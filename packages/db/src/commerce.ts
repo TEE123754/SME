@@ -16,6 +16,7 @@ import type { z } from 'zod';
 import { depositSen, proposalHash, pickupInstant } from '@customerbuddy/domain';
 import { withScope } from './scope.js';
 import { DataError } from './repositories.js';
+import { currentBenefit, type MemberBenefit } from './loyalty.js';
 
 type QuoteInput = z.infer<typeof quoteRequestSchema>;
 type Item = {
@@ -28,6 +29,7 @@ type Item = {
   lineTotalSen: number;
 };
 type Offer = {
+  memberBenefit?: MemberBenefit;
   knowledgeVersionId: string;
   items: Item[];
   pickupDate: string;
@@ -36,6 +38,7 @@ type Offer = {
   depositSen: number;
 };
 type Quote = {
+  member_benefit: MemberBenefit | null;
   id: string;
   customer_id: string;
   knowledge_version_id: string;
@@ -159,7 +162,7 @@ async function outbox(
     ],
   );
 }
-async function idem<T>(
+export async function idem<T>(
   c: PoolClient,
   s: TrustedScope,
   operation: string,
@@ -188,8 +191,11 @@ async function idem<T>(
   );
   return result;
 }
-async function price(c: PoolClient, input: QuoteInput, discount = 0): Promise<Offer> {
+async function price(c: PoolClient, input: QuoteInput, discount = 0, cid?: string): Promise<Offer> {
   input = quoteRequestSchema.parse(input);
+  const benefit = cid ? await currentBenefit(c, cid) : undefined;
+  if (benefit) discount = benefit.basisPoints;
+  let savingsSen = 0;
   const knowledge = await published(c),
     instant = await now(c);
   const slot = notFound(
@@ -215,6 +221,7 @@ async function price(c: PoolClient, input: QuoteInput, discount = 0): Promise<Of
       ).rows[0],
     );
     const unit = Math.floor((Number(product.unit_price_sen) * (10000 - discount)) / 10000);
+    savingsSen += (Number(product.unit_price_sen) - unit) * requested.quantity;
     items.push({
       productId: product.id,
       catalogueItemId: product.catalogue_id,
@@ -228,6 +235,7 @@ async function price(c: PoolClient, input: QuoteInput, discount = 0): Promise<Of
   const total = items.reduce((sum, item) => sum + item.lineTotalSen, 0);
   if (total <= 0 || total > 10000000) throw new DataError('INVALID_TOTAL');
   return {
+    ...(benefit ? { memberBenefit: { ...benefit, savingsSen } } : {}),
     knowledgeVersionId: knowledge.id,
     items,
     pickupDate: input.pickupDate,
@@ -249,7 +257,7 @@ async function insertQuote(
     hash = proposalHash(offer);
   const expiry = new Date(instant.getTime() + knowledge.policy.quoteLifetimeMinutes * 60000);
   await c.query(
-    `INSERT INTO app.quotes(id,business_id,customer_id,knowledge_version_id,items_json,pickup_date,pickup_slot_id,total_sen,deposit_sen,proposal_hash,approval_id,expires_at,state,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'active',$13)`,
+    `INSERT INTO app.quotes(id,business_id,customer_id,knowledge_version_id,items_json,pickup_date,pickup_slot_id,total_sen,deposit_sen,proposal_hash,approval_id,expires_at,state,created_at,member_benefit) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'active',$13,$14)`,
     [
       id,
       s.businessId,
@@ -264,6 +272,7 @@ async function insertQuote(
       approvalId,
       expiry,
       instant,
+      offer.memberBenefit ? JSON.stringify(offer.memberBenefit) : null,
     ],
   );
   await audit(c, s, cid, 'quote_created', id, { totalSen: offer.totalSen, approvalId });
@@ -283,6 +292,16 @@ async function getQuote(c: PoolClient, id: string): Promise<Quote> {
   );
 }
 async function validQuote(c: PoolClient, q: Quote) {
+  if (q.member_benefit) {
+    const current = await currentBenefit(c, q.customer_id);
+    if (
+      !current ||
+      current.memberVersion !== q.member_benefit.memberVersion ||
+      current.programVersion !== q.member_benefit.programVersion ||
+      current.basisPoints !== q.member_benefit.basisPoints
+    )
+      conflict('MEMBER_BENEFIT_CHANGED');
+  }
   if (q.state !== 'active') conflict('QUOTE_NOT_ACTIVE');
   if (q.expires_at.getTime() <= (await now(c)).getTime()) conflict('QUOTE_EXPIRED');
   const knowledge = await published(c);
@@ -399,7 +418,7 @@ export function createCommerce(pool: Pool) {
       requireCustomer(s);
       return tx(s, (c) =>
         idem(c, s, 'quote', key, input, async () =>
-          insertQuote(c, s, s.customerId!, await price(c, input)),
+          insertQuote(c, s, s.customerId!, await price(c, input, 0, s.customerId!)),
         ),
       );
     },
@@ -409,7 +428,12 @@ export function createCommerce(pool: Pool) {
         idem(c, s, 'edit_quote', key, { id, ...input }, async () => {
           const q = await getQuote(c, id);
           if (q.state !== 'active') conflict('QUOTE_NOT_ACTIVE');
-          const quote = await insertQuote(c, s, s.customerId!, await price(c, input));
+          const quote = await insertQuote(
+            c,
+            s,
+            s.customerId!,
+            await price(c, input, 0, s.customerId!),
+          );
           await c.query("UPDATE app.quotes SET state='superseded' WHERE id=$1", [id]);
           return quote;
         }),
@@ -473,6 +497,11 @@ export function createCommerce(pool: Pool) {
           await c.query('SELECT app.expire_date($1::date)', [q.pickup_date]);
           const buckets: { id: string; item: Item }[] = [];
           for (const item of q.items_json) {
+            const stock = (
+              await c.query('SELECT app.inventory_available($1) AS available', [item.productId])
+            ).rows[0]?.available;
+            if (stock !== null && stock !== undefined && stock < item.quantity)
+              conflict('STOCK_UNAVAILABLE');
             const bucket = (
               await c.query(
                 'SELECT * FROM app.capacity_buckets WHERE product_id=$1 AND pickup_date=$2 FOR UPDATE',
@@ -610,6 +639,23 @@ export function createCommerce(pool: Pool) {
             };
           }
           const paid = await paymentTotal(c, order.id);
+          const risk = (
+            await c.query(
+              "SELECT state FROM app.risk_cases WHERE order_id=$1 AND reference=$2 AND state IN ('open','blocked')",
+              [order.id, input.reference],
+            )
+          ).rows[0];
+          if (risk) conflict('PAYMENT_RISK_REVIEW');
+          if (
+            input.amountSen >= 100000 &&
+            !(
+              await c.query(
+                "SELECT 1 FROM app.risk_cases WHERE order_id=$1 AND reference=$2 AND amount_sen=$3 AND state='cleared'",
+                [order.id, input.reference, input.amountSen],
+              )
+            ).rowCount
+          )
+            conflict('PAYMENT_RISK_REVIEW');
           if (paid + input.amountSen > Number(order.total_sen))
             conflict('OVERPAYMENT_REQUIRES_REVIEW');
           const hold = await reservation(c, order.id),
@@ -896,8 +942,10 @@ export function createCommerce(pool: Pool) {
           } else {
             if (order.exception_paused) conflict('EXCEPTION_PAUSED');
             if (
-              (input.state === 'ready' && order.state !== 'confirmed') ||
-              (input.state === 'completed' && order.state !== 'ready')
+              (input.state === 'preparing' && order.state !== 'confirmed') ||
+              (input.state === 'ready' && !['confirmed', 'preparing'].includes(order.state)) ||
+              (input.state === 'delivering' && order.state !== 'ready') ||
+              (input.state === 'completed' && !['ready', 'delivering'].includes(order.state))
             )
               conflict('INVALID_TRANSITION');
             if (
@@ -1028,7 +1076,7 @@ export function createCommerce(pool: Pool) {
             conversationId: id,
             state: conversation.state,
             humanTakeover: conversation.human_takeover,
-            dispatch: 'deferred_phase5',
+            dispatch: 'awaiting_scripted_response',
           };
         }),
       );

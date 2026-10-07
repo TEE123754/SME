@@ -32,11 +32,30 @@ export const seedPolicy = {
   allowedExceptionTypes: ['discount', 'custom_order', 'complaint', 'refund_request'],
 };
 
-export async function seedDemo(pool: Pool): Promise<boolean> {
+export async function seedDemo(pool: Pool, reset = false): Promise<boolean> {
   const c = await pool.connect();
   try {
     await c.query('BEGIN');
     await c.query('SELECT pg_advisory_xact_lock(70202603)');
+    if (reset) {
+      const target = (
+        await c.query(
+          'SELECT current_database() AS name,current_user AS role,host(inet_server_addr()) AS host',
+        )
+      ).rows[0];
+      if (
+        !/^customerbuddy(?:_phase5_test_[0-9]+_[a-f0-9]{8})?$/.test(target.name) ||
+        target.role !== 'customerbuddy' ||
+        !['127.0.0.1', '::1'].includes(target.host)
+      )
+        throw new Error('Reset requires the named local synthetic database');
+      const others = (
+        await c.query('SELECT id FROM app.businesses WHERE id<>$1', [fixtureBusinessId])
+      ).rowCount;
+      if (others) throw new Error('Reset refuses databases with other businesses');
+      await c.query('SELECT pg_advisory_xact_lock(hashtextextended($1,3003))', [fixtureBusinessId]);
+      await c.query('TRUNCATE app.businesses,app.seed_history CASCADE');
+    }
     if ((await c.query("SELECT 1 FROM app.seed_history WHERE version='demo-v1'")).rowCount) {
       await c.query('COMMIT');
       return false;
@@ -50,6 +69,10 @@ export async function seedDemo(pool: Pool): Promise<boolean> {
     );
     await c.query(
       "INSERT INTO app.memberships(business_id,auth_provider,provider_subject,role) VALUES($1,'demo','demo:owner','owner')",
+      [b],
+    );
+    await c.query(
+      'INSERT INTO app.loyalty_programs(business_id) VALUES($1) ON CONFLICT DO NOTHING',
       [b],
     );
     await c.query(
@@ -101,10 +124,11 @@ export async function seedDemo(pool: Pool): Promise<boolean> {
       { sku: 'cupcake-box', label: 'Cupcake box', price: 4800, units: '12 pieces', capacity: 8 },
     ];
     for (const p of products) {
-      await c.query('INSERT INTO app.products(id,business_id,sku) VALUES($1,$2,$3)', [
+      await c.query('INSERT INTO app.products(id,business_id,sku,image_key) VALUES($1,$2,$3,$4)', [
         fixtureId(p.sku),
         b,
         p.sku,
+        p.sku === 'brownie-tray' ? 'brownie' : 'cupcake',
       ]);
       await c.query(
         'INSERT INTO app.catalogue_items(id,business_id,knowledge_version_id,product_id,label,description,unit_price_sen,units_description) VALUES($1,$2,$3,$4,$5,$6,$7,$8)',

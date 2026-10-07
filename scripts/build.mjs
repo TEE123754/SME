@@ -11,6 +11,6 @@ await build({
   format: 'esm',
   bundle: true,
   // Bundle local workspace sources; externalize installed third-party dependencies.
-  external: ['express', 'cors', 'dotenv', 'zod', 'pg'],
+  external: ['express', 'cors', 'dotenv', 'zod', 'pg', 'pdf-lib'],
 });
 await runNode([viteCli, 'build', 'apps/web']);

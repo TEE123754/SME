@@ -1,0 +1,154 @@
+{
+  "recordedAt": "2026-10-07T14:05:10.457Z",
+  "ownerPages": [
+    {
+      "page": "stock",
+      "headings": [
+        "47 heading Stock, forecasts and pricing, Value: 1",
+        "62 heading Brownie tray, Value: 2",
+        "98 heading Cupcake box, Value: 2",
+        "134 heading Dynamic pricing proposals, Value: 2",
+        "138 heading Stock movement ledger, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "sales",
+      "headings": [
+        "47 heading Sales and invoices, Value: 1",
+        "60 heading Sales by item, Value: 2",
+        "64 heading Invoice register, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "members",
+      "headings": [
+        "47 heading Members, Value: 1",
+        "55 heading Farah, Value: 2",
+        "62 heading Jason, Value: 2",
+        "69 heading Mei, Value: 2",
+        "76 heading Amir, Value: 2",
+        "83 heading Priya, Value: 2",
+        "90 heading Nur, Value: 2",
+        "97 heading Daniel, Value: 2",
+        "104 heading Aisha, Value: 2",
+        "111 heading Hana, Value: 2",
+        "118 heading Ryan, Value: 2",
+        "124 heading Add a synthetic member, Value: 2",
+        "137 heading Customer membership controls, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "calendar",
+      "headings": [
+        "47 heading Calendar overview, Value: 1",
+        "126 heading 2026-10-10 · agenda, Value: 2",
+        "145 heading Add a calendar task, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "campaigns",
+      "headings": [
+        "47 heading Customer engagement, Value: 1",
+        "51 heading Create a campaign, Value: 2",
+        "76 heading Audience preview, Value: 2",
+        "79 heading Saved campaigns, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "content",
+      "headings": [
+        "47 heading Content and visual studio, Value: 1",
+        "52 heading Create a draft, Value: 2",
+        "83 heading Saved drafts, Value: 3",
+        "86 heading Copy and visual preview, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "risks",
+      "headings": [
+        "47 heading Transaction risk review, Value: 1",
+        "52 heading Screen a proposed payment, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "ethics",
+      "headings": [
+        "47 heading Trust and ethical controls, Value: 1",
+        "51 heading Customer protection settings, Value: 2",
+        "66 heading How this demo earns trust, Value: 2",
+        "68 heading Limited data and bias, Value: 3",
+        "71 heading Privacy and consent, Value: 3",
+        "74 heading Healthy engagement, Value: 3",
+        "77 heading Transparency and human control, Value: 3"
+      ],
+      "errors": []
+    },
+    {
+      "page": "business",
+      "headings": [
+        "47 heading Business and catalogue, Value: 1",
+        "51 heading 2",
+        "68 heading Products and services, Value: 2"
+      ],
+      "errors": []
+    },
+    {
+      "page": "assistant",
+      "headings": [
+        "47 heading Business assistant, Value: 1"
+      ],
+      "errors": []
+    }
+  ],
+  "workflows": [
+    {
+      "feature": "Members",
+      "result": "Created Demo Avery, 11 members, independent synthetic sign-in account, consents initially off."
+    },
+    {
+      "feature": "Checkout and tracking",
+      "result": "Two-item authoritative RM126 quote explicitly confirmed; order e967e5c5-c899-4553-83a6-9751247c60b5 persisted with RM63 deposit due and payment-pending history."
+    },
+    {
+      "feature": "Scripted assistant",
+      "result": "Avery catalogue recommendation saved in scoped conversation; owner sales query reads saved order/payment totals."
+    },
+    {
+      "feature": "Content and visual template",
+      "result": "BM social draft edited, approved and actual SVG download verified on disk."
+    },
+    {
+      "feature": "Campaign/local inbox",
+      "result": "One consenting synthetic member received announcement; ten suppressed. Repeat disabled by daily cap; saved message visible in Avery inbox."
+    },
+    {
+      "feature": "Agents",
+      "result": "11 unique customer cards; 2 active, 9 inactive, 2 human-review flags. Priority cards visible first, review filter and transcript controls work."
+    }
+  ],
+  "layout": {
+    "desktopWidth": 1281,
+    "mobileRequestedWidth": 400,
+    "mobileObservedDocumentWidth": 428,
+    "mobileDocumentScrollWidth": 428,
+    "responsiveCardScreenshot": "agents-mobile-card.png",
+    "viewportRestored": true
+  },
+  "deferred": [
+    "Actual 200% browser zoom",
+    "Exact 360px viewport unavailable due browser clamp"
+  ],
+  "limits": [
+    "Synthetic accounts/payments only",
+    "Scripted language and copy/visual templates",
+    "Local inbox only; no external messages",
+    "No live WorkBuddy, model or cloud integration"
+  ]
+}

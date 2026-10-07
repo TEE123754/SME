@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +9,7 @@ import type { Product, Pickup, Quote, Order, Conversation, Message, Capacity } f
 import { Button } from '../components/ui/button';
 import { useData, useAction } from '../lib/hooks';
 import { PageHeading, Feedback, QueryState, Status } from '../components/workflow';
+import { OrderTracking } from './Calendar';
 
 const orderFormSchema = z.object({
   sku: z.string().min(1),
@@ -18,10 +19,24 @@ const orderFormSchema = z.object({
 });
 type OrderFields = z.infer<typeof orderFormSchema>;
 export function CustomerChat() {
+  const orderSection = useRef<HTMLDetailsElement>(null);
+  function openOrderForm() {
+    if (orderSection.current) {
+      orderSection.current.open = true;
+      orderSection.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
   const { me, t } = useSession(),
     products = useData<{ items: Product[] }>('/catalogue'),
     pickup = useData<Pickup>('/pickup-options');
   const conversations = useData<{ conversations: Conversation[] }>('/conversations');
+  const notices = useData<{ notifications: { id: string; content: string; order_id: string }[] }>(
+    '/me/notifications',
+  );
+  const [lastMessage, setLastMessage] = useState<{
+    conversationId: string;
+    messageId: string;
+  } | null>(null);
   const history = useData<{ orders: Order[] }>('/orders'),
     knowledge = useData<{
       policy: { policy_json: { leadTimeHours: number } };
@@ -60,7 +75,7 @@ export function CustomerChat() {
   const form = useForm<OrderFields>({
     resolver: zodResolver(orderFormSchema),
     defaultValues: {
-      sku: 'brownie-tray',
+      sku: '',
       quantity: 1,
       pickupDate: '2026-10-10',
       pickupSlotCode: 'midday',
@@ -71,6 +86,11 @@ export function CustomerChat() {
       `/capacity?date=${encodeURIComponent(date)}`,
       /^\d{4}-\d{2}-\d{2}$/.test(date),
     );
+  const quoteExpired =
+    !!quote &&
+    (quote.state === 'expired' ||
+      (!!clock.data &&
+        new Date(quote.expiresAt).getTime() <= new Date(clock.data.demoTime).getTime()));
   async function prepare(fields: OrderFields) {
     const input = {
       items: [{ sku: fields.sku, quantity: fields.quantity }],
@@ -132,37 +152,119 @@ export function CustomerChat() {
       setEditing(null);
     }
   }
-  async function send(event: React.FormEvent) {
-    event.preventDefault();
-    const id = activeId ?? (await newConversation());
-    if (!id) return;
-    const result = await action.run(`/conversations/${id}/messages`, { content: message.trim() });
+  async function dispatch(conversationId: string, messageId: string) {
+    const result = await action.run<{ reply: string; error?: string }>(
+      `/conversations/${conversationId}/respond`,
+      { messageId },
+    );
     if (result) {
-      setMessage('');
+      setLastMessage(null);
       action.setNotice(
-        t(
-          'Message saved. Scripted replies arrive in Phase 5; use the order form below or ask the owner.',
-          'Mesej disimpan. Balasan berskrip hadir pada Fasa 5; gunakan borang pesanan atau minta bantuan pemilik.',
-        ),
+        result.error ? 'The scripted service failed. Ask the owner or use the form.' : result.reply,
       );
     }
   }
+  async function send(event: React.FormEvent) {
+    event.preventDefault();
+    await sendText(message.trim());
+  }
+  async function sendText(content: string) {
+    const id = activeId ?? (await newConversation());
+    if (!id) return;
+    const result = await action.run<{ id: string }>(`/conversations/${id}/messages`, {
+      content,
+    });
+    if (result) {
+      setMessage('');
+      setLastMessage({ conversationId: id, messageId: result.id });
+      await dispatch(id, result.id);
+    }
+  }
+
   return (
     <>
       <PageHeading
         title={t(
-          `Hello, ${me?.profile?.display_name ?? 'there'}. What are we baking?`,
+          `Hello, ${me?.profile?.display_name ?? 'there'}. How can we help?`,
           `Hai, ${me?.profile?.display_name ?? 'anda'}. Apa pilihan anda?`,
         )}
         description={t(
-          'A clear order, a familiar bakery. All amounts and availability come from saved business records.',
-          'Pesanan jelas daripada bakeri pilihan anda. Harga dan ketersediaan daripada rekod perniagaan.',
+          'Your dedicated business buddy. Amounts and availability come from saved business records.',
+          'Pembantu perniagaan anda. Harga dan ketersediaan daripada rekod perniagaan.',
         )}
-      />
+      >
+        <Link className="button button-primary" to="/checkout">
+          {t('Start a booking', 'Buat tempahan')}
+        </Link>
+      </PageHeading>
+      {notices.data?.notifications.map((n) => (
+        <section className="panel spaced" key={n.id}>
+          <strong>
+            {t(
+              'Saved reminder — check the order for its current balance',
+              'Peringatan tersimpan — semak pesanan untuk baki terkini',
+            )}
+          </strong>
+          <p>{n.content}</p>
+          <Link to={`/account/orders/${n.order_id}`}>{t('View order', 'Lihat pesanan')}</Link>
+        </section>
+      ))}
+      <div className="action-row spaced chat-quick-actions" aria-label="Supported scripted actions">
+        {[
+          'menu',
+          'pickup',
+          'order status',
+          'preferences',
+          'recommendation',
+          'after sales',
+          'owner help',
+        ].map((text) => (
+          <Button
+            key={text}
+            variant="secondary"
+            disabled={action.pending}
+            onClick={() => sendText(text)}
+          >
+            {t(
+              (
+                {
+                  menu: 'Products',
+                  pickup: 'Collection times',
+                  'order status': 'My order status',
+                  preferences: 'Saved preferences',
+                  recommendation: 'Recommend for me',
+                  'after sales': 'After-sales help',
+                  'owner help': 'Ask the owner',
+                } as Record<string, string>
+              )[text]!,
+              (
+                {
+                  menu: 'menu',
+                  pickup: 'waktu ambil',
+                  'order status': 'status pesanan',
+                  preferences: 'pilihan',
+                  recommendation: 'cadangan',
+                  'after sales': 'sokongan selepas jualan',
+                  'owner help': 'bantuan pemilik',
+                } as Record<string, string>
+              )[text]!,
+            )}
+          </Button>
+        ))}
+      </div>
+      {lastMessage ? (
+        <Button
+          variant="secondary"
+          disabled={action.pending}
+          onClick={() => dispatch(lastMessage.conversationId, lastMessage.messageId)}
+        >
+          Retry scripted reply
+        </Button>
+      ) : null}
       <div className="action-row spaced">
-        <a className="button button-secondary" href="#order-form">
-          {t('View products / New order', 'Lihat produk / Pesanan baharu')}
-        </a>
+        <Button variant="secondary" onClick={openOrderForm}>
+          {t('Single-item order form', 'Borang satu produk')}
+        </Button>
         <Button
           variant="secondary"
           disabled={!history.data?.orders.length}
@@ -177,7 +279,7 @@ export function CustomerChat() {
               });
               setEditing(null);
               setQuote(null);
-              document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
+              openOrderForm();
             }
           }}
         >
@@ -253,7 +355,7 @@ export function CustomerChat() {
             </div>
             <form className="form-stack" onSubmit={send}>
               <label>
-                {t('Message to the bakery', 'Mesej kepada bakeri')}
+                {t('Message to your business', 'Mesej kepada perniagaan')}
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -263,20 +365,20 @@ export function CustomerChat() {
                 />
               </label>
               <Button disabled={action.pending || !message.trim() || active?.state === 'closed'}>
-                {t('Save message', 'Simpan mesej')}
+                {t('Send message', 'Hantar mesej')}
               </Button>
             </form>
             <p className="fine-print">
               {t(
-                'Message saving is active. Scripted replies start in Phase 5.',
-                'Mesej boleh disimpan. Balasan berskrip bermula pada Fasa 5.',
+                'Supported scripts: menu, pickup, order status, order again, preferences, recommendation, after sales, owner help. Exact ordering uses the form.',
+                'Skrip: menu, waktu ambil, status, pesan lagi, pilihan, bantuan pemilik. Gunakan borang untuk pesanan tepat.',
               )}
             </p>
           </section>
-          <section className="panel spaced">
-            <h2>{t('Ask the owner', 'Minta bantuan pemilik')}</h2>
+          <details className="panel spaced disclosure-panel">
+            <summary>{t('Request help from the owner', 'Minta bantuan pemilik')}</summary>
             <form
-              className="form-stack"
+              className="form-stack disclosure-body"
               onSubmit={async (e) => {
                 e.preventDefault();
                 const id = activeId ?? (await newConversation());
@@ -320,104 +422,117 @@ export function CustomerChat() {
                 {t('Request owner review', 'Minta semakan pemilik')}
               </Button>
             </form>
-          </section>
+          </details>
         </div>
         <div>
-          <section className="panel" id="order-form">
-            <h2>
+          <details ref={orderSection} className="panel disclosure-panel" id="order-form">
+            <summary>
               {t(
-                editing ? 'Edit your order' : 'New order',
+                editing ? 'Edit your order' : 'Single-item order form',
                 editing ? 'Ubah pesanan' : 'Pesanan baharu',
               )}
-            </h2>
-            <QueryState query={products}>
-              <div className="catalogue-cards">
-                {products.data?.items.map((p) => (
-                  <article key={p.sku} className="product-card">
-                    <span className="product-mark" aria-hidden="true">
-                      {p.sku === 'brownie-tray' ? '▦' : '♧'}
-                    </span>
-                    <div>
-                      <h3>{p.label}</h3>
-                      <p>{p.units_description}</p>
-                      <strong>{money(p.unit_price_sen)}</strong>
-                      <p>{p.description}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </QueryState>
-            <form onSubmit={form.handleSubmit(prepare)} className="form-stack">
-              <label>
-                {t('Product', 'Produk')}
-                <select {...form.register('sku')}>
+            </summary>
+            <div className="disclosure-body">
+              <QueryState query={products}>
+                <div className="catalogue-cards">
                   {products.data?.items.map((p) => (
-                    <option key={p.sku} value={p.sku}>
-                      {p.label}
-                    </option>
+                    <article key={p.sku} className="product-card">
+                      <span className="product-mark" aria-hidden="true">
+                        {p.sku === 'brownie-tray' ? '▦' : '♧'}
+                      </span>
+                      <div>
+                        <h3>{p.label}</h3>
+                        <p>{p.units_description}</p>
+                        <strong>{money(p.unit_price_sen)}</strong>
+                        <p>{p.description}</p>
+                      </div>
+                    </article>
                   ))}
-                </select>
-              </label>
-              <label>
-                {t('Quantity', 'Kuantiti')}
-                <input
-                  type="number"
-                  min={1}
-                  max={100}
-                  required
-                  {...form.register('quantity', { valueAsNumber: true })}
-                />
-              </label>
-              <label>
-                {t('Pickup date', 'Tarikh ambil')}
-                <input type="date" required {...form.register('pickupDate')} />
-              </label>
-              <label>
-                {t('Pickup slot', 'Waktu ambil')}
-                <select {...form.register('pickupSlotCode')}>
-                  {pickup.data?.slots.map((s) => (
-                    <option key={s.id} value={s.code}>
-                      {s.start_local.slice(0, 5)}–{s.end_local.slice(0, 5)} · Malaysia
-                    </option>
-                  ))}
-                </select>
-              </label>
-              {Object.keys(form.formState.errors).length ? (
-                <p className="error-banner" role="alert">
-                  {t(
-                    'Choose a valid product, whole quantity (1–100), date and pickup slot.',
-                    'Pilih produk, kuantiti bulat (1–100), tarikh dan waktu ambil yang sah.',
-                  )}
-                </p>
-              ) : null}
-              <QueryState query={capacity}>
-                {capacity.data?.capacity.map((c) => (
-                  <p className="fine-print" key={c.sku}>
-                    {c.sku}: {c.available_units}{' '}
-                    {t('units available on this date', 'unit tersedia pada tarikh ini')}
-                  </p>
-                ))}
+                </div>
               </QueryState>
-              <p className="fine-print">
-                {knowledge.data?.policy.policy_json.leadTimeHours}{' '}
-                {t(
-                  'hours lead time. Quotes do not hold capacity. Business time:',
-                  'jam persediaan. Sebut harga tidak menempah kapasiti. Masa perniagaan:',
-                )}{' '}
-                {clock.data ? instant(clock.data.demoTime) : t('Loading…', 'Memuatkan…')}
-              </p>
-              <Button disabled={action.pending || !products.data?.items.length || !pickup.data}>
-                {t(
-                  editing ? 'Prepare revised quote' : 'Prepare quote',
-                  editing ? 'Sediakan sebut harga baharu' : 'Sediakan sebut harga',
-                )}
-              </Button>
-            </form>
-          </section>
+              <form onSubmit={form.handleSubmit(prepare)} className="form-stack">
+                <label>
+                  {t('Product', 'Produk')}
+                  <select {...form.register('sku')}>
+                    <option value="">
+                      {t('Choose a product or service', 'Pilih produk atau perkhidmatan')}
+                    </option>
+                    {products.data?.items.map((p) => (
+                      <option key={p.sku} value={p.sku}>
+                        {p.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  {t('Quantity', 'Kuantiti')}
+                  <input
+                    type="number"
+                    min={1}
+                    max={100}
+                    required
+                    {...form.register('quantity', { valueAsNumber: true })}
+                  />
+                </label>
+                <label>
+                  {t('Pickup date', 'Tarikh ambil')}
+                  <input type="date" required {...form.register('pickupDate')} />
+                </label>
+                <label>
+                  {t('Pickup slot', 'Waktu ambil')}
+                  <select {...form.register('pickupSlotCode')}>
+                    {pickup.data?.slots.map((s) => (
+                      <option key={s.id} value={s.code}>
+                        {s.start_local.slice(0, 5)}–{s.end_local.slice(0, 5)} · Malaysia
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                {Object.keys(form.formState.errors).length ? (
+                  <p className="error-banner" role="alert">
+                    {t(
+                      'Choose a valid product, whole quantity (1–100), date and pickup slot.',
+                      'Pilih produk, kuantiti bulat (1–100), tarikh dan waktu ambil yang sah.',
+                    )}
+                  </p>
+                ) : null}
+                <QueryState query={capacity}>
+                  {capacity.data?.capacity.map((c) => (
+                    <p className="fine-print" key={c.sku}>
+                      {c.sku}: {c.available_units}{' '}
+                      {t('units available on this date', 'unit tersedia pada tarikh ini')}
+                    </p>
+                  ))}
+                </QueryState>
+                <p className="fine-print">
+                  {knowledge.data?.policy.policy_json.leadTimeHours}{' '}
+                  {t(
+                    'hours lead time. Quotes do not hold capacity. Business time:',
+                    'jam persediaan. Sebut harga tidak menempah kapasiti. Masa perniagaan:',
+                  )}{' '}
+                  {clock.data ? instant(clock.data.demoTime) : t('Loading…', 'Memuatkan…')}
+                </p>
+                <Button disabled={action.pending || !products.data?.items.length || !pickup.data}>
+                  {t(
+                    editing ? 'Prepare revised quote' : 'Prepare quote',
+                    editing ? 'Sediakan sebut harga baharu' : 'Sediakan sebut harga',
+                  )}
+                </Button>
+              </form>
+            </div>
+          </details>
           {quote ? (
             <section className="panel quote-card spaced" aria-label="Quote prepared">
               <span className="eyebrow">{t('Quote prepared', 'Sebut harga tersedia')}</span>
               <h2>{t('Review your order', 'Semak pesanan anda')}</h2>
+              {quoteExpired ? (
+                <p role="status" className="notice">
+                  {t(
+                    'This quote has expired. Prepare a fresh quote before confirming.',
+                    'Sebut harga tamat tempoh. Sediakan sebut harga baharu sebelum sahkan.',
+                  )}
+                </p>
+              ) : null}
               {quote.items.map((i) => (
                 <p key={i.sku}>
                   {i.quantity} × {i.label} <strong>{money(i.lineTotalSen)}</strong>
@@ -445,7 +560,7 @@ export function CustomerChat() {
               </p>
               <div className="action-row">
                 <Button
-                  disabled={action.pending || quote.state !== 'active'}
+                  disabled={action.pending || quote.state !== 'active' || quoteExpired}
                   onClick={async () => {
                     const token = await action.run<{ challengeToken: string }>(
                       `/quotes/${quote.id}/confirmation-challenge`,
@@ -479,7 +594,7 @@ export function CustomerChat() {
                         pickup.data?.slots.find((s) => s.id === quote.pickupSlotId)?.code ??
                         'midday',
                     });
-                    document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
+                    openOrderForm();
                   }}
                 >
                   {t('Edit order', 'Ubah pesanan')}
@@ -524,113 +639,56 @@ export function CustomerChat() {
           ) : null}
         </div>
       </div>
-      <section className="panel spaced">
-        <h2>{t('Your owner reviews and offers', 'Semakan pemilik dan tawaran anda')}</h2>
-        <QueryState query={reviews}>
-          {reviews.data?.reviews.length ? (
-            reviews.data.reviews.map((r) => (
-              <article className="review-summary" key={r.id}>
-                <div>
-                  <strong>{r.kind.replaceAll('_', ' ')}</strong>{' '}
-                  <Status state={r.effective_state} />
-                  {r.decision_note ? <p>{r.decision_note}</p> : null}
-                </div>
-                {r.quote_id ? (
-                  <Button
-                    variant="secondary"
-                    disabled={action.pending}
-                    onClick={() => openOffer(r.quote_id!)}
-                  >
-                    {t('Review approved offer', 'Semak tawaran diluluskan')}
-                  </Button>
-                ) : null}
-              </article>
-            ))
-          ) : (
-            <p>{t('No owner reviews yet.', 'Belum ada semakan pemilik.')}</p>
-          )}
-        </QueryState>
-      </section>
-      <section className="panel spaced">
-        <h2>{t('Bakery facts', 'Maklumat bakeri')}</h2>
-        <QueryState query={knowledge}>
-          {knowledge.data?.entries.map((e) => (
-            <details key={e.fact_key}>
-              <summary>{e.fact_key.replaceAll('_', ' ')}</summary>
-              <p>{me?.profile?.preferred_language === 'bm' ? e.content_bm : e.content_en}</p>
-            </details>
-          ))}
-        </QueryState>
-      </section>
+      <details
+        className="panel spaced disclosure-panel"
+        open={!!reviews.data?.reviews.length || undefined}
+      >
+        <summary>{t('Your owner reviews and offers', 'Semakan pemilik dan tawaran anda')}</summary>
+        <div className="disclosure-body">
+          <QueryState query={reviews}>
+            {reviews.data?.reviews.length ? (
+              reviews.data.reviews.map((r) => (
+                <article className="review-summary" key={r.id}>
+                  <div>
+                    <strong>{r.kind.replaceAll('_', ' ')}</strong>{' '}
+                    <Status state={r.effective_state} />
+                    {r.decision_note ? <p>{r.decision_note}</p> : null}
+                  </div>
+                  {r.quote_id ? (
+                    <Button
+                      variant="secondary"
+                      disabled={action.pending}
+                      onClick={() => openOffer(r.quote_id!)}
+                    >
+                      {t('Review approved offer', 'Semak tawaran diluluskan')}
+                    </Button>
+                  ) : null}
+                </article>
+              ))
+            ) : (
+              <p>{t('No owner reviews yet.', 'Belum ada semakan pemilik.')}</p>
+            )}
+          </QueryState>
+        </div>
+      </details>
+      <details className="panel spaced disclosure-panel">
+        <summary>{t('Business facts', 'Maklumat perniagaan')}</summary>
+        <div className="disclosure-body">
+          <QueryState query={knowledge}>
+            {knowledge.data?.entries.map((e) => (
+              <details key={e.fact_key}>
+                <summary>{e.fact_key.replaceAll('_', ' ')}</summary>
+                <p>{me?.profile?.preferred_language === 'bm' ? e.content_bm : e.content_en}</p>
+              </details>
+            ))}
+          </QueryState>
+        </div>
+      </details>
       <Feedback action={action} />
     </>
   );
 }
-export function Orders({ owner = false }: { owner?: boolean }) {
-  const { t } = useSession(),
-    query = useData<{ orders: Order[] }>(owner ? '/owner/orders' : '/orders');
-  return (
-    <>
-      <PageHeading
-        title={owner ? 'Bakery orders' : t('My orders', 'Pesanan saya')}
-        description={
-          owner
-            ? 'Saved orders and synthetic payment records. Open an order to review its next action.'
-            : t(
-                'Your saved orders, pickup details and verified deposit status.',
-                'Pesanan tersimpan, butiran ambil dan status deposit yang disahkan.',
-              )
-        }
-      >
-        <Link
-          className="button button-primary"
-          to={owner ? '/owner/reviews' : '/b/ainas-home-bakery/chat'}
-        >
-          {owner ? 'Owner reviews' : t('New order', 'Pesanan baharu')}
-        </Link>
-      </PageHeading>
-      <QueryState query={query}>
-        {query.data?.orders.length ? (
-          <div className="order-list">
-            {query.data.orders.map((o) => (
-              <Link
-                key={o.id}
-                className="panel order-row"
-                to={`${owner ? '/owner/orders' : '/account/orders'}/${o.id}`}
-              >
-                <div>
-                  <h2>{o.display_code}</h2>
-                  <p>{o.items?.map((i) => `${i.quantity} × ${i.label}`).join(' · ')}</p>
-                  <p>
-                    {o.pickup_date} · {t('Pickup in Malaysia time', 'Waktu ambil Malaysia')}
-                  </p>
-                </div>
-                <div>
-                  <Status state={o.state} />
-                  <p>
-                    {money(o.total_sen)} · {money(o.verified_paid_sen)}{' '}
-                    {t('verified paid', 'bayaran disahkan')}
-                  </p>
-                  <span className="text-link">{t('View details →', 'Lihat butiran →')}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <section className="panel">
-            <h2>{t('No orders yet', 'Belum ada pesanan')}</h2>
-            <p>
-              {t(
-                'Prepare a quote and confirm it to reserve production capacity.',
-                'Sediakan sebut harga dan sahkan untuk menempah kapasiti.',
-              )}
-            </p>
-          </section>
-        )}
-      </QueryState>
-    </>
-  );
-}
+export { Orders } from './OrdersList';
 export function OrderDetail({ owner = false }: { owner?: boolean }) {
   const { id } = useParams(),
     query = useData<Order>(`/orders/${id}`),
@@ -651,6 +709,7 @@ export function OrderDetail({ owner = false }: { owner?: boolean }) {
             >
               <Status state={query.data.state} />
             </PageHeading>
+            <OrderTracking order={query.data} owner={owner} />
             <div className="two-columns">
               <section className="panel">
                 <h2>{t('Order summary', 'Ringkasan pesanan')}</h2>
@@ -715,14 +774,19 @@ export function OrderDetail({ owner = false }: { owner?: boolean }) {
                 {query.data.documents?.length ? (
                   query.data.documents.map((d) => (
                     <p key={d.id}>
-                      {d.kind} · <Status state={d.state} />
+                      {d.kind} · <Status state={d.state} />{' '}
+                      {d.state === 'available' ? (
+                        <a className="text-link" href={`/api/v1/documents/${d.id}/download`}>
+                          {t('Download PDF', 'Muat turun PDF')}
+                        </a>
+                      ) : null}
                     </p>
                   ))
                 ) : (
                   <p>
                     {t(
-                      'No document file has been generated. New-order document processing and authorised downloads arrive in Phase 5.',
-                      'Fail dokumen belum dijana. Pemprosesan dan muat turun dokumen hadir pada Fasa 5.',
+                      'No file available yet. The local worker processes queued documents; the owner can run due jobs.',
+                      'Fail belum tersedia. Pemproses tempatan menjana dokumen; pemilik boleh menjalankan tugas.',
                     )}
                   </p>
                 )}
@@ -848,7 +912,9 @@ function OwnerOrderActions({ order }: { order: Order }) {
               disabled={
                 action.pending ||
                 !note.trim() ||
-                (state === 'ready' ? order.state !== 'confirmed' : order.state !== 'ready')
+                (state === 'ready'
+                  ? !['confirmed', 'preparing'].includes(order.state)
+                  : !['ready', 'delivering'].includes(order.state))
               }
               onClick={async () => {
                 if (

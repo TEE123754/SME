@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-07T14:02:13.445Z",
+  "reason": "Final catalogue-neutral form defaults, agent priority ordering and title polish; rebuild includes API SQL repairs made after original build. Integration passes preserved without repetition.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 3868
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 4950
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1247
+    }
+  ]
+}

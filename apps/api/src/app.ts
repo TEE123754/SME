@@ -23,9 +23,16 @@ import {
 } from './auth.js';
 import type { Pool } from '@customerbuddy/db';
 import type { readConfig } from './config.js';
+import { phase5Routes } from './phase5-routes.js';
 import { commerceRoutes } from './commerce-routes.js';
+import { operationsRoutes } from './operations-routes.js';
+import { shoppingRoutes } from './shopping-routes.js';
 
-export function createApp(config: ReturnType<typeof readConfig>, pool: Pool) {
+export function createApp(
+  config: ReturnType<typeof readConfig>,
+  pool: Pool,
+  reset?: () => Promise<void>,
+) {
   const app = express();
   app.disable('x-powered-by');
   app.use((request, response, next) => {
@@ -49,7 +56,7 @@ export function createApp(config: ReturnType<typeof readConfig>, pool: Pool) {
     const payload = healthSchema.parse({
       status: ready ? 'ok' : 'degraded',
       service: 'customerbuddy-api',
-      phase: 4,
+      phase: 6,
       assistantMode: 'scripted',
       database: ready ? 'connected' : 'unavailable',
       correlationId: randomUUID(),
@@ -60,8 +67,17 @@ export function createApp(config: ReturnType<typeof readConfig>, pool: Pool) {
   const repositories = createRepositories(pool);
   const signedIn = requireSession(identity);
   const mutationOrigin = requireMutationOrigin(config.allowedOrigins);
-  app.get('/api/v1/demo/accounts', async (_request, response) => {
-    const result = await pool.query('SELECT * FROM app.list_demo_accounts()');
+  shoppingRoutes(app, pool, signedIn, mutationOrigin);
+  app.get('/api/v1/demo/accounts', async (request, response) => {
+    const slug = request.query.business
+      ? z
+          .string()
+          .regex(/^[a-z0-9-]{3,60}$/)
+          .parse(request.query.business)
+      : null;
+    const result = slug
+      ? await pool.query('SELECT * FROM app.store_demo_accounts($1)', [slug])
+      : await pool.query('SELECT * FROM app.list_demo_accounts()');
     response.json({ isSynthetic: true, accounts: result.rows });
   });
   app.post('/api/v1/demo/sessions', mutationOrigin, async (request, response) => {
@@ -188,6 +204,8 @@ export function createApp(config: ReturnType<typeof readConfig>, pool: Pool) {
     ),
   );
   commerceRoutes(app, pool, signedIn, mutationOrigin);
+  operationsRoutes(app, pool, signedIn, mutationOrigin);
+  phase5Routes(app, pool, signedIn, mutationOrigin, config.documentPath, reset);
   app.use((_request, response) => {
     response.status(404).json({ code: 'NOT_FOUND', message: 'This route is not implemented yet.' });
   });

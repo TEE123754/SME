@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-export type { Pool } from 'pg';
+export type { Pool, PoolClient } from 'pg';
 export { applyMigrations } from './migrate.js';
 export { seedDemo, fixtureId, fixtureBusinessId, demoCustomers } from './seed.js';
 export { withScope, assertRestrictedRuntime } from './scope.js';
@@ -25,3 +25,4 @@ export async function databaseReady(pool: Pool): Promise<boolean> {
   }
 }
 export { createCommerce } from './commerce.js';
+export { createOperations } from './operations.js';

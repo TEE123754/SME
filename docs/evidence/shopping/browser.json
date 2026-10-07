@@ -1,0 +1,31 @@
+{
+  "status": "Passed within documented limits",
+  "viewportReset": true,
+  "desktopActualWidth": 1298,
+  "mobileRequestedWidth": 400,
+  "fixtureOrder": "DEMO-40AEB907",
+  "screenshots": 9,
+  "mobileActualWidth": 444,
+  "deferred": [
+    "Actual 200% browser zoom",
+    "Exact360px/400px viewport"
+  ],
+  "phase": "S1",
+  "cases": [
+    "Landing owner setup entry",
+    "Isolated synthetic florist creation",
+    "Saved facts/products/image and date capacity",
+    "Derived readiness and owner resumption",
+    "Public store and business-specific sign-in",
+    "Product search/type filter/empty recovery",
+    "Product detail and saved basket transfer",
+    "Member join keeps newsletter independent",
+    "Explicit local newsletter opt-in",
+    "Exact discounted quote and confirmation",
+    "Saved order and cleared basket",
+    "Mobile store/detail/member/setup no overflow",
+    "Keyboard focus visible",
+    "Anonymous browsing and sign-out"
+  ],
+  "newErrorsOnFinalReload": 0
+}

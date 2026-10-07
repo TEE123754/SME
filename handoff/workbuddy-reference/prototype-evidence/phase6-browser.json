@@ -1,0 +1,56 @@
+{
+  "phase": 6,
+  "recordedAt": "2026-10-07T12:42:54.183105+00:00",
+  "checks": [
+    {
+      "id": "restart",
+      "status": "passed",
+      "detail": "Stopped known dev session28836 and restarted pnpm dev51033; Hana session, order39B2 paid39/balance39, messages/files and owner clock/jobs retained without seed/reset."
+    },
+    {
+      "id": "quote",
+      "status": "passed",
+      "detail": "Current quote78/deposit39, pickup10Oct; no hold; desktop/mobile captured."
+    },
+    {
+      "id": "expiry",
+      "status": "passed",
+      "detail": "Old approved70.20 offer explicitly expired; confirm disabled. Server expiry cases are in cumulative gate."
+    },
+    {
+      "id": "failure",
+      "status": "passed",
+      "detail": "Too-soon8Oct pickup produces lead-time rejection; no booking."
+    },
+    {
+      "id": "deposit",
+      "status": "passed",
+      "detail": "New actualDEMO5D83716F order holds1 awaiting39deposit; saved job documents processed."
+    },
+    {
+      "id": "review",
+      "status": "passed",
+      "detail": "Owner pending complaint and recorded approved/rejected discounts rendered desktop/mobile."
+    }
+  ],
+  "limits": [
+    "Actual200%zoom user deferred",
+    "Requested360 clamps400px"
+  ],
+  "mainReset": false,
+  "mainState": "clock paused8Oct09:00MYT;6orders,20400sen verified synthetic,2awaiting",
+  "screenshots": [
+    "phase6-approval-mobile.png",
+    "phase6-approval.png",
+    "phase6-deposit-mobile.png",
+    "phase6-deposit.png",
+    "phase6-expiry-mobile.png",
+    "phase6-expiry.png",
+    "phase6-failure-mobile.png",
+    "phase6-failure.png",
+    "phase6-quote-mobile.png",
+    "phase6-quote.png",
+    "phase6-receipt-mobile.png",
+    "phase6-restart.png"
+  ]
+}

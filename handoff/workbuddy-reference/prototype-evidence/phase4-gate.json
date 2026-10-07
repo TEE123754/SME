@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-07T10:04:36.707240+00:00",
+  "phase": 4,
+  "node": "v24.14.0",
+  "initialAttempt": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 2944
+    },
+    {
+      "check": "ESLint",
+      "status": "failed",
+      "message": "Command failed with exit 1: node_modules/eslint/bin/eslint.js"
+    }
+  ],
+  "implementation": "Codex local reference",
+  "status": "built_gate_pending",
+  "automatedStatus": "passed_after_repairs",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed"
+    },
+    {
+      "check": "ESLint",
+      "status": "passed"
+    },
+    {
+      "check": "Build",
+      "status": "passed"
+    },
+    {
+      "check": "Phase 4 integration (6 cases)",
+      "status": "passed"
+    }
+  ],
+  "repairRuns": [
+    "pnpm lint after Fast Refresh/context-hook separation and useWatch repair",
+    "pnpm typecheck and pnpm build after duplicate Account imports repair",
+    "Final pnpm typecheck, pnpm lint, pnpm build after preference value/language and conversation-selection repairs",
+    "pnpm exec tsx scripts/test-phase4-api.ts: all six cases passed; broader Phase 4 rerun justified by shared message-write chronology change; earlier phase suites preserved"
+  ],
+  "browserEvidence": "phase4-browser.json",
+  "remaining": [
+    "200% browser zoom left pending at user request"
+  ]
+}

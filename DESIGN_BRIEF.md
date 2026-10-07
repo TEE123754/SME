@@ -1,14 +1,18 @@
 # CustomerBuddy - Design Brief
 
-Version 0.4 | 7 October 2026 | Phase 4 core UI built, zoom gate pending; expanded WorkBuddy screens specified, not built.
+## Expanded local demo E1 (current user authorisation)
+
+The user now explicitly requests a complete Codex local demo without WorkBuddy, using hardcoded/scripted methods. This supersedes earlier specification-only deferrals of expanded features for the local demo. Business profile/catalogue/facts support retail and services; dedicated agent cards, stock/forecasts/pricing, owner/customer assistants, engagement/content/visual templates, risk/ethical controls, calendar/tracking, checkout/members/appointments/sales are implemented with saved scoped records. See [expanded demo contracts and flows](docs/EXPANDED_DEMO.md) and [current checkpoint](IMPLEMENTATION_PLAN.md) for limits and verification status. Future WorkBuddy integration/rebuild remains separate; the existing Phase 6 ZIP is a historical pre-expansion snapshot.
+
+Version 0.6 | 8 October 2026 | UX1 workspace redesign; expanded local demo retained; actual 200% zoom pending by user choice; independent WorkBuddy designs remain rebuild requirements.
 
 Related: [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>).
 
 ## 1. Direction
 
-Create a calm, practical assistant for a Malaysian home bakery. The customer experience should feel personal and clear; the owner experience should make today's decisions and upcoming pickup workload easy to scan.
+Create a calm, practical workspace for small retail and service businesses. The bakery remains the initial synthetic fixture. The customer experience should feel personal and clear; the owner experience should make decisions and upcoming fulfilment easy to scan.
 
-Working identity: **CustomerBuddy**, presented to customers as **Aina's Home Bakery assistant**. Public product name: **CustomerLane**; internal identifiers/UI retain CustomerBuddy until a separate branding migration. Use the existing simple mark or bakery icon. Photography supports exact product appearance; reviewed generated illustrations support the expanded WorkBuddy marketing tools. The core prototype can communicate the product with typography, catalogue cards and transaction details. PRD FR-18–FR-27 define the added final-project requirements; this revision does not build new screens or alter the Phase 4 checkpoint.
+Working identity: **CustomerBuddy**, with the configured business name in the header. Public product name: **CustomerLane**; internal identifiers/UI retain CustomerBuddy until a separate branding migration. UX1 uses a general layered mark, restrained indigo accents and white panels. Typography, catalogue records and transaction details communicate the local demo without invented product photography. The Instagram reference was unavailable, so no unseen reference style is claimed. PRD FR-18–FR-27 continue to define the independent final-project requirements.
 
 The main design priority is confidence in the next business action: what is being ordered, what it costs, what has been reserved, and who must act next.
 
@@ -24,21 +28,21 @@ Support BM and English without fixed-width labels that break when translated. In
 
 | Token | Proposed value | Use |
 | --- | --- | --- |
-| Page background | `#F7F4EF` | Warm neutral canvas |
+| Page background | `#F7F8FB` | Cool neutral canvas |
 | Surface | `#FFFFFF` | Cards, chat, forms |
-| Primary text | `#242D28` | Body and headings |
-| Secondary text | `#56635C` | Supporting copy |
-| Primary action | `#28604D` with white text | Confirm, Save, publish controlled changes |
-| Soft green | `#EAF2ED` | Assistant/confirmed-state background |
-| Accent | `#E8B69A` | Decorative emphasis, never essential status text |
-| Border | `#D7DDD7` | Card and input separation |
-| Warning | `#875300` on `#FFF4DA` | Awaiting review, expiring hold |
+| Primary text | `#202534` | Body and headings |
+| Secondary text | `#687082` | Supporting copy |
+| Primary action | `#5651C8` with white text | Confirm, Save, publish controlled changes |
+| Soft indigo | `#EFEFFB` | Selected navigation and assistant panel |
+| Accent | `#D6B789` | Review-card border, never essential status text |
+| Border | `#E6E8EF` | Card and input separation |
+| Warning | `#8F662A` on `#FFF5E6` | Awaiting review, expiring hold |
 | Error | `#A12D2D` on `#FFF0F0` | Failed action or blocked state |
-| Success | `#246044` on `#EAF5ED` | Verified deposit or completed action |
+| Success | `#437B58` on `#EDF6F0` | Verified deposit or completed action |
 
 Use accessible contrast rather than assuming every colour combination passes. Target at least 4.5:1 for normal text and verify chosen combinations at the Phase 4 gate. Accent peach is a background/decorative token, not small text on white.
 
-Typography: system sans-serif with optional self-hosted Inter. Body 16px/1.5, supporting text 14px, card heading 18px, page heading 28-32px. Display money with tabular numerals and `RM78.00`. Preserve raw integer-sen values in the data layer.
+Typography: local system sans-serif. Workspace body 14px/1.5, form/table text 12-14px, supporting metadata 11-12px, card heading 16-17px, page heading 28px (25px mobile). Display money with tabular numerals and `RM78.00`. Preserve raw integer-sen values in the data layer. Verify legibility with real records; the deferred actual zoom check remains separate.
 
 Spacing scale: 4, 8, 12, 16, 24, 32 and 48px. Card radius 12px; controls 8px. Use subtle borders and minimal shadows. Buttons and primary tap targets should be at least 44px high. Provide visible focus outlines and reduced-motion support.
 
@@ -46,7 +50,7 @@ Spacing scale: 4, 8, 12, 16, 24, 32 and 48px. Card radius 12px; controls 8px. Us
 
 At desktop widths, centre a conversation panel of approximately 760px with an optional 320px order-summary panel. On mobile, use one column; quote and status cards appear inline. A sticky composer must not cover confirmation controls or the last message.
 
-Header shows bakery name, the permanent "Demo assistant — scripted responses" label, language control, and Ask owner. User and assistant bubbles have distinct alignment and readable surfaces. Timestamps are secondary; order state is explicit text. Use genuine AI disclosure only in the future WorkBuddy implementation.
+Header shows the configured business, language and account controls. The shared sidebar, mobile navigation and footer permanently retain "Demo assistant — scripted responses". User and assistant bubbles have distinct alignment and readable surfaces. Timestamps are secondary; order state is explicit text. Use genuine AI disclosure only in the future WorkBuddy implementation. A primary Start a booking link opens checkout. Optional owner-help, single-item form, reviews and facts use native disclosures; existing offers open visibly when present. Quick-action wording is readable while dispatched scripted intents remain unchanged.
 
 Provide View products, Order again, New order, Check order and Ask owner quick actions. New order opens labelled product, quantity, exact date and pickup-slot fields. Unknown text shows these choices without losing the message. A customer must be able to complete a standard order without guessing a scripted phrase.
 
@@ -64,11 +68,11 @@ Consent is a small onboarding panel with independent controls. Promotional follo
 
 ## 5. Owner workspace layout
 
-Desktop uses a 220-240px sidebar and a flexible main panel. Navigation: Overview, Orders, Reviews, Customers, Knowledge, Capacity, Automation, Evidence. On mobile, collapse navigation into a labelled menu and convert dense tables to summary cards where practical.
+Desktop uses one 220-244px sidebar and a flexible main panel. Workspace groups Overview, Customer agents, Orders & appointments, Calendar and Members. Business groups Sales & invoices, Stock & forecast, Human reviews and Risk review. Growth groups Engagement, Content studio and Business assistant. Settings & tools is collapsed unless its current route is selected. It includes catalogue, knowledge, capacity, ethics, automation, evidence and conversation archive. The competing owner-tab row is removed. Header page search supports Ctrl/Meta+K, filter, Tab/Enter and Escape. On mobile, native modal navigation traps focus and restores it on Escape; order/member tables become labelled cards. Account switching and language remain reachable.
 
-Overview contains a date/reporting-period selector, four concise operating cards, pending review list, pickup workload, and failed-job alert. Suggested cards: confirmed orders, verified deposits collected, awaiting-deposit orders, pending owner decisions. Do not label an unpaid order total as cash received.
+Overview contains four linked operating cards: active orders, non-cancelled booked value, verified synthetic payments and pending human reviews. Upcoming fulfilments show three actual orders with customer names, exact amounts and windows. The order-stage ring uses saved counts with a readable legend; it does not imply trends or a reporting period. Attention links open saved reviews and the awaiting-deposit order filter. Business time links to demo controls. Do not label an unpaid order total as cash received.
 
-Orders show code, customer, pickup, total, verified paid amount, status, and next action. A row opens details; payment verification is an explicit action inside the detail view rather than an accidental row-click side effect.
+Orders show code, customer, schedule, total, verified paid amount and status. Search filters code/customer/items; a URL status filter supports deep links from priorities. Explicit order/Open links lead to details; payment verification remains inside that view. Members uses a searchable compact directory and native Add member modal; successful real synthetic-account creation closes the form with feedback. View buddy opens the matching agent interaction drawer using a customer URL parameter. Drawer focus returns to the matching card when closed.
 
 Review detail places the proposed response/action beside business facts and the relevant conversation summary. Display amount, policy exception, object version and expiry before Approve/Edit/Reject. Rejection and financial decisions require clear labels; avoid ambiguous icon-only actions.
 
@@ -162,3 +166,18 @@ Keep the established React/Tailwind/shadcn design system. The TRD Section 15 rep
 ## Phase 4 visual evidence
 
 Saved desktop customer, BM mobile and owner verified-payment screenshots are under docs/evidence/phase4-*. Customer desktop measured 1422 CSSpx; mobile request360 measured 400, no horizontal overflow. Core contrast: white/green7.32:1, body/cream12.92:1, muted/cream5.74:1, muted/white6.30:1. Labels, visible keyboard focus, skip link, status/alert roles and menu Escape/close were inspected; this is not a full screen-reader audit. Core customer copy is BM/EN; owner/technical labels remain English. Actual200% zoom is left pending by explicit user choice; do not mark Phase 4 Complete until recorded.
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+Implemented Automation uses labelled clock/advance, bounded job processing, reminder pause, saved job/error/digest states and an explicitly typed reset section. Customer quick actions and saved scripted replies keep permanent scripted disclosure; historical reminders tell users to check the current order balance. Order pages show only available authenticated Download PDF links. Browser desktop and actual400px mobile views were inspected without horizontal content overflow; requested360px is clamped by the tool. Actual200%zoom remains pending, not passed.
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.
+
+## S1 — Owner setup and customer shopping (8 October 2026)
+
+S1 customer experience uses a separate ecommerce shell: cream canvas, forest text, terracotta actions, serif collection headings, illustrated product cards, top shopping navigation and mobile bottom navigation. Owner workspace retains its operational sidebar and a four-step setup checklist. Product illustrations are explicitly labelled, selectable from five local SVG assets (general parcel, brownie, cupcake, flowers, service). Never imply illustrations are product photographs or date capacity is current stock. Loading/error/empty states and visible keyboard focus are required. Existing deferred actual 200% zoom gate remains pending.
+

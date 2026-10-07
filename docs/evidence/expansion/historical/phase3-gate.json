@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-10-07T09:14:56.367Z",
+  "phase": 3,
+  "node": "v24.14.0",
+  "initialResults": [
+    {
+      "check": "TypeScript",
+      "status": "failed",
+      "message": "Command failed with exit 2: node_modules/typescript/bin/tsc"
+    }
+  ],
+  "status": "passed",
+  "resolvedAt": "2026-10-07T09:22:24.789046+00:00",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "command": "pnpm typecheck"
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "command": "pnpm lint"
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "command": "pnpm build"
+    },
+    {
+      "check": "Phase 3 integration",
+      "status": "passed",
+      "command": "pnpm exec tsx scripts/test-phase3.ts (25 cases)"
+    }
+  ],
+  "repairs": [
+    "Linked cached Zod as an explicit db dependency and narrowed optional approval offer.",
+    "Removed ON CONFLICT read behavior from customer write-only outbox insertion; idempotency and unique action keys still guard duplicates. Status events have distinct payload-bound keys.",
+    "Added migration 003 for shared-trigger JSON field access. Applied migrations 001/002 remain unchanged.",
+    "Corrected test assertions for synchronous owner-authority guards."
+  ],
+  "verificationPolicy": "One initial gate batch. Failed/affected checks rerun after repairs; integration scenarios share persisted setup, so the affected runner recreated that causal setup in a fresh disposable DB. Final compiler/lint/build rerun justified by the changed service and source/status repairs. Phase 1/2 suites were not repeated."
+}

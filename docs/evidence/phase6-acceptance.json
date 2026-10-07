@@ -1,0 +1,208 @@
+{
+  "phase": 6,
+  "recordedAt": "2026-10-07T12:49:18.097Z",
+  "mode": "scripted; not model accuracy",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "name": "P6-S01 catalogue",
+      "status": "passed",
+      "durationMs": 51
+    },
+    {
+      "name": "P6-S02 catalogue",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S03 catalogue",
+      "status": "passed",
+      "durationMs": 23
+    },
+    {
+      "name": "P6-S04 catalogue",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S05 catalogue",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S06 faq",
+      "status": "passed",
+      "durationMs": 27
+    },
+    {
+      "name": "P6-S07 faq",
+      "status": "passed",
+      "durationMs": 22
+    },
+    {
+      "name": "P6-S08 faq",
+      "status": "passed",
+      "durationMs": 22
+    },
+    {
+      "name": "P6-S09 faq",
+      "status": "passed",
+      "durationMs": 22
+    },
+    {
+      "name": "P6-S10 faq",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S11 repeat_order",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S12 repeat_order",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S13 repeat_order",
+      "status": "passed",
+      "durationMs": 18
+    },
+    {
+      "name": "P6-S14 repeat_order",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S15 order_status",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S16 order_status",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S17 order_status",
+      "status": "passed",
+      "durationMs": 20
+    },
+    {
+      "name": "P6-S18 order_status",
+      "status": "passed",
+      "durationMs": 18
+    },
+    {
+      "name": "P6-S19 preference_proposal",
+      "status": "passed",
+      "durationMs": 46
+    },
+    {
+      "name": "P6-S20 preference_proposal",
+      "status": "passed",
+      "durationMs": 22
+    },
+    {
+      "name": "P6-S21 preference_proposal",
+      "status": "passed",
+      "durationMs": 22
+    },
+    {
+      "name": "P6-S22 preference_proposal",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S23 prepare_quote",
+      "status": "passed",
+      "durationMs": 20
+    },
+    {
+      "name": "P6-S24 prepare_quote",
+      "status": "passed",
+      "durationMs": 20
+    },
+    {
+      "name": "P6-S25 prepare_quote",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S26 prepare_quote",
+      "status": "passed",
+      "durationMs": 19
+    },
+    {
+      "name": "P6-S27 unknown",
+      "status": "passed",
+      "durationMs": 18
+    },
+    {
+      "name": "P6-S28 unknown",
+      "status": "passed",
+      "durationMs": 21
+    },
+    {
+      "name": "P6-S29 unknown",
+      "status": "passed",
+      "durationMs": 17
+    },
+    {
+      "name": "P6-S30 unknown",
+      "status": "passed",
+      "durationMs": 23
+    },
+    {
+      "name": "P6-S31 unknown",
+      "status": "passed",
+      "durationMs": 29
+    },
+    {
+      "name": "P6-S32 unknown",
+      "status": "passed",
+      "durationMs": 27
+    },
+    {
+      "name": "P6-S33 unknown",
+      "status": "passed",
+      "durationMs": 26
+    },
+    {
+      "name": "P6-S34 unknown",
+      "status": "passed",
+      "durationMs": 23
+    },
+    {
+      "name": "P6-S35 human_handoff",
+      "status": "passed",
+      "durationMs": 41
+    },
+    {
+      "name": "P6-S36 human_handoff",
+      "status": "passed",
+      "durationMs": 27
+    },
+    {
+      "name": "P6-S37 human_handoff",
+      "status": "passed",
+      "durationMs": 33
+    },
+    {
+      "name": "P6-S38 human_handoff",
+      "status": "passed",
+      "durationMs": 32
+    },
+    {
+      "name": "P6-configuration redaction and storage containment",
+      "status": "passed",
+      "durationMs": 7
+    },
+    {
+      "name": "P6-server and worker restart preserves session records and private files",
+      "status": "passed",
+      "durationMs": 257
+    }
+  ]
+}

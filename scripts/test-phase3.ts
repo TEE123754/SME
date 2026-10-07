@@ -72,7 +72,7 @@ try {
   await bootstrap.query(`REVOKE CONNECT,TEMPORARY ON DATABASE ${database} FROM PUBLIC`);
   await bootstrap.query(`GRANT CONNECT ON DATABASE ${database} TO cb_runtime,cb_worker`);
   await check('P3-01 fresh migration and checksummed replay', async () => {
-    assert.equal(await applyMigrations(bootstrap!), 3);
+    assert.equal(await applyMigrations(bootstrap!), 7);
     assert.equal(await applyMigrations(bootstrap!), 0);
     await seedDemo(bootstrap!);
   });
@@ -472,7 +472,7 @@ try {
     await service.takeover(owner, convo.id, true, randomUUID());
     const message = await service.message(farah, convo.id, 'Owner please help', randomUUID());
     assert.equal(message.humanTakeover, true);
-    assert.equal(message.dispatch, 'deferred_phase5');
+    assert.equal(message.dispatch, 'awaiting_scripted_response');
     assert.equal((await service.messages(farah, convo.id)).length, 1);
     await assert.rejects(service.messages(jason, convo.id), code('NOT_FOUND'));
     await assert.rejects(

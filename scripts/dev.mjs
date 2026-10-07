@@ -28,6 +28,4 @@ for (const child of children) {
 }
 process.once('SIGINT', () => stop());
 process.once('SIGTERM', () => stop());
-console.log(
-  'Local web + API starting. Worker implementation is deferred to Phase 5; no tests run on save.',
-);
+console.log('Local web + API + bounded job scheduler starting. No tests run on save.');

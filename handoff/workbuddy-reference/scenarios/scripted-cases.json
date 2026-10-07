@@ -1,0 +1,310 @@
+{
+  "mode": "scripted",
+  "notModelAccuracy": true,
+  "cases": [
+    {
+      "id": "S01",
+      "input": "menu",
+      "intent": "catalogue",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S02",
+      "input": "harga produk",
+      "intent": "catalogue",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S03",
+      "input": "brownie price",
+      "intent": "catalogue",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S04",
+      "input": "cupcake",
+      "intent": "catalogue",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S05",
+      "input": "products please",
+      "intent": "catalogue",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S06",
+      "input": "pickup",
+      "intent": "faq",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S07",
+      "input": "deposit",
+      "intent": "faq",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S08",
+      "input": "lead time",
+      "intent": "faq",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S09",
+      "input": "waktu ambil",
+      "intent": "faq",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S10",
+      "input": "pickup policy",
+      "intent": "faq",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S11",
+      "input": "order again",
+      "intent": "repeat_order",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S12",
+      "input": "pesan lagi",
+      "intent": "repeat_order",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S13",
+      "input": "repeat please",
+      "intent": "repeat_order",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S14",
+      "input": "ulang pesanan",
+      "intent": "repeat_order",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S15",
+      "input": "order status",
+      "intent": "order_status",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S16",
+      "input": "pesanan saya",
+      "intent": "order_status",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S17",
+      "input": "my order",
+      "intent": "order_status",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S18",
+      "input": "status please",
+      "intent": "order_status",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "current authoritative records"
+    },
+    {
+      "id": "S19",
+      "input": "remember brownie",
+      "intent": "preference_proposal",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S20",
+      "input": "ingat kegemaran",
+      "intent": "preference_proposal",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S21",
+      "input": "preferences",
+      "intent": "preference_proposal",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S22",
+      "input": "favourite cupcake",
+      "intent": "preference_proposal",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S23",
+      "input": "quote Saturday",
+      "intent": "prepare_quote",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S24",
+      "input": "sebut harga",
+      "intent": "prepare_quote",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S25",
+      "input": "pesan brownie",
+      "intent": "prepare_quote",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S26",
+      "input": "order 2 cupcakes",
+      "intent": "prepare_quote",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "explicit form or preferences; no inferred dates"
+    },
+    {
+      "id": "S27",
+      "input": "approve payment",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S28",
+      "input": "verify deposit",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S29",
+      "input": "mark paid",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S30",
+      "input": "reset demo",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S31",
+      "input": "delete my order",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S32",
+      "input": "bayar sekarang",
+      "intent": "unknown",
+      "language": "bm",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S33",
+      "input": "unrecognised xyz",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S34",
+      "input": "refund now",
+      "intent": "unknown",
+      "language": "en",
+      "commercialEffect": "no order/payment/capacity/preference mutation",
+      "expected": "bounded supported choices; no approval/payment authority"
+    },
+    {
+      "id": "S35",
+      "input": "owner help",
+      "intent": "human_handoff",
+      "language": "en",
+      "commercialEffect": "create complaint review and pause conversation",
+      "expected": "human takeover; no further automatic reply until resume"
+    },
+    {
+      "id": "S36",
+      "input": "pemilik",
+      "intent": "human_handoff",
+      "language": "bm",
+      "commercialEffect": "create complaint review and pause conversation",
+      "expected": "human takeover; no further automatic reply until resume"
+    },
+    {
+      "id": "S37",
+      "input": "complaint",
+      "intent": "human_handoff",
+      "language": "en",
+      "commercialEffect": "create complaint review and pause conversation",
+      "expected": "human takeover; no further automatic reply until resume"
+    },
+    {
+      "id": "S38",
+      "input": "bantuan please",
+      "intent": "human_handoff",
+      "language": "bm",
+      "commercialEffect": "create complaint review and pause conversation",
+      "expected": "human takeover; no further automatic reply until resume"
+    }
+  ]
+}

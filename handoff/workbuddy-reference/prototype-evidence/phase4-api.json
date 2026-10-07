@@ -1,0 +1,31 @@
+{
+  "phase": 4,
+  "recordedAt": "2026-10-07T09:57:45.256Z",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "name": "P4-API-01 customer review list excludes other customer and owner raw decisions",
+      "status": "passed"
+    },
+    {
+      "name": "P4-API-02 approved offer exposes only scoped quote for explicit customer acceptance",
+      "status": "passed"
+    },
+    {
+      "name": "P4-API-03 capacity UI receives scoped product identity and optimistic version",
+      "status": "passed"
+    },
+    {
+      "name": "P4-API-04 business clock reads require auth and preserve paused fixture instant",
+      "status": "passed"
+    },
+    {
+      "name": "P4-API-05 stale policy reviews are nonactionable and dashboard excludes them",
+      "status": "passed"
+    },
+    {
+      "name": "P4-API-06 paused-clock messages preserve customer-owner chronology",
+      "status": "passed"
+    }
+  ]
+}

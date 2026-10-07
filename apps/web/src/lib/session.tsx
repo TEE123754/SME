@@ -80,7 +80,7 @@ export function Access({ role, children }: { role: 'owner' | 'customer'; childre
       <section className="panel">
         <h1>
           {t(
-            role === 'owner' ? 'Owner workspace' : 'Your bakery account',
+            role === 'owner' ? 'Owner workspace' : 'Your shopping account',
             role === 'owner' ? 'Ruang pemilik' : 'Akaun bakeri anda',
           )}
         </h1>
@@ -98,5 +98,5 @@ export function Access({ role, children }: { role: 'owner' | 'customer'; childre
         </Link>
       </section>
     );
-  return <div key={`${me.role}:${me.profile?.id ?? 'owner'}`}>{children}</div>;
+  return <div key={`${me.business.id}:${me.role}:${me.profile?.id ?? 'owner'}`}>{children}</div>;
 }

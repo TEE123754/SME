@@ -1,0 +1,3 @@
+# Future expansion — NOT IMPLEMENTED
+
+FR-18–FR-27 are requirements only. Read the full PRD, TRD, flow, design and schema in ../specifications/. Implement owner customer-agent cards/history; separate scoped queries; physical stock/reconciled sales; sparse-data forecasts; bounded owner price publication; consented engagement/support; reviewed multilingual content/visuals; advisory risk review and ethical controls. No expansion screenshots, model metrics or release passes are provided. Acceptance/rebuild7A–7E is in ../specifications/IMPLEMENTATION_PLAN.md. Verify conditional Tencent models/region/credits/runtime/channels before enabling them.

@@ -68,7 +68,7 @@ try {
   await bootstrap.query(`REVOKE CONNECT,TEMPORARY ON DATABASE ${database} FROM PUBLIC`);
   await bootstrap.query(`GRANT CONNECT ON DATABASE ${database} TO cb_runtime,cb_worker`);
   await check('P2-01 apply and replay migrations on empty disposable database', async () => {
-    assert.equal(await applyMigrations(bootstrap!), 1);
+    assert.equal(await applyMigrations(bootstrap!), 7);
     assert.equal(await applyMigrations(bootstrap!), 0);
   });
   await check('P2-02 idempotent synthetic seed preserves history', async () => {
@@ -109,7 +109,7 @@ try {
         "SELECT relrowsecurity,relforcerowsecurity,pg_get_userbyid(relowner) AS owner FROM pg_class WHERE relnamespace='app'::regnamespace AND relkind='r'",
       )
     ).rows;
-    assert.equal(tables.length, 31);
+    assert.equal(tables.length, 42);
     for (const table of tables) {
       assert.equal(table.relrowsecurity, true);
       assert.equal(table.relforcerowsecurity, true);

@@ -1,0 +1,26 @@
+{
+  "recordedAt": "2026-10-07T13:44:52.642Z",
+  "reasonForRegression": "Expanded order state machine, inventory reservation checks, migrations and business-branded documents cross existing commerce/jobs boundaries.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 3770
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 5037
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1454
+    },
+    {
+      "check": "Expansion integration",
+      "status": "failed",
+      "message": "Command failed with exit 1: C:\\Users\\Edison Tee\\Downloads\\SME\\node_modules\\.pnpm\\tsx@4.23.15\\node_modules\\tsx\\dist\\cli.mjs"
+    }
+  ]
+}

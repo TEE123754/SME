@@ -1,0 +1,33 @@
+{
+  "scope": "Four core shopping text/action pairs. This is not an exhaustive accessibility audit.",
+  "results": [
+    {
+      "name": "Action text",
+      "textColor": "#ffffff",
+      "background": "#a6442c",
+      "ratio": 6.03,
+      "passesAA": true
+    },
+    {
+      "name": "Store text",
+      "textColor": "#243d35",
+      "background": "#fffdf9",
+      "ratio": 11.52,
+      "passesAA": true
+    },
+    {
+      "name": "Muted copy",
+      "textColor": "#62675e",
+      "background": "#fffdf9",
+      "ratio": 5.71,
+      "passesAA": true
+    },
+    {
+      "name": "Member link",
+      "textColor": "#943d28",
+      "background": "#eaf0e3",
+      "ratio": 6.11,
+      "passesAA": true
+    }
+  ]
+}

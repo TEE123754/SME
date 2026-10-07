@@ -1,0 +1,19 @@
+# Phase 6 usable-prototype acceptance
+
+7 October2026. Codex synthetic local reference; Tencent WorkBuddy Phase7 remains Not started. This is a usable reference milestone, not competition eligibility, deployed production or a live-AI release.
+
+## Actual checks
+
+[Gate](phase6-gate.json): TypeScript, lint and build pass. Cumulative current-schema regressions:24identity/scope,25commerce/concurrency,6UIAPI,16job/document cases pass. [New acceptance](phase6-acceptance.json):38 supported/unsupported BM/EN input cases plus configuration/storage/worker-authority and HTTP/worker/session/file restart checks pass. Total111 integration/acceptance checks, not a language-model accuracy score. All disposable databases removed. Original Phase2–5 evidence preserved; current regressions are separately stored under phase6-regression/.
+
+Initial lint unused-import/assignment errors were fixed. Historical migration-count assertions updated to current5 migrations/33forced-RLS tables without changing scope tests. A preference payload replay assertion compared Date with its persisted JSON string; normalized wire-value comparison fixed it. S01–S18 passes retained, remainingS19–S38 and unrun checks resumed. Pack validation caught Idea and external course-PDF links; Idea included, PDF attribution retained without machine-local link. Actual generated role passwords plus key/URI patterns are scanned without printing secrets. Final affected typecheck/lint and pack-script lint passed. Build emits522.73kB client-chunk warning.
+
+[Browser evidence](phase6-browser.json): stopped known dev28836 and restarted pnpm dev51033; retained Hana session, messages, order/payment/file data and owner clock/jobs. Fresh quote78/deposit39, too-soon pickup denial, expired-offer guidance/disabled confirmation, actual new awaiting-deposit order5D83716F and owner review states captured. No main reset. Main clock remains paused8Oct09:00MYT;6orders,RM204verified synthetic,2awaitingdeposit. Owner Run due jobs remained usable; scheduler had already completed document work, so manual batch truthfully claimed0. Owner effort observed here:one manual job-run click; manual time/savings baseline remains blank/unmeasured.
+
+Four real generated sample PDFs were rendered and visually inspected:quote,invoice,summary,receipt; no clipped or overlapping content. Brownie78/deposit39/paid39/balance39, exact10Oct midday12:00–14:00MYT and synthetic labels/reference match saved snapshots. [Receipt render](phase6-receipt-render.png), [quote render](phase6-quote-render.png), [invoice](phase6-invoice-render.png), [summary](phase6-summary-render.png). Poppler warns about unused Symbol/ArialUnicode display fonts; actual Helvetica pages render clearly.
+
+## Handoff and limits
+
+Portable requirements/flow/design/schema, fixture inputs, API/tool contracts,38input expectations, rubric/manual baseline, walkthrough/runbook, screenshot states, PDFs and actual prototype evidence are packaged under handoff/workbuddy-reference. Source, migrations, compiled app, credentials/sessions/runtime, vendor code/model weights are excluded. Hash manifest and relative links support portable review. Full new WorkBuddy7A–7E tasks and unbuilt FR18–27 targets/candidate register are included, with no fabricated expansion visuals/results. Future cloud/auth/storage/managedAI/Automation capabilities require account/runtime/region/credits verification and independent implementation/tests.
+
+Actual200%zoom remains user-deferred Phase4 work; exact360px is unverified because browser clamps400. Desktop and actual400px customer/owner states inspected. Owner technical copy English, keyword templates, local API uptime, in-app only, ASCII PDF font and separate post-reset file archive remain limits. Prototype completion does not erase the deferred accessibility check or mean expanded/WorkBuddy release completion.

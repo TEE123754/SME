@@ -1,0 +1,104 @@
+{
+  "recordedAt": "2026-10-07T12:47:34.568Z",
+  "phase": 2,
+  "implementation": "Codex local scripted reference",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "name": "P2-01 apply and replay migrations on empty disposable database",
+      "status": "passed"
+    },
+    {
+      "name": "P2-02 idempotent synthetic seed preserves history",
+      "status": "passed"
+    },
+    {
+      "name": "P2-03 restricted runtime rejects bootstrap connection",
+      "status": "passed"
+    },
+    {
+      "name": "P2-04 sensitive tables force RLS and are not runtime-owned",
+      "status": "passed"
+    },
+    {
+      "name": "P2-05 missing context denies reads and pooled context is cleared",
+      "status": "passed"
+    },
+    {
+      "name": "P2-06 no cross-customer order, transcript or preference reads",
+      "status": "passed"
+    },
+    {
+      "name": "P2-07 owner and customer records cannot cross business scope",
+      "status": "passed"
+    },
+    {
+      "name": "P2-08 composite foreign keys reject cross-business and cross-customer attachments",
+      "status": "passed"
+    },
+    {
+      "name": "P2-09 RLS blocks cross-customer writes even with runtime grants",
+      "status": "passed"
+    },
+    {
+      "name": "P2-10 bootstrap sessions and role switching are not runtime-readable",
+      "status": "passed"
+    },
+    {
+      "name": "P2-11 worker scope is distinct and cannot mutate payments",
+      "status": "passed"
+    },
+    {
+      "name": "P2-12 preference updates persist and optional deletion preserves commerce",
+      "status": "passed"
+    },
+    {
+      "name": "P2-13 memory withdrawal clears preferences and blocks later writes",
+      "status": "passed"
+    },
+    {
+      "name": "P2-14 simultaneous withdrawal and save cannot leave optional memory",
+      "status": "passed"
+    },
+    {
+      "name": "P2-15 profile changes cannot change customer identity",
+      "status": "passed"
+    },
+    {
+      "name": "P2-16 published catalogue and seed capacity read authoritative records",
+      "status": "passed"
+    },
+    {
+      "name": "P2-17 local selector lists known synthetic accounts only",
+      "status": "passed"
+    },
+    {
+      "name": "P2-18 session identity survives a new adapter; forged text/header IDs ignored",
+      "status": "passed"
+    },
+    {
+      "name": "P2-19 customer cannot read owner list or another customer order",
+      "status": "passed"
+    },
+    {
+      "name": "P2-20 profile write needs exact origin and session-bound CSRF",
+      "status": "passed"
+    },
+    {
+      "name": "P2-21 API consent defaults, withdrawal and optional values are controlled",
+      "status": "passed"
+    },
+    {
+      "name": "P2-22 unknown, disabled and expired sessions do not authenticate",
+      "status": "passed"
+    },
+    {
+      "name": "P2-23 logout revokes persisted sessions",
+      "status": "passed"
+    },
+    {
+      "name": "P2-24 customer context stays empty after failures and audit stays append-only",
+      "status": "passed"
+    }
+  ]
+}

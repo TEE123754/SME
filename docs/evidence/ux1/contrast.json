@@ -1,0 +1,54 @@
+{
+  "scope": "Six core UX1 text/action/status colour pairs, WCAG relative luminance; not an audit of every inherited style.",
+  "target": 4.5,
+  "initialFailure": {
+    "name": "confirmed/preparing",
+    "foreground": "#7061bb",
+    "background": "#efedfc",
+    "ratio": 4.42
+  },
+  "results": [
+    {
+      "name": "primary action",
+      "foreground": "#ffffff",
+      "background": "#5651c8",
+      "ratio": 6.16,
+      "passes": true
+    },
+    {
+      "name": "secondary text",
+      "foreground": "#687082",
+      "background": "#f7f8fb",
+      "ratio": 4.68,
+      "passes": true
+    },
+    {
+      "name": "awaiting deposit",
+      "foreground": "#8f662a",
+      "background": "#fff5e6",
+      "ratio": 4.74,
+      "passes": true
+    },
+    {
+      "name": "confirmed/preparing",
+      "foreground": "#6c5db7",
+      "background": "#efedfc",
+      "ratio": 4.68,
+      "passes": true
+    },
+    {
+      "name": "completed/active",
+      "foreground": "#437b58",
+      "background": "#edf6f0",
+      "ratio": 4.52,
+      "passes": true
+    },
+    {
+      "name": "ready/delivering",
+      "foreground": "#4b6f99",
+      "background": "#edf5ff",
+      "ratio": 4.74,
+      "passes": true
+    }
+  ]
+}

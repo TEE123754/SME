@@ -1,10 +1,12 @@
 # CustomerBuddy - Technical Requirements Document
 
-Version 0.5 | 7 October 2026 | Phase 4 checkpoint preserved; requested WorkBuddy expansion specified, not implemented; no deployment.
+Version 0.6 | 7 October 2026 | Expanded local demo E1 complete; scripted/synthetic operation; independent WorkBuddy rebuild Not started; no cloud deployment.
 
 Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [Backend Schema](<C:/Users/Edison Tee/Downloads/SME/BACKEND_SCHEMA.md>), [Implementation Plan](<C:/Users/Edison Tee/Downloads/SME/IMPLEMENTATION_PLAN.md>).
 
 ## 1. Delivery decision
+
+**E1 local implementation override:** Explicit current user authorisation adds the expanded operations/growth features to the existing React/Vite/Express/PostgreSQL local demo. No model SDK, MCP connector, WorkBuddy access or Tencent provisioning is required. Owner/customer intent matching, forecasts, copy and visuals use deterministic rules/templates with visible disclosures; saved records drive all operations. See [E1 implementation contracts](docs/EXPANDED_DEMO.md). Future WorkBuddy source/deployment remains independent.
 
 Codex builds a local reference prototype and prepares a portable behaviour/design/data reference pack in Phases 1-6. Tencent WorkBuddy independently rebuilds the complete application in a new workspace in Phase 7, including frontend, backend, migrations, agent tools, tests, deployment and documentation. The PRD records the competition-rule distinction.
 
@@ -12,7 +14,7 @@ Codex builds a local reference prototype and prepares a portable behaviour/desig
 
 The final target is WorkBuddy's CloudBase-backed application services. The reference app remains a separate local artifact. WorkBuddy consumes the specifications/screenshots/fixtures as inputs and authors the final implementation; it does not merely import or publish the Codex app. Account access, runtime support and resource charges remain verification gates.
 
-**Expansion boundary:** PRD FR-18–FR-27 extend the fresh WorkBuddy project after its core flow, within 7A-7E. All are required for the expanded requested release; optional ML upgrades and external delivery require separate capability/data evidence. The current request updates specifications only. No expansion endpoint, migration, model, library installation or UI is implemented by this revision; Phases 1–4 evidence is unchanged.
+**Historical specification-only expansion boundary (superseded for the local demo by E1):** PRD FR-18â€“FR-27 extend the fresh WorkBuddy project after its core flow, within 7A-7E. All are required for the expanded requested release; optional ML upgrades and external delivery require separate capability/data evidence. The current request updates specifications only. No expansion endpoint, migration, model, library installation or UI is implemented by this revision; Phases 1â€“4 evidence is unchanged.
 
 ## 2. Proposed tech stack
 
@@ -53,7 +55,7 @@ scripts/                  phase gate runners, fixtures, handoff packaging
 docs/evidence/            concise phase-end results and final integration proof
 ```
 
-The Codex workspace now contains the foundation, SQL data model, synthetic sessions and scoped read/profile/consent APIs. Commerce writes now exist; UI flows, assistant dispatch and jobs remain Phases 4–5. WorkBuddy creates equivalent modules independently in its fresh project.
+The Codex workspace now contains the foundation, SQL data model, synthetic sessions and scoped read/profile/consent APIs. Commerce writes now exist; UI flows, assistant dispatch and jobs remain Phases 4â€“5. WorkBuddy creates equivalent modules independently in its fresh project.
 
 `integrations/workbuddy/`, managed-AI runtime modules and `infra/cloudbase/` belong to the future WorkBuddy project. Do not scaffold them or install their SDKs as prototype requirements. Describe future integration contracts in the reference documents only.
 
@@ -98,7 +100,7 @@ Prefix application routes with `/api/v1`. Return structured data and correlation
 | `POST /orders/confirm` | Customer | Verify challenge and idempotency key; atomically reserve capacity |
 | `GET /orders`, `GET /orders/:id` | Customer | Only this customer's orders |
 | `POST /orders/:id/handoff` | Customer | Open an owner case and pause conflicting automation |
-| `GET /documents/:id/download` | Scoped customer/owner | Authorise then issue short-lived private download |
+| `GET /documents/:id/download` | Scoped customer/owner | Prototype: scoped authenticated PDF stream; WorkBuddy: scoped short-lived private download |
 | `/owner/orders`, `/owner/customers`, `/owner/dashboard` | Owner | Business-scoped operating views |
 | `POST /owner/approvals/:id/decision` | Owner | Approve/edit/reject the exact current proposal |
 | `POST /owner/payments/verify` | Owner | Record verified demo payment; reconcile deposit and reservation state |
@@ -134,7 +136,7 @@ Pipeline: authenticate and bind scope -> persist input -> match allowed intent -
 
 Unknown input returns supported quick actions and Ask owner. It must not invent an answer or report an operation succeeded. If human takeover is active, preserve the message and show the waiting state. Preference changes, confirmation, approvals and payments still require explicit customer/owner controls. Forms remain a reliable path even when text matching fails.
 
-Return `assistant_mode=scripted`, matched intent, script version, fact/service references and outcome in safe trace metadata. Keep model/token usage null because no model is called. The permanent customer label is "Demo assistant — scripted responses". Seed data and scripted wording are synthetic; database mutations and documents must actually work.
+Return `assistant_mode=scripted`, matched intent, script version, fact/service references and outcome in safe trace metadata. Keep model/token usage null because no model is called. The permanent customer label is "Demo assistant â€” scripted responses". Seed data and scripted wording are synthetic; database mutations and documents must actually work.
 
 ### 8.2 Future WorkBuddy implementation only
 
@@ -177,7 +179,7 @@ WorkBuddy Automation triggers processing and daily digest generation in Phase 7.
 
 Reset demo requires an authenticated owner and explicit confirmation, and is enabled only against a validated local synthetic environment. Stop/quiesce the worker, reset only demo-scoped records and local generated files, restore seeds/clock, then resume. Never infer a reset target from a customer message or accept an external database target.
 
-Store generated quote/invoice/receipt files privately. Download links are scoped and short-lived. Use database summaries as the source; do not render model-generated totals. File generation jobs have unique document identity and content hashes.
+Store generated quote/invoice/receipt files privately. The local prototype streams downloads through an authenticated, scope-checked endpoint without a bearer URL; the independent WorkBuddy rebuild uses scoped short-lived private links. Use database summaries as the source; do not render model-generated totals. File generation jobs have unique document identity and content hashes.
 
 ## 11. Configuration and deployment
 
@@ -302,3 +304,22 @@ Additional routes are `/quotes/:id/edit`, `/exceptions`, `/owner/orders/:id/resu
 React Router pages use trusted `/me` scope through a session provider, TanStack Query keys scoped by role/customer, same-origin typed API helpers, CSRF and retry-safe idempotency. Private query data is removed on account switch/sign-out. Hook Form/Zod and useWatch back explicit ordering; the server prices/validates all commercial writes. `GET /business-time` reads the authenticated clock; customer-only `GET /me/reviews` exposes scoped review states and approved quote IDs. Owner approval/dashboard reads exclude stale policy/order-version proposals from actionable counts; capacity reads include product identity/version.
 
 Messages are serialized and assigned at least 1ms greater than the preceding conversation message when the demo clock is paused. Conversation choice persists in scoped sessionStorage. No schema migration was added in Phase 4. Customer-core BM/EN and responsive/keyboard states are implemented; 200% zoom is pending by user request. See Phase 4 evidence for measured viewport limits and six focused API cases. Phase 5 still owns actual scripted response dispatch, private files, leased workers and clock controls.
+
+## Phase 5 implementation checkpoint â€” 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18â€“FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+Prototype routes: POST /conversations/:id/respond takes a saved messageId and replays the same completed input; GET /me/notifications; GET /documents/:id/download validates scope, availability and SHA-256 before returning an attachment; owner GET /owner/demo/jobs and POST /owner/demo/jobs/run, /owner/demo/digest, /owner/demo/clock, /owner/demo/pause, /owner/demo/reset. All paths are under /api/v1. Mutations require session/Origin/CSRF. Clock mutations additionally require Idempotency-Key; request-hash mismatch returns409.
+
+The worker uses its separate restricted local credential, processes at most50 outbox intents and10 jobs per batch, and has30-second real-time leases, three attempts and one-minute business-time retry. Quiet-window deferral does not consume an attempt. The legacy quietHoursStart/End policy fields mean permitted delivery hours, default09:00â€“20:00MYT. Delivery rechecks current consent, hold/payment/order state, review, takeover, exception and global pause. Other internal outbox status events are acknowledged without claiming external notification delivery. The scheduler runs every15 seconds while the API is up.
+
+Reset requires owner authority, exact RESET SYNTHETIC DEMO text, the local admin credential and named loopback synthetic database with no extra business. Data reseeding is transactional; sessions invalidate. Private files archive locally after reset rather than being purged. File archiving is not atomic with the database transaction: an archive failure must be investigated before retrying. Standard Helvetica PDFs sanitise unsupported characters; the fresh rebuild should use a suitable licensed Unicode font. No model API, MCP package, external send or cloud provisioning is included.
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.
+
+## S1 — Owner setup and customer shopping (8 October 2026)
+
+S1 uses existing React/Vite, Express/Zod and PostgreSQL with migration 007. Public store projection exposes published catalogue fields only. Loopback-only synthetic bootstrap creates an isolated business, owner and shopper with no products, orders or capacity. New membership services use scoped RLS, business lock, idempotency, bounded basis-point pricing and exact quote snapshots; confirmation rejects changed membership/programme/ethics benefits. Individually approved promotions replace member discounts without stacking. Browser basket stores only SKU/quantity, keyed by business/customer; guest transfer occurs once into an empty signed-in basket.
+

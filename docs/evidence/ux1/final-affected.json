@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-07T17:13:58.611Z",
+  "scope": "Final affected UI gate after browser findings: route focus, mobile labels/controls, drawer focus return, customer chat disclosures, legacy slug navigation and quote review focus. E1 integration passes preserved.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 7779
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 12010
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1383
+    }
+  ],
+  "recordedAt": "2026-10-07T17:14:19.789Z"
+}

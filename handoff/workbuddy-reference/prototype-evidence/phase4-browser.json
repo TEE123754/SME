@@ -1,0 +1,89 @@
+{
+  "recordedAt": "2026-10-07T10:04:36.707240+00:00",
+  "phase": 4,
+  "implementation": "Codex local synthetic reference",
+  "status": "partial_zoom_pending",
+  "scenarios": [
+    {
+      "id": "P4-B01",
+      "status": "passed",
+      "evidence": "Hana cookie session, consent/favourite persistence, withdrawal, BM/EN profile synchronization verified; favourite value and profile dropdown repaired."
+    },
+    {
+      "id": "P4-B02",
+      "status": "passed",
+      "evidence": "Brownie RM78/RM39; edit cupcake RM48/RM24 and back; explicit confirmation created DEMO-0A9FC590; order/hold persisted after reload, no fabricated document link."
+    },
+    {
+      "id": "P4-B03",
+      "status": "passed",
+      "evidence": "Exact owner discount rejection with note visible to Hana."
+    },
+    {
+      "id": "P4-B04",
+      "status": "passed",
+      "evidence": "Synthetic RM39 verified once; production booked, paid39/balance39 persisted. Four orders reconcile to RM165 verified payments in owner Evidence."
+    },
+    {
+      "id": "P4-B05",
+      "status": "passed",
+      "evidence": "Customer message, owner takeover/reply, customer waiting-owner banner, explicit owner resume verified. New message chronology and chosen conversation verified after reload."
+    },
+    {
+      "id": "P4-B06",
+      "status": "passed",
+      "evidence": "Owner approved exact ten percent quote; Hana reviewed RM70.20/RM35.10 and explicitly confirmed DEMO-DF29A65B; Jason gets record-unavailable denial."
+    },
+    {
+      "id": "P4-B07",
+      "status": "passed",
+      "evidence": "Capacity10\u219211 increased available8\u21929, restored10. Catalogue brownie7800\u21927900 published v2, restored7800 in v3. Automation panels disclose Phase5 deferred."
+    },
+    {
+      "id": "P4-B08",
+      "status": "passed",
+      "evidence": "Customer owner-route and owner customer-route denied; invalid lead-time date shows inline error; no leaked order to Jason; empty/loading/pending states observed."
+    },
+    {
+      "id": "P4-B09",
+      "status": "partial",
+      "evidence": "Desktop/customer and owner mobile have no horizontal overflow; fields labelled, status roles, keyboard focus/skip link and menu close/Escape verified; BM reflow and core contrast inspected. 200% zoom pending by user request."
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "requestedWidth": 1280,
+      "actualCSSWidth": 1422,
+      "clientWidth": 1405,
+      "scrollWidth": 1405,
+      "devicePixelRatio": 0.9000000134
+    },
+    "mobile": {
+      "requestedWidth": 360,
+      "actualCSSWidth": 400,
+      "clientWidth": 383,
+      "scrollWidth": 383,
+      "runtimeClamped": true
+    },
+    "ownerDefault": {
+      "actualCSSWidth": 1298,
+      "clientWidth": 1281,
+      "scrollWidth": 1281
+    }
+  },
+  "contrast": {
+    "primaryWhiteOnGreen": 7.32,
+    "bodyOnCream": 12.92,
+    "mutedOnCream": 5.74,
+    "mutedOnWhite": 6.3
+  },
+  "screenshots": [
+    "phase4-desktop.png",
+    "phase4-mobile.png",
+    "phase4-payment.png"
+  ],
+  "finalConsoleErrors": [],
+  "remaining": "200% browser zoom. Locator shortcut did not change zoom; user selected Leave this check pending. Exact360 CSS-pixel verification also unavailable due runtime clamp.",
+  "syntheticStateChanges": "Two Hana orders; one RM39 payment; rejected and approved discounts; two conversations; memory withdrawn; capacity maximum and catalogue price restored, published version is now3. Existing pre-repair equal-timestamp messages remain historical ties; subsequent writes use monotonic timestamp increments.",
+  "temporaryViewportReset": true
+}

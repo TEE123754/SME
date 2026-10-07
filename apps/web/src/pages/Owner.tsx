@@ -4,86 +4,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { policySchema, publishRequestSchema } from '@customerbuddy/contracts';
-import type { Product, Dashboard, Approval, Conversation, Message, Capacity } from '../lib/types';
+import type { Product, Approval, Conversation, Message, Capacity, Dashboard } from '../lib/types';
 import { money, instant } from '../lib/api';
 import { PageHeading, QueryState, Status, Feedback } from '../components/workflow';
 import { Button } from '../components/ui/button';
 import { useData, useAction } from '../lib/hooks';
 
-export function OwnerOverview() {
-  const dashboard = useData<Dashboard>('/owner/dashboard'),
-    reviews = useData<{ approvals: Approval[] }>('/owner/approvals');
-  return (
-    <>
-      <PageHeading
-        title="A little clarity for your day."
-        description="Your bakery's saved orders and verified synthetic payments, in one place."
-      />
-      <QueryState query={dashboard}>
-        {dashboard.data ? (
-          <>
-            <div className="metric-grid">
-              {[
-                ['Orders', String(dashboard.data.orders)],
-                ['Confirmed', String(dashboard.data.confirmed)],
-                ['Verified synthetic payments', money(dashboard.data.verifiedSyntheticPaymentSen)],
-                ['Pending owner reviews', String(dashboard.data.pendingApprovals)],
-              ].map(([label, value]) => (
-                <article className="panel metric" key={label}>
-                  <p>{label}</p>
-                  <strong>{value}</strong>
-                </article>
-              ))}
-            </div>
-            <p className="notice">
-              Demo business time: {instant(dashboard.data.demoTime)} · Paused clock controls arrive
-              in Phase 5. Awaiting deposit: {dashboard.data.awaiting_deposit}; paused cases:{' '}
-              {dashboard.data.paused}.
-            </p>
-          </>
-        ) : null}
-      </QueryState>
-      <div className="two-columns">
-        <section className="panel">
-          <h2>Next decisions</h2>
-          <QueryState query={reviews}>
-            {reviews.data?.approvals.filter((a) => a.effective_state === 'pending').length ? (
-              reviews.data.approvals
-                .filter((a) => a.effective_state === 'pending')
-                .slice(0, 5)
-                .map((a) => (
-                  <p key={a.id}>
-                    <Link className="text-link" to="/owner/reviews">
-                      {a.kind.replaceAll('_', ' ')} · {a.customer_id.slice(0, 8)} →
-                    </Link>
-                  </p>
-                ))
-            ) : (
-              <p>No pending owner decisions.</p>
-            )}
-          </QueryState>
-          <Link className="button button-secondary" to="/owner/reviews">
-            Open reviews
-          </Link>
-        </section>
-        <section className="panel">
-          <h2>Keep the bakery moving</h2>
-          <p>
-            Open an order to verify a synthetic deposit, review cancellation or mark pickup ready.
-          </p>
-          <div className="action-row">
-            <Link className="button button-primary" to="/owner/orders">
-              Bakery orders
-            </Link>
-            <Link className="button button-secondary" to="/owner/capacity">
-              Production capacity
-            </Link>
-          </div>
-        </section>
-      </div>
-    </>
-  );
-}
+export { OwnerOverview } from './Overview';
 export function OwnerReviews() {
   const query = useData<{ approvals: Approval[] }>('/owner/approvals');
   return (
@@ -250,7 +177,7 @@ export function OwnerCustomers() {
     </>
   );
 }
-function ConversationReview({ conversation: c }: { conversation: Conversation }) {
+export function ConversationReview({ conversation: c }: { conversation: Conversation }) {
   const messages = useData<{ messages: Message[] }>(`/conversations/${c.id}/messages`),
     action = useAction(),
     [reply, setReply] = useState('');
@@ -471,7 +398,7 @@ function KnowledgeEditor({ knowledge, products }: { knowledge: Knowledge; produc
         ) : (
           <p>Edit values and preview the exact version before publishing.</p>
         )}
-        <h3 className="spaced">Published bakery facts</h3>
+        <h3 className="spaced">Published business facts</h3>
         {knowledge.entries.map((e) => (
           <details key={e.fact_key}>
             <summary>{e.fact_key.replaceAll('_', ' ')}</summary>
@@ -480,8 +407,8 @@ function KnowledgeEditor({ knowledge, products }: { knowledge: Knowledge; produc
           </details>
         ))}
         <p className="fine-print">
-          Fact entries are preserved when publishing. Editing those facts/new products is outside
-          this prototype's current publication API.
+          Fact entries are preserved when publishing. Edit business facts and add new items in
+          Business & catalogue.
         </p>
         <Feedback action={action} />
       </section>
@@ -495,11 +422,11 @@ export function OwnerCapacity() {
   return (
     <>
       <PageHeading
-        title="Production capacity"
+        title="Order & booking capacity"
         description="Held and committed units are authoritative saved allocations. Maximums cannot drop below booked units."
       />
       <label className="date-filter">
-        Production date
+        Fulfilment date
         <input type="date" required value={date} onChange={(e) => setDate(e.target.value)} />
       </label>
       <QueryState query={query}>
@@ -611,9 +538,9 @@ export function OwnerEvidence({ automation = false }: { automation?: boolean }) 
               </div>
             </dl>
             <p className="notice">
-              Scripted responses, document generation, reminders, leased workers and demo
-              clock/run/reset controls arrive in Phase 5. No automation run or delivered document is
-              claimed here.
+              Scripted responses and local leased jobs are active. Inspect Local automation for
+              actual job states, clock controls and saved digests; files are available only after
+              generation.
             </p>
             <div className="action-row">
               <Link className="button button-secondary" to="/owner/orders">

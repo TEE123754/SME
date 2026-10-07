@@ -7,18 +7,32 @@ export class ApiError extends Error {
   }
 }
 const messages: Record<string, string> = {
+  MEMBER_BENEFIT_CHANGED:
+    'Your membership or its discount changed. Review a fresh quote before confirming.',
+  PROGRAM_DISABLED: 'The owner has paused new memberships.',
+  DISCOUNT_LIMIT: 'This member discount exceeds your Ethics discount limit.',
+  VERSION_CONFLICT: 'These settings changed. Refresh before saving.',
+  STORE_ADDRESS_TAKEN: 'That store address is already used. Choose another address.',
+  SETUP_REQUEST_CHANGED:
+    'This business was already created. Sign in to its saved owner account to continue setup.',
+  STOCK_UNAVAILABLE: 'Insufficient unreserved stock. Receive stock or reduce the quantity.',
+  PAYMENT_RISK_REVIEW:
+    'This payment needs risk review. Screen it in Risk Review and resolve the case before verifying.',
+  STALE_PROFILE: 'Business settings changed. Refresh before saving.',
+  SERVICE_USES_CAPACITY: 'Services use booking capacity, not physical stock.',
+  PRICE_LIMIT: 'This proposal exceeds the current ethical pricing limit.',
   AUTH_REQUIRED: 'Your session expired. Sign in again.',
   CSRF_DENIED: 'Sign in again to refresh your session before saving.',
   OWNER_ONLY: 'This action needs an owner session.',
   CUSTOMER_ONLY: 'Sign in as a customer to use this page.',
   NOT_FOUND: 'This record is unavailable in your account.',
   LEAD_TIME_REQUIRED:
-    'Choose a pickup after the bakery’s published lead time, measured from demo business time.',
+    'Choose a pickup after the business’s published lead time, measured from demo business time.',
   CAPACITY_UNAVAILABLE:
-    'That production date is full. Edit the quote and choose another date or quantity.',
+    'That fulfilment date is full. Edit the quote and choose another date or quantity.',
   QUOTE_EXPIRED: 'This quote expired. Prepare a fresh quote.',
   QUOTE_NOT_ACTIVE: 'This quote has already been accepted or replaced. Check your orders.',
-  POLICY_CHANGED: 'The bakery published new prices or policies. Prepare a fresh quote.',
+  POLICY_CHANGED: 'The business published new prices or policies. Prepare a fresh quote.',
   INVALID_CONFIRMATION: 'The confirmation expired. Review the quote and try again.',
   STALE_APPROVAL: 'This review has changed or expired. Refresh the reviews list.',
   STALE_ORDER: 'The order changed. Refresh and review its latest status.',

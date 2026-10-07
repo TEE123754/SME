@@ -1,0 +1,86 @@
+{
+  "recordedAt": "2026-10-07T18:07:03.202Z",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "id": "S01 migration replay and fresh seed programme",
+      "status": "passed"
+    },
+    {
+      "id": "S02 membership is explicit; default quotes unchanged",
+      "status": "passed"
+    },
+    {
+      "id": "S03 idempotent join does not change any consent",
+      "status": "passed"
+    },
+    {
+      "id": "S04 member quote has exact total/deposit/savings and scoped prices",
+      "status": "passed"
+    },
+    {
+      "id": "S05 leaving invalidates member confirmation; orders unchanged",
+      "status": "passed"
+    },
+    {
+      "id": "S06 newsletter opt-in is independent of joining/leaving",
+      "status": "passed"
+    },
+    {
+      "id": "S07 programme authority and bounded pricing",
+      "status": "passed"
+    },
+    {
+      "id": "S08 programme edits invalidate old member quotes",
+      "status": "passed"
+    },
+    {
+      "id": "S09 quote confirmation idempotency and saved discounted order",
+      "status": "passed"
+    },
+    {
+      "id": "S10 approved promotions replace member pricing without stacking",
+      "status": "passed"
+    },
+    {
+      "id": "S11 customer cannot select a discount or another member",
+      "status": "passed"
+    },
+    {
+      "id": "S12 public store exposes only published catalogue fields",
+      "status": "passed"
+    },
+    {
+      "id": "S13 bootstrap requires synthetic acceptance and valid input",
+      "status": "passed"
+    },
+    {
+      "id": "S14 isolated bootstrap and exact replay",
+      "status": "passed"
+    },
+    {
+      "id": "S15 new business readiness starts empty; original data isolated",
+      "status": "passed"
+    },
+    {
+      "id": "S16 saved setup readiness depends on facts and eligible capacity",
+      "status": "passed"
+    },
+    {
+      "id": "S17 store-specific account selection and customer authority",
+      "status": "passed"
+    },
+    {
+      "id": "S18 programme pause prevents new joins and removes future discount",
+      "status": "passed"
+    },
+    {
+      "id": "S19 missing scope cannot read loyalty records",
+      "status": "passed"
+    },
+    {
+      "id": "S20 saved setup/membership survives a fresh connection",
+      "status": "passed"
+    }
+  ]
+}

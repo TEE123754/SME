@@ -1,0 +1,17 @@
+{
+  "phase": 6,
+  "recordedAt": "2026-10-07T12:44:49.694Z",
+  "node": "v24.14.0",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 3225
+    },
+    {
+      "check": "ESLint",
+      "status": "failed",
+      "message": "Command failed with exit 1: node_modules/eslint/bin/eslint.js"
+    }
+  ]
+}

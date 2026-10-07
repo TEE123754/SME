@@ -1,0 +1,71 @@
+{
+  "phase": 5,
+  "recordedAt": "2026-10-07T12:48:06.905Z",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "id": "P5-01 allowlisted BM/EN/mixed routing and authority fallback",
+      "status": "passed"
+    },
+    {
+      "id": "P5-02 scoped persisted response uses published prices and deduplicates",
+      "status": "passed"
+    },
+    {
+      "id": "P5-03 unknown/quote/preference intents never confirm or write memory",
+      "status": "passed"
+    },
+    {
+      "id": "P5-04 handoff pauses dispatch until explicit owner resume",
+      "status": "passed"
+    },
+    {
+      "id": "P5-05 worker generates unique snapshot PDFs and order summaries",
+      "status": "passed"
+    },
+    {
+      "id": "P5-06 receipt binds verified payment and ledger totals",
+      "status": "passed"
+    },
+    {
+      "id": "P5-07 clock controls owner-only and durable paused instant",
+      "status": "passed"
+    },
+    {
+      "id": "P5-08 paid deposit reminder suppressed at delivery boundary",
+      "status": "passed"
+    },
+    {
+      "id": "P5-09 quiet window defers without consuming retries",
+      "status": "passed"
+    },
+    {
+      "id": "P5-10 eligible reminder delivered once before hold expiry",
+      "status": "passed"
+    },
+    {
+      "id": "P5-11 real lease recovery and retry budget",
+      "status": "passed"
+    },
+    {
+      "id": "P5-12 digest idempotency reconciles ledger",
+      "status": "passed"
+    },
+    {
+      "id": "P5-13 owner and worker boundaries deny customer job control",
+      "status": "passed"
+    },
+    {
+      "id": "P5-14 suppression rechecks consent, takeover, global pause, exceptions and expiry",
+      "status": "passed"
+    },
+    {
+      "id": "P5-15 HTTP private PDF, auth/owner/CSRF denial and download integrity",
+      "status": "passed"
+    },
+    {
+      "id": "P5-16 reset restores fixture and refuses a non-demo business",
+      "status": "passed"
+    }
+  ]
+}

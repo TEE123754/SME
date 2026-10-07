@@ -1,5 +1,9 @@
 # CustomerBuddy - Backend / Database Schema
 
+## Expanded local demo E1 (current user authorisation)
+
+The user now explicitly requests a complete Codex local demo without WorkBuddy, using hardcoded/scripted methods. This supersedes earlier specification-only deferrals of expanded features for the local demo. Business profile/catalogue/facts support retail and services; dedicated agent cards, stock/forecasts/pricing, owner/customer assistants, engagement/content/visual templates, risk/ethical controls, calendar/tracking, checkout/members/appointments/sales are implemented with saved scoped records. See [expanded demo contracts and flows](docs/EXPANDED_DEMO.md) and [current checkpoint](IMPLEMENTATION_PLAN.md) for limits and verification status. Future WorkBuddy integration/rebuild remains separate; the existing Phase 6 ZIP is a historical pre-expansion snapshot.
+
 Version 0.5 | 7 October 2026 | Migrations001–003 unchanged; expanded WorkBuddy schema specified only; Phase 4 zoom gate pending.
 
 "Background Schema" is interpreted here as the backend/database schema. Visual background tokens are covered in the Design Brief.
@@ -286,3 +290,18 @@ Late payment stays in the synthetic ledger, marks the order paused and creates a
 ## Phase 4 read/write notes
 
 No new tables/migration. Capacity DTO includes product_id/version for owner optimistic editing; customer reviews are scoped with effective expiry/policy/order-version state. The authenticated clock remains paused. New message timestamps use max(business time, preceding message timestamp +1ms) under serialized writes so paused-clock conversations retain insertion order. Historical equal-timestamp messages remain untouched. UI reads/writes use the existing restricted runtime role and trusted scope; no browser database or model credentials were added.
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+Migration004 adds agent_runs.result_json, document action keys, scoped unique notification actions and owner/worker-only digest snapshots, plus narrow runtime script/owner job permissions and worker read/write policies. Migration005 grants cb_worker SELECT on quotes for snapshot rendering; worker commerce writes and payment/approval authority remain denied. Original migrations are unchanged. Document identity/content hashes and jobs.action_key prevent duplicate generated documents/deliveries. Local clock advances use actor/operation/key/hash-bound idempotency records. Lease expiry uses real time; commercial deadlines use persisted business time. Reset restores the synthetic seed transactionally and invalidates sessions; old private document files archive separately.
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.
+
+## S1 — Owner setup and customer shopping (8 October 2026)
+
+Migration 007 adds products.image_key (bounded local illustration enum), loyalty_programs (one per business, enabled, discount_basis_points 0–1500, version), customer_loyalty (business/customer composite FK, active/version/joined_at), and quotes.member_benefit snapshot. app.memberships remains owner authentication authority; customer_loyalty is separate. Force RLS on loyalty tables: programme reads scoped by business, writes owner-only, customer membership writes self-only. Public security-definer projection whitelists published store/catalogue fields; bootstrap grants authority only in newly created synthetic businesses. Member benefit includes membership/programme versions, effective basis points and savings; deterministic confirmation revalidates under the same business lock.
+

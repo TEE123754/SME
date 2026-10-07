@@ -1,6 +1,6 @@
 # CustomerBuddy - Implementation Plan and Progress Checklist
 
-Version 0.4 | Updated 7 October 2026 | Prototype checkpoint preserved; expanded WorkBuddy requirements planned, not built.
+Version 0.7 | Updated 8 October 2026 | S1 and UX1 complete within documented verification limits; actual200% zoom deferred; independent WorkBuddy rebuild Not started.
 
 Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [TRD](<C:/Users/Edison Tee/Downloads/SME/TRD.md>), [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [Design Brief](<C:/Users/Edison Tee/Downloads/SME/DESIGN_BRIEF.md>), [Backend Schema](<C:/Users/Edison Tee/Downloads/SME/BACKEND_SCHEMA.md>), [WorkBuddy Rebuild Brief](<C:/Users/Edison Tee/Downloads/SME/WORKBUDDY_REBUILD_BRIEF.md>).
 
@@ -17,9 +17,9 @@ Related: [PRD](<C:/Users/Edison Tee/Downloads/SME/PRD.md>), [TRD](<C:/Users/Edis
 
 The original exclusive-tool competition rule and this requested build approach are distinguished in the PRD. That distinction is recorded; no additional permission flow is introduced into routine local implementation.
 
-**Current completion target:** A demonstrator can sign in as synthetic customers/owner, order through forms or scripted chat, confirm a quote, review an exception, verify a synthetic payment, download documents, run due reminders and inspect a reconciled digest. All business state persists across restarts. The prototype runs with local Node/PostgreSQL and no WorkBuddy, cloud or model credentials. Completing Phase 6 does not depend on Phase 7.
+**Current completion target:** A demonstrator can use the general business profile and product/service catalogue; inspect one customer per agent card; use multi-item checkout, members, appointments/orders, sales/invoices, stock/forecasts/pricing, owner/customer queries, campaigns, content/visual templates, risks/ethics, calendar and tracking. They can confirm a quote, review an exception, verify a synthetic payment, download documents, run due reminders and inspect a reconciled digest. All business state persists across restarts. The prototype runs with local Node/PostgreSQL and no WorkBuddy, cloud or model credentials. Completing Phase 6 does not depend on Phase 7.
 
-**Requested expansion, specification only:** PRD FR-18–FR-27 add the owner customer-agent board, owner/customer AI queries, stock/sales management and forecasts, controlled pricing, engagement/after-sales, multilingual content/visual generation, transaction-risk review and ethical controls to the independent WorkBuddy project. Existing mechanics are reused. All expansion requirements are needed to claim the expanded release complete; optional model upgrades/external delivery have capability/data gates. This request does not authorise app implementation, reopen Phases 1–4 or require new packages/migrations. The saved deferred Phase 4 accessibility action remains the next implementation action.
+**Historical expansion boundary (superseded by E1 user authorisation):** PRD FR-18â€“FR-27 add the owner customer-agent board, owner/customer AI queries, stock/sales management and forecasts, controlled pricing, engagement/after-sales, multilingual content/visual generation, transaction-risk review and ethical controls to the independent WorkBuddy project. Existing mechanics are reused. All expansion requirements are needed to claim the expanded release complete; optional model upgrades/external delivery have capability/data gates. This request does not authorise app implementation, reopen Phases 1â€“4 or require new packages/migrations. The saved deferred Phase 4 accessibility action remains the next implementation action.
 
 ## 2. Stack and tool ownership
 
@@ -33,8 +33,8 @@ The original exclusive-tool competition rule and this requested build approach a
 | Demo assistant | Hardcoded intent rules, BM/English templates, quick actions, real scoped service calls | Codex, Phase 5; no LLM SDK or model adapter |
 | Agent release | Newly authored scoped orchestration and CloudBase-managed AI | WorkBuddy, rebuild Phase 7D |
 | Owner tools | Official MCP SDK, WorkBuddy connector/skills and Automation | Deferred to WorkBuddy 7D; Codex implements ordinary owner UI/API controls |
-| Expanded operations | Customer-agent projection, stock lots/movements, reconciled sales/invoices, forecasts, price proposals, risk cases | Planned WorkBuddy 7A-7D; not prototype additions |
-| Expanded growth / AI | Separate owner/customer tool registries, approved campaigns/content/assets; optional StatsForecast/scikit-learn/BGE/Presidio | Planned WorkBuddy 7D; Tencent-hosted only after checks; repository register in TRD Section 15 |
+| Expanded operations | Customer-agent projection, inventory movement ledger, reconciled sales/invoices, baseline forecasts, price proposals, risk cases, calendar, checkout/members/bookings | Codex E1 implemented; richer expiry-lot/ML/production services remain independent WorkBuddy requirements |
+| Expanded growth / AI | Scoped scripted owner/customer queries, approved local campaigns, editable copy/SVG templates | Codex E1 implemented; live AI/external channels and optional model libraries deferred to independent WorkBuddy 7D |
 | Verification | Vitest, Supertest, Playwright, compiler/linter/build commands | Current phase's end gate only |
 | Final rebuild/deployment | Fresh WorkBuddy source/tests/docs; CloudBase API, Postgres, Auth, storage and AI | WorkBuddy, Phases 7A-7E |
 
@@ -48,12 +48,48 @@ Phase 1 has pinned/installed local dependencies and initialized Git. Node 24.14.
 | 1 - Foundation | Complete | Passed once; typecheck/lint/build/startup and browser review recorded | Codex |
 | 2 - Data and identity | Complete | Passed; compiler repair then remaining checks; 24 integration cases | Codex |
 | 3 - Business API | Complete | Passed after affected repairs; 25 integration cases plus type/lint/build | Codex |
-| 4 - App flows | Built - gate pending | Type/lint/build +6 API cases and browser B01–B08 passed; B09 partial, 200% zoom pending by user choice | Codex |
-| 5 - Scripted assistant and local jobs | Not started | Not run | Codex |
-| 6 - Usable prototype acceptance and handoff | Not started | Not run | Codex |
+| 4 - App flows | Built - gate pending | Type/lint/build +6 API cases and browser B01â€“B08 passed; B09 partial, 200% zoom pending by user choice | Codex |
+| 5 - Scripted assistant and local jobs | Complete | Typecheck/lint/build, 16 integration cases, browser workflows and rendered PDF inspection passed after affected repairs | Codex |
+| 6 - Usable prototype acceptance and handoff | Complete |111 integration/acceptance checks, type/lint/build, browser restart/state/PDF inspection and portable pack review passed after affected repairs; deferred zoom remains explicit | Codex |
+| E1 - Expanded local business demo | Complete within demo boundaries | 65 integration/regression scenarios; final type/lint/build; desktop/mobile and checkout/member/content/inbox browser checks passed | Codex |
+| UX1 - Navigation and workflow redesign | Complete within documented limits | Type/lint/build and affected keyboard/contrast repairs passed; desktop/mobile browser flows and screenshots recorded | Codex |
+| S1 - Owner setup and customer shopping | Complete within documented limits |20 shopping +25 commerce cases, initial/final type/lint/build and desktop/mobile workflows passed | Codex |
 | 7 - Independent rebuild (7A-7E) | Not started | Not run; actual account capabilities unverified | WorkBuddy |
 
-**Active checkpoint:** Phase 4 build finished. Final compiler/lint/build and six API cases pass; browser P4-B01–B08 pass and P4-B09 is partial. 200% browser zoom remains pending at the user’s explicit request. Mobile runtime clamps360px to 400px. Evidence/screenshots and repairs are saved under docs/evidence/phase4-*. Phase 5 has not started; preserve passed checks.
+**Previous checkpoint:** UX1 complete within documented limits. One grouped role-aware shell, real operational overview, searchable order/member directories, focused agent drawer, clearer customer chat/checkout and consistent responsive theme are built. Initial/final/accessibility-affected compiler/lint/build gates passed; repaired Tab wrapping, focus return, core six contrast pairs and desktop/mobile workflows verified. Evidence: docs/evidence/ux1/review.md, browser.json, gate.json, final-affected.json, focus-affected.json, contrast.json and eight screenshots. Current preview http://127.0.0.1:5173/owner is open with default desktop sizing restored. E1's65 passing business scenarios are preserved; no API/schema/reset/order/payment/approval/external-send change. Synthetic Demo Morgan and unconfirmed quote records are retained browser fixtures. No required UX1 work remains. Next action: report the preview and outcome; resume implementation only on a new request. Actual200% zoom and exact360px remain explicitly deferred/unverified. WorkBuddy/live AI/cloud remain Not started; Phase6 ZIP remains historical.
+
+**Active checkpoint:** S1 complete within documented limits. Landing new-owner creation and saved-record setup checklist, public ecommerce storefront/detail images/prices, scoped persistent basket, customer club and independent newsletter controls, real bounded member quote pricing and owner programme controls are built. Migration007 applied additively; no reset. Initial/final compiler/lint/build,20 shopping and25 commerce scenarios passed. Desktop1298px/mobile444px, keyboard focus, image loading, empty states, signup/setup resumption, newsletter and actual synthetic order confirmation verified. Evidence: docs/evidence/shopping/{gate,final-affected,integration,commerce,browser,contrast}.json, review.md and nine screenshots. Retained fixtures: Demo Bloom Studio/florist, bouquet/facts/capacity and order DEMO-40AEB907 (RM114/RM57, awaiting deposit, no verified payment); its shopper joined club and explicitly opted into newsletter. Bakery Daniel joined with newsletter off, one saved basket item and an unconfirmed RM74.10/RM37.05 quote; no bakery order/payment created. Public storefront http://127.0.0.1:5173/b/ainas-home-bakery left open; viewport reset and final fresh load had no new errors. Legacy phase2/phase3/expansion fresh-migration count assertions now expect7; phase2 was not rerun (literal-only harness maintenance). No required S1 work remains. Next action: report preview and implemented features; further implementation requires a new request. Actual200% zoom remains deferred; exact360/400px unverified. Live AI/WorkBuddy/cloud remain Not started; Phase6 ZIP is historical.
+
+## S1 — Owner onboarding and customer shopping
+
+- [x] Landing owner workflow and isolated synthetic business/account creation.
+- [x] Resumable saved-record setup checklist and storefront preview.
+- [x] Separate ecommerce shell, image/price catalogue, product details and scoped persistent basket.
+- [x] Membership join/leave, independent newsletter consent, deterministic discount/stale benefit checks and owner controls.
+- [x] Meaningful scoped/bootstrap/discount tests authored.
+- [x] Build complete; compiler/lint/build and 20 shopping +25 commerce cases passed. Three focused test-harness assertions repaired (date wire serialization, synchronous owner denial, detail response shape); no full-suite rerun.
+- [x] Browser desktop/mobile/keyboard review; five specifications aligned, README walkthrough and nine screenshots/evidence saved. Actual200% zoom remains deferred; exact360/400px unverified.
+
+## Local expansion E1 — Complete business demo (explicitly requested)
+
+Stack: existing React/TypeScript/Express/PostgreSQL. Tools: Codex, deterministic rules and editable templates; no model keys, WorkBuddy or cloud dependencies.
+
+- [x] Configurable general business profile, products/services and published facts; preserve existing order snapshots.
+- [x] One customer per agent card, active/inactive filters, latest interaction, human review, owner takeover/reply.
+- [x] Stock receipts/adjustments/fulfilment movements, history-based forecast and owner-approved bounded dynamic pricing.
+- [x] Owner query assistant and improved supported customer queries, recommendations and after-sales handoff.
+- [x] Consent-aware announcement/recommendation/promotion/after-sales campaigns with preview and local delivery.
+- [x] Multilingual product/marketing/email/social templates and downloadable editable visual templates (explicitly simulated).
+- [x] Transaction risk rules, payment guard, owner case review and ethical controls.
+- [x] Calendar events/order overview and persistent payment/fulfilment timeline.
+- [x] Checkout: multi-item basket, authoritative quote, explicit review/confirmation and saved order.
+- [x] Members: searchable profiles/consents/totals and synthetic member creation/sign-in.
+- [x] Appointments / Orders: configurable services, date/window capacity and owner fulfilment controls.
+- [x] Sales: reconciled order/payment/item totals and invoice register/private downloads.
+- [x] Meaningful expansion integration tests authored; automated gate passed (24 expansion +25 commerce +16 jobs/document cases); final affected type/lint/build passed. Owner pages, checkout/member/tracking/content/inbox workflows and responsive agent board verified in browser.
+- [x] Update specs/runbook and completion checkpoint with precise limits and evidence.
+
+Checkpoint E1 backend chunk: added migration 006 (business profile, product/service kinds, stock ledger, price proposals, campaigns/deliveries, content drafts, risk cases, calendar and order tracking); operations and growth services/routes; expanded fulfilment states, inventory reservation check and payment-risk guard; customer recommendation/after-sales scripts. Changes unverified; no gate run. Next build owner agent/stock/growth/content/risk/member/sales/calendar/settings screens, explicit checkout/tracking and customer inbox, author integration tests, then end gate. Added Checkout, Members, Appointments/Orders and Sales to scope from latest user message. Instagram reference could not be fetched; use the user's explicit feature list and supplied dashboard image.
 
 ## 4. Phase 0 - Specifications
 
@@ -158,7 +194,7 @@ Phase 1 has pinned/installed local dependencies and initialized Git. Node 24.14.
 
 **End gate:** One browser batch for customer confirmation, owner rejection/payment verification, human takeover and preference change, plus visual/accessibility review at mobile and desktop sizes. Run build/quality checks once as part of the same gate; do not rerun every prior API test.
 
-- [x] Automated checks and browser P4-B01–B08 passed; screenshots/viewports recorded in docs/evidence/phase4-review.md.
+- [x] Automated checks and browser P4-B01â€“B08 passed; screenshots/viewports recorded in docs/evidence/phase4-review.md.
 - [ ] Complete remaining P4-B09 200% browser-zoom inspection (left pending by user request); then mark the full gate passed.
 - [x] Checkpoint updated with final build and passing evidence.
 - [ ] Phase 4 marked Complete only after the remaining zoom check passes.
@@ -169,25 +205,25 @@ Phase 1 has pinned/installed local dependencies and initialized Git. Node 24.14.
 
 **Build checklist**
 
-- [ ] Implement `DemoAssistant`: allowlisted intent rules for catalogue/FAQ, repeat order, quote, status, preference proposals and owner handoff. Bind scope from the authenticated session.
-- [ ] Add BM/English response templates, supported mixed-language example phrases and quick actions; show "Demo assistant — scripted responses" permanently.
-- [ ] Use current published knowledge, consented preferences and saved history. Render prices/status from real service results; never return unconditional hardcoded success.
-- [ ] Collect missing product/quantity/exact date/slot through a structured form. Unknown/ambiguous text offers supported actions or owner handoff; no claim of general language comprehension.
-- [ ] Persist messages and scripted runs, including matched intent/script version, service outcomes and failures. Confirmation, preference consent, approvals and payment verification remain explicit UI actions.
-- [ ] Implement leased bounded job processing, retry limits, recovery and durable action keys.
-- [ ] Implement invoice/summary/receipt generation and authorised download through the storage adapter.
-- [ ] Implement one eligible in-app deposit reminder, quiet-hour deferral and all suppression checks.
-- [ ] Implement owner digest and reconcilable metrics from records.
-- [ ] Add a local bounded scheduler and owner-only Run due jobs/Generate digest controls; no WorkBuddy Automation dependency.
-- [ ] Add a controlled demo clock: pause/resume/advance, show current demo time, and keep persisted deadlines consistent across restarts. Advancing time triggers or enables guarded due-job processing.
-- [ ] Add explicit owner-confirmed Reset demo for the synthetic local database/files only; restore seeds, clock and jobs coherently. Never target an external database.
-- [ ] Document supported scripted inputs and future agentic behaviour as reference contracts only; do not build WorkBuddy connectors, MCP manifests/protocol clients or managed-AI adapters.
-- [ ] Author meaningful scripted-dispatch/job/document tests and save checkpoint.
+- [x] Implement `DemoAssistant`: allowlisted intent rules for catalogue/FAQ, repeat order, quote, status, preference proposals and owner handoff. Bind scope from the authenticated session.
+- [x] Add BM/English response templates, supported mixed-language example phrases and quick actions; show "Demo assistant â€” scripted responses" permanently.
+- [x] Use current published knowledge, consented preferences and saved history. Render prices/status from real service results; never return unconditional hardcoded success.
+- [x] Collect missing product/quantity/exact date/slot through a structured form. Unknown/ambiguous text offers supported actions or owner handoff; no claim of general language comprehension.
+- [x] Persist messages and scripted runs, including matched intent/script version, service outcomes and failures. Confirmation, preference consent, approvals and payment verification remain explicit UI actions.
+- [x] Implement leased bounded job processing, retry limits, recovery and durable action keys.
+- [x] Implement invoice/summary/receipt generation and authorised download through the storage adapter.
+- [x] Implement one eligible in-app deposit reminder, quiet-hour deferral and all suppression checks.
+- [x] Implement owner digest and reconcilable metrics from records.
+- [x] Add a local bounded scheduler and owner-only Run due jobs/Generate digest controls; no WorkBuddy Automation dependency.
+- [x] Add a controlled demo clock: pause/resume/advance, show current demo time, and keep persisted deadlines consistent across restarts. Advancing time triggers or enables guarded due-job processing.
+- [x] Add explicit owner-confirmed Reset demo for the synthetic local database/files only; restore seeds, clock and jobs coherently. Never target an external database.
+- [x] Document supported scripted inputs and future agentic behaviour as reference contracts only; do not build WorkBuddy connectors, MCP manifests/protocol clients or managed-AI adapters.
+- [x] Author meaningful scripted-dispatch/job/document tests and save checkpoint.
 
 **End gate:** One focused batch for scripted scope/authority denial, supported-intent routing, unknown-input fallback, real state updates, leased-worker retry, stale reminder suppression, quiet hours, duplicate documents/notifications and receipt/payment consistency. Verify local clock/job controls and reset isolation. No MCP protocol or live-model tests in Codex. Scripted cases verify workflow mechanics and policy, not language-model capability.
 
-- [ ] Gate passed; record scripted-mode limitations and supported inputs.
-- [ ] Checkpoint updated; Phase 5 marked Complete.
+- [x] Gate passed; supported inputs and limitations recorded in docs/SCRIPTED_INPUTS.md and docs/evidence/phase5-review.md.
+- [x] Checkpoint updated; Phase 5 marked Complete.
 
 ## 10. Phase 6 - Usable prototype acceptance and handoff
 
@@ -195,26 +231,26 @@ Phase 1 has pinned/installed local dependencies and initialized Git. Node 24.14.
 
 **Build checklist**
 
-- [ ] Finish outstanding local P0 mechanics and remove obsolete temporary UI data.
-- [ ] Document install/migrate/seed/start/stop/reset steps and provide a single command to start the configured web/API/worker. Verify no WorkBuddy/cloud/model key is needed.
-- [ ] Prove customer and owner workflows remain usable after restart; no dead primary buttons, fabricated totals or placeholder downloads.
-- [ ] Prepare at least 30 supported scripted/unsupported-input cases, expected commercial actions, reviewer rubric and manual baseline template. Keep future real-AI evaluation separate.
-- [ ] Verify configuration segregation, redaction, least-privilege boundaries and safe deployment defaults in code.
-- [ ] Capture customer/owner screens at mobile and desktop sizes, including quote, awaiting deposit, approval, receipt, expiry and failure states.
-- [ ] Create portable API/tool contracts, synthetic fixture data, expected outputs and a concise demo walkthrough.
-- [ ] Package requirements, flow, design, schema, screenshots, scenarios and prototype evidence as `handoff/workbuddy-reference/`; add an indexed README with provenance and limitations.
-- [ ] Include unbuilt expansion specifications, candidate register and FR-18–FR-27 acceptance expectations as future WorkBuddy targets; label them unimplemented and never fabricate expansion screenshots/results.
-- [ ] Document desired cloud auth/storage/AI/scheduling behaviours without requiring copied prototype implementation.
-- [ ] Write fresh WorkBuddy rebuild tasks 7A-7E; record account/hosting assumptions still unverified.
-- [ ] Keep Codex source/build output outside the primary reference pack; any later code consultation is read-only reference, not an imported final app.
-- [ ] Update PRD/TRD/schema/flow only for actual implementation changes; record changed requirements.
-- [ ] Save checkpoint, then run the local release gate once.
+- [x] Finish outstanding local P0 mechanics and remove obsolete temporary UI data.
+- [x] Document install/migrate/seed/start/stop/reset steps and provide a single command to start the configured web/API/worker. Verify no WorkBuddy/cloud/model key is needed.
+- [x] Prove customer and owner workflows remain usable after restart; no dead primary buttons, fabricated totals or placeholder downloads.
+- [x] Prepare at least 30 supported scripted/unsupported-input cases, expected commercial actions, reviewer rubric and manual baseline template. Keep future real-AI evaluation separate.
+- [x] Verify configuration segregation, redaction, least-privilege boundaries and safe deployment defaults in code.
+- [x] Capture customer/owner screens at mobile and desktop sizes, including quote, awaiting deposit, approval, receipt, expiry and failure states.
+- [x] Create portable API/tool contracts, synthetic fixture data, expected outputs and a concise demo walkthrough.
+- [x] Package requirements, flow, design, schema, screenshots, scenarios and prototype evidence as `handoff/workbuddy-reference/`; add an indexed README with provenance and limitations.
+- [x] Include unbuilt expansion specifications, candidate register and FR-18â€“FR-27 acceptance expectations as future WorkBuddy targets; label them unimplemented and never fabricate expansion screenshots/results.
+- [x] Document desired cloud auth/storage/AI/scheduling behaviours without requiring copied prototype implementation.
+- [x] Write fresh WorkBuddy rebuild tasks 7A-7E; record account/hosting assumptions still unverified.
+- [x] Keep Codex source/build output outside the primary reference pack; any later code consultation is read-only reference, not an imported final app.
+- [x] Update PRD/TRD/schema/flow only for actual implementation changes; record changed requirements.
+- [x] Save checkpoint, then run the local release gate once.
 
 **End gate:** One cumulative prototype acceptance batch plus typecheck/lint/build. Review the reference pack for completeness, secrets and broken portable links. This is the planned combined regression point, not an every-phase full-suite policy. Record prototype mechanics/owner effort; scripted runs are not managed-AI accuracy or revenue.
 
-- [ ] Local release gate passed; usable Codex prototype complete independently of WorkBuddy; store concise evidence and unresolved limitations.
-- [ ] Reference pack complete; prototype results, limitations and WorkBuddy rebuild tasks indexed.
-- [ ] Phase 6 marked Complete; Phase 7 remains Not started until actual WorkBuddy work begins.
+- [x] Local release gate passed; usable Codex prototype complete independently of WorkBuddy; store concise evidence and unresolved limitations.
+- [x] Reference pack complete; prototype results, limitations and WorkBuddy rebuild tasks indexed.
+- [x] Phase 6 marked Complete; Phase 7 remains Not started until actual WorkBuddy work begins.
 
 ## 11. Phase 7 - Independent WorkBuddy rebuild
 
@@ -299,17 +335,17 @@ Build the following blocks in order, saving checkpoints between them. Complete a
 - [ ] Deploy the new WorkBuddy project to reviewable staging; prototype build outputs are excluded.
 - [ ] Author final PRD/TRD/schema/flow/setup/evaluation documentation and slides in WorkBuddy from the rebuilt app.
 - [ ] Save checkpoint, then run one deployment-focused browser-to-API-to-data/document acceptance batch and critical cloud auth/capacity/retry checks.
-- [ ] Verify FR-18–FR-27 on deployed services: unique agent board, scoped queries, physical-stock transactions, forecast uncertainty, controlled price publication, approved consented campaigns/content/assets and private risk/ethical review. Record external delivery/model upgrades separately from required baseline/in-app/export acceptance.
+- [ ] Verify FR-18â€“FR-27 on deployed services: unique agent board, scoped queries, physical-stock transactions, forecast uncertainty, controlled price publication, approved consented campaigns/content/assets and private risk/ethical review. Record external delivery/model upgrades separately from required baseline/in-app/export acceptance.
 - [ ] Reuse passed WorkBuddy subphase evidence for unchanged new components; do not rerun every suite solely to publish.
 - [ ] Publish the rebuilt app through WorkBuddy and capture final URL, environment, new source version, tests and task evidence.
 - [ ] Keep reference/rebuild provenance accurate; synthetic transactions remain labelled.
-- [ ] Mark Phase 7 / expanded release Complete only when 7A-7E, core P0 and FR-18–FR-27 required workflows pass; disclose unfinished conditional model/channel upgrades without claiming their success.
+- [ ] Mark Phase 7 / expanded release Complete only when 7A-7E, core P0 and FR-18â€“FR-27 required workflows pass; disclose unfinished conditional model/channel upgrades without claiming their success.
 
 If a required rebuild/platform feature is unsupported, mark Phase 7 Blocked/Partial and retain the labelled Codex reference. Do not present that prototype as the completed WorkBuddy app or silently change the deployment/agent platform.
 
 ## 12. Planned gate commands and evidence
 
-`pnpm gate:phase1` through `pnpm gate:phase4` exist. Phases 1–3 passed; Phase 4 automated checks passed and its remaining zoom review is pending. Add each later phase's bounded runner when its implementation is built; do not create empty passing gates for unbuilt phases. During WorkBuddy 7A, generate that new project's own gate commands for 7A-7E. Each runner selects the bounded checks above, rather than running every suite by default.
+`pnpm gate:phase1` through `pnpm gate:phase4` exist. Phases 1â€“3 passed; Phase 4 automated checks passed and its remaining zoom review is pending. Add each later phase's bounded runner when its implementation is built; do not create empty passing gates for unbuilt phases. During WorkBuddy 7A, generate that new project's own gate commands for 7A-7E. Each runner selects the bounded checks above, rather than running every suite by default.
 
 Each gate entry records implementation (Codex reference or WorkBuddy rebuild), phase/subphase, date, environment, command, result, scenario IDs and evidence. Keep long logs in the respective project's evidence folder. Live AI is verified in 7D, not on every commit. Never carry a prototype Complete/pass status into the fresh rebuild.
 
@@ -333,28 +369,26 @@ Update in this order:
 
 | Field | Value |
 | --- | --- |
-| Updated | 7 October 2026 |
-| Current phase | Phase 4 Built - gate pending |
-| Latest completed work | Persisted customer/owner flows, scoped session/query/mutation helpers, confirmation/edit, offers/review, payments, takeover/reply/resume, consent/preferences, versioned knowledge/capacity and truthful evidence panels |
-| Changed files | apps/web/src/App/main/styles, pages/Account/Customer/Owner, lib/api/types/session-context/session/hooks, components/workflow and readiness copy; apps/api commerce-routes/app; packages/db commerce/repositories; shared health contract; package scripts; scripts/gate-phase4.mjs and test-phase4-api.ts; specifications and phase4 evidence/screenshots |
-| Data/runtime | Migrations001–003 unchanged. Local synthetic PostgreSQL connected, runtime secrets ignored. Preview http://127.0.0.1:5173; owner verified order displayed. Dev session 28836. Two new Hana orders and one RM39 synthetic payment retained; knowledge v3 with original prices, capacity max 10 restored |
-| Tests/build checks | Final pnpm typecheck/lint/build pass. Six Phase 4 API cases pass; disposable database removed. Browser B01–B08 pass. B09 reflow/labels/focus/menu/contrast pass, 200% zoom pending. Repairs and original gate failure retained |
-| Evidence | docs/evidence/phase4-gate.json, phase4-api.json, phase4-browser.json, phase4-review.md, phase4-desktop/mobile/payment.png; earlier phase evidence preserved |
-| Remaining in Phase 4 | 200% browser zoom inspection, left pending by explicit user reply. Exact360 CSSpx is also unverified because supported viewport clamps to 400; record this limit rather than claiming a pass |
-| Limitations | Owner UI and some technical/status copy remain English; core customer actions/preferences support BM/EN. Historical pre-repair tied message timestamps are retained; new writes preserve order. Documents/replies/jobs/clock controls remain Phase 5; no liveAI/cloud/WorkBuddy integration |
-| Blockers | No implementation blocker. Browser API cannot set actual 200% zoom; user chose to defer this manual accessibility check |
-| Exact next action | Resume pending zoom inspection when requested: set real browser zoom200%, inspect customer and owner forms/text/menu for clipping, record actual result, restore zoom, then mark Phase 4 Complete. Preserve existing passes; do not rerun entire gates. Next build phase is5 after Phase 4 gate is resolved |
-| Avoid repeating | No reinstall/scaffold/old suites. No test watch. No WorkBuddy provenance claims or import of prototype source as final app |
+| Updated/status | 7 October 2026; E1 expanded local business demo Complete within scripted/synthetic boundaries; Phase7 independent WorkBuddy rebuild Not started; actual 200% zoom remains deferred |
+| Completed | General business profile/facts and product/service versions; one customer/agent board and human oversight; authoritative basket checkout/member creation/service bookings; stock ledger/reservations/baseline forecasts/bounded pricing; scoped assistants; consent/cap/pause-guarded campaigns/local inbox; reviewed multilingual copy/SVG; risk/payment guards; sales/invoices; calendar/tracking |
+| Changed files | migration006, db operations/commerce/repositories/contracts, API operations/growth/scripted/jobs, web Agents/Business/Growth/Calendar/Checkout and shared pages/styles, expansion gate/tests/final check, agreed specs, README and expanded demo runbook. Prior Phase5/6 source/evidence preserved |
+| Checks/evidence | docs/evidence/expansion: gate.json and integration.json (24 expansion cases), commerce/jobs reports (25+16), historical prior reports/failure records, final-affected.json (type/lint/build), browser.json/review.md and desktop/mobile screenshots. Integration passes were preserved after final UI-only polish |
+| Runtime/main data | Dev session51033, web127.0.0.1:5173/API3001, local PG54329; no reset. Paused8Oct09:00MYT; migration006 applied. 7orders/RM204 verified synthetic payments; 11members including Demo Avery; two-item order DEMO-E967E5C5 awaiting RM63 deposit against RM126 total. One approved visual draft/export and one locally delivered consenting-member campaign |
+| Remaining | No local E1 build/gate task remains. Actual 200% zoom, exact360px and manual time-savings measurement unverified. Independent WorkBuddy cloud/managedAI/MCP/Automation/deployment/external messaging remains future work |
+| Limits | Scripted intent matching; heuristic forecast ranges; reviewed language/SVG templates; local jobs require running API; synthetic identity/payments; in-app campaigns only; daily service capacity/shared windows; no staff scheduling/expiry-lots/production accounting. 579.49kB client-chunk warning |
+| Reference delivery | Existing handoff/customerbuddy-workbuddy-reference.zip and pack are historical Phase6 snapshots. Expanded current references: docs/EXPANDED_DEMO.md, migration006/data contracts and docs/evidence/expansion. Do not label the old ZIP as containing E1 or import/deploy Codex source as final WorkBuddy source |
+| Exact next action | Requested local demo complete; report app link and verification. Resume only an explicitly requested follow-up. Future WorkBuddy rebuild needs refreshed behaviour/design/fixture references and fresh independent source/tests/deployment; actual zoom only when user revisits the pending check |
+| Avoid repeating | Preserve passed gates; no main reset, per-edit suites, inherited WorkBuddy passes, liveAI/cloud/eligibility claims, git push or deployment from this request |
 
 ### Specification expansion checkpoint - 7 October 2026
 
 | Field | Value |
 | --- | --- |
 | Request/status | Update seven specification files and add suitable GitHub/Hugging Face options; documentation only. Expansion application work Not started |
-| Completed chunk | Existing capabilities reused; FR-18–FR-27, owner/card and query flows, stock/forecast/pricing rules, engagement/content/visual/risk/ethical requirements, planned schema/API/UI and WorkBuddy build/gate items aligned |
+| Completed chunk | Existing capabilities reused; FR-18â€“FR-27, owner/card and query flows, stock/forecast/pricing rules, engagement/content/visual/risk/ethical requirements, planned schema/API/UI and WorkBuddy build/gate items aligned |
 | Changed files | PRD.md, TRD.md, APP_FLOW.md, DESIGN_BRIEF.md, BACKEND_SCHEMA.md, IMPLEMENTATION_PLAN.md, WORKBUDDY_REBUILD_BRIEF.md only |
 | Repository research | Primary sources reviewed 7 October; TRD Section 15 records sources, licences, use cases and authority/runtime limits; archived CloudBase SDK mirrors excluded as build sources; Hunyuan weights are evaluation-only under custom terms |
-| Check state | Documentation consistency reviewed; local file links, balanced Markdown fences, unique FR-18–FR-27 rows and git diff whitespace check passed. No application tests, lint, typecheck, builds, migrations or dependency installation run. Earlier evidence preserved |
+| Check state | Documentation consistency reviewed; local file links, balanced Markdown fences, unique FR-18â€“FR-27 rows and git diff whitespace check passed. No application tests, lint, typecheck, builds, migrations or dependency installation run. Earlier evidence preserved |
 | Remaining / dependencies | All expanded implementation and new WorkBuddy evidence remain pending; account/runtime/region, model/image credits, Python/GPU support, data sufficiency, external connectors and track dependency rules still require actual verification |
 | Exact next action | Documentation request complete; report the seven-file update. A later implementation request resumes the saved Phase 4 zoom action; do not start Phase 5 or any WorkBuddy/expansion build from this documentation request |
 
@@ -371,7 +405,7 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 ### README and documentation publication update - 7 October 2026
 
 - User requested a README focused on **1 Customer, 1 Agent**, the expanded features and a GitHub push.
-- Updated README.md with the persistent customer-agent concept, one-box-per-customer owner oversight, scoped history/consent/human takeover, and an explicitly planned roadmap covering FR-18–FR-27. Current local capabilities, setup and implementation status remain accurate.
+- Updated README.md with the persistent customer-agent concept, one-box-per-customer owner oversight, scoped history/consent/human takeover, and an explicitly planned roadmap covering FR-18â€“FR-27. Current local capabilities, setup and implementation status remain accurate.
 - Publication scope is README.md plus the seven specification updates from the preceding request. No application source, migration, dependency or prior gate evidence changes are included.
 - README local-link/fence checks and git diff whitespace review passed. Remote main matches local HEAD `b3ec8a26ce7007941d03d4d43d349c5c1ed18079`; a normal push can proceed. No application tests, lint, typecheck or build were run for this documentation-only change.
 - Commit `dbb4a4674da499c4347741f45395ef28ea4d66bc` was pushed successfully to origin/main; `git ls-remote` confirmed GitHub main matches that commit. This follow-up record captures the verified publication result.
@@ -428,3 +462,77 @@ WorkBuddy independently rebuilds the full
 final project in a fresh workspace in Phases 7A-7E; do not import/deploy the
 Codex prototype or inherit its passing tests as final implementation evidence.
 ```
+
+
+### E1 pre-gate checkpoint
+
+All requested build items are present, including basket checkout, synthetic member creation and service bookings. New tests authored in scripts/test-expansion.ts (24 integration scenarios); gate-expansion.mjs includes commerce and document/job regressions because their boundaries changed. Local migration 006 not applied yet. No expansion tests, compiler, lint or production build have been executed. Changed files: migration006; operations/growth/API routes; commerce/repositories/contracts/assistant/jobs; Agents/Business/Growth/Calendar/Checkout pages; App/styles/preferences/tracking; specification notes and docs/EXPANDED_DEMO.md; gate/test scripts. Next: format, run the one end gate, repair only affected failures, then apply migration to the retained demo database and browser-verify all owner/customer pages. Existing data must be preserved; no reset.
+
+### E1 automated gate checkpoint
+
+Automated end gate passed: 24 expansion integration scenarios, 25 commerce regressions and 16 job/document regressions; TypeScript/ESLint/build passed. Retained initial compiler, seed-time timestamp, generated-member-key, calendar alias and closed-conversation projection failures in docs/evidence/expansion before affected repairs. Historical Phase3/5 evidence retained in expansion/historical. Migration006 applied additively to the retained local database; no reset. Next browser-verify owner pages, customer multi-item checkout and tracking, member creation, content export/campaign local inbox and mobile agent board. Final affected build is needed because SQL repairs changed API source after the first production build. Actual 200% browser zoom remains deferred by the user.
+### E1 browser and final polish checkpoint
+
+Browser owner pages (Agents, Assistant, Stock/Forecast, Sales, Members, Calendar, Engagement, Content Studio, Risk Review, Ethics, Business Settings) rendered without application error banners. Created synthetic Demo Avery member and signed into that scoped account; recommendations read the catalogue. Multi-item checkout created DEMO-E967E5C5 with RM126 total, RM63 deposit and persisted payment-pending tracking. Edited/approved BM social content and downloaded its actual SVG. Consented local announcement delivered once to Avery; ten customers suppressed, repeat prevented by daily cap; customer inbox visibly contains the saved message. No external messaging or payments. Original records retained. Small final UI polish removes bakery-only labels/default SKU assumptions, uses business name in browser title and places review/active cards first. Legacy Phase2 fresh-schema expected migration/table counts updated for additive migration006; its historical suite is not rerun or claimed as a new pass. Final affected type/lint/build pending for this polish and API repairs after original build; responsive board check and evidence/checkpoint publication next. 65 passing integration scenarios preserved; actual 200% zoom remains deferred.
+
+### E1 completion checkpoint
+
+All local expansion build items and phase-end verification are complete within the documented demo limits. Final affected compiler/lint/build passed after SQL repairs and neutral catalogue defaults/agent priority ordering; no integration suite rerun merely for final polish. Browser evidence confirms synthetic member creation, real two-item quote/order/tracking, saved scripted recommendations, editable reviewed visual export, consent-filtered/capped local campaign/inbox delivery, owner page rendering and responsive cards. Desktop viewport restored. Agreed specs and README now distinguish delivered local features from future live AI/WorkBuddy requirements. No commit, push, cloud deployment or WorkBuddy evidence created. Exact next action: report completion and local agent-dashboard URL; pending manual 200% zoom stays pending by user choice.
+
+### Preview restart - 8 October 2026
+
+User requested opening the web preview. Port5173 was stopped; restarted the existing local dev runner (session32461), PostgreSQL/API/web startup succeeded. Web /owner/agents returns HTTP200 and API /api/v1/health responds successfully. Queued the owner-agent URL in the Codex browser panel. No source changes, resets, migrations, application tests or new build; existing acceptance evidence remains valid. Exact next action: use the preview; implementation only on a new user request.
+
+## UX1 — Navigation and workflow redesign (8 October 2026)
+
+User requests an overall UX/UI upgrade because the current layout is messy. The Instagram reel could not be fetched; no unseen style/content is claimed. Current owner preview inspected: competing customer sidebar and 19 owner tabs, noisy repeated warnings, weak operational priorities, large member/order cards and offscreen agent review.
+
+Active implementation checkpoint: UX1 In progress. Existing E1 business behaviour and 65-case evidence preserved. No backend/schema/AI changes planned. Build all UX1 items before one type/lint/build gate; verify desktop/mobile/keyboard/navigation/search/dialogs and customer quote flow in browser. No per-edit suites.
+
+- [x] Unified role-aware grouped sidebar; remove owner tab wall; compact header/account controls; page search with keyboard shortcut; accessible mobile navigation.
+- [x] Useful owner dashboard with real saved metrics, order pipeline, upcoming orders and named review priorities.
+- [x] Searchable/filterable orders and compact member directory; discoverable add-member action.
+- [x] Agent interaction opens in focused drawer with keyboard/focus support; one card per customer preserved.
+- [x] Consistent spacing/type/surfaces/status/form system; clearer checkout steps and empty/review states.
+- [x] React quality review and one affected compiler/lint/build gate after build completion; browser acceptance and screenshots. Failed/affected compiler/lint and later browser-found focus/contrast repairs verified; earlier passes retained.
+- [x] Align Design Brief/App Flow/runbook and update completion checkpoint.
+
+Completion status: all UX1 items checked. Phase-end checks and browser acceptance passed after affected repairs; see the final checkpoint below. Actual 200% zoom remains pending by earlier user choice; WorkBuddy/live AI remains deferred.
+
+### UX1 build checkpoint
+
+Shared role-aware AppLayout/navigation config implemented: grouped owner sidebar, quiet header, searchable pages/CtrlK, account disclosure and native modal mobile drawer; 19-tab row removed. New Overview shows live saved values, named requests, three upcoming orders and a data-derived stage chart. OrdersList uses search/status filters and responsive rows; Members uses directory and native create dialog. Agents opens a native interaction drawer with URL linkage from member rows. Shared workspace theme, status labels, readable contrasts/type and checkout stage/quote placeholder updated. Source changes are frontend only; APIs/schema/payment authority unchanged. Build checklist now implemented; no automated gate yet. Next run formatting + one affected TypeScript/ESLint/production-build batch, fix only failed checks, then browser verify desktop/mobile navigation, page search/keyboard, members/agent drawer/order filters and customer quote review. Existing E1 integration evidence preserved; no main database reset.
+
+### UX1 gate / browser checkpoint
+
+TypeScript, ESLint and production build passed. Initial missing Dashboard type import and mutable chart offset lint failure are retained in docs/evidence/ux1/gate.json; failed/remaining checks resumed without repeating passed checks. React review covered hook cleanup, native dialog labels/focus, semantic directories, stable record keys and real saved totals. Browser overview and deposit-priority link/filter verified. Browser found programmatic main focus scrolling past the header; changed route focus to preventScroll and explicit top positioning, with main-only outline suppression. This small post-gate browser repair needs one affected final compiler/lint/build batch after all browser findings. Next verify directories, dialogs/keyboard/search, customer quote and responsive layout; finish specs/evidence. E1 integration passes and deferred actual 200% zoom unchanged.
+
+### UX1 workflow / mobile checkpoint
+
+Browser passed order search/no-match/reset, saved synthetic Demo Morgan creation (12 members; optional consents off), member-to-Hana drawer, Escape/query clearing, CtrlK/search/no-match/Tab+Enter navigation, settings expansion and mobile navigation focus return. Requested400px viewport is runtime-clamped428px; stock/orders/interaction document widths match428 with no horizontal overflow. Mobile order directory becomes labelled cards. Follow-up browser polish: drawer returns focus to the selected card even for deep links; search icon has an accessible label; mobile breadcrumb simplified while EN/BM remains reachable; customer navigation adapts legacy business slug. Customer chat now has a primary booking link and native collapsed optional help/order/facts/review sections; business actions unchanged. Authoritative two-item Morgan quote shows RM126/RM63 and Confirm disabled until explicit review. Added mobile quote focus/scroll and plain schedule labels; final affected quality/build gate not yet rerun. Remaining: inspect final quote/checkbox/reset, desktop/customer routes/shared screens, final screenshots/specs and one final affected gate. No order/payment confirmation, reset, deployment or external sends.
+
+### UX1 accessibility checkpoint
+
+Final affected type/lint/build passed; checkout explicit review enables Confirm and changing its schedule discards the old quote; scoped Morgan order history is empty as expected. Desktop calendar/sales/risk/content headings rendered with no alert banners or horizontal overflow. General theme has consistent44px controls and equal-height agent rows. Design Brief/App Flow/runbook and README preview links aligned. Core six colour-pair audit found preparing purple4.42:1; corrected to#6C5DB7. Final keyboard wrap inspection found backward Tab moving focus outside the native modal; added shared containDialogFocus helper to all four dialog types. Accessibility affected type/lint/build running in session53395; do not repeat earlier passed business suites. Next verify repaired focus and mobile width/header, capture final overview/agents/modal screenshots, write UX1 review/browser/contrast evidence and mark the final checkpoint only after pass. No new order/payment/approval or external communication; Demo Morgan and unused quote records are synthetic browser fixtures.
+
+### UX1 completion checkpoint
+
+Completed the requested UX/UI upgrade. Accessibility affected compiler/lint/build passed (focus-affected.json), with the non-failing bundle-size advisory recorded. Repaired interaction backward Tab wraps to approval link and forward Tab returns to Close; search/member/mobile traversal remains inside their modals, Escape returns to the correct control/card. Six core contrast pairs meet 4.5:1. Final mobile client/scroll width both428px, language control44px and top positioning confirmed; desktop sizing restored. Final owner overview left open and marked deliverable. Screenshots and precise browser fixture/limit evidence saved in docs/evidence/ux1. Design Brief, App Flow, expanded runbook and README previews aligned; git diff whitespace check passed. No business integration rerun, schema/API change, reset, order/payment confirmation, external message, WorkBuddy integration, commit/push or deployment. Existing independent changes preserved. Remaining for this request: none within the documented verification scope; user-deferred actual200% zoom and tool-clamped exact360px remain explicit. Exact next action: report completion and local preview; no further implementation until a new request.
+
+Final documentation check: 51 relative links resolve and five UX1 evidence JSON files parse. Whitespace check passed with CR-at-EOL recognition for the workspace's Windows line endings. Owner web preview queued in the Codex browser panel. No further app checks or source edits after the passing accessibility gate.
+
+
+
+
+
+
+
+## SME README and repository publication — 8 October 2026
+
+User requested clearer SME positioning, local run instructions, app flows for new users/owners/customers, persuasive product copy and pushing all changes to GitHub.
+
+- Rewrote README around CustomerLane's SME value, current available features, requirements/install/start/restart instructions, guided business onboarding, owner daily operations, customer checkout and one complete order walkthrough. Includes existing UX1 screenshots, truthful local/synthetic/scripted scope, architecture, troubleshooting and documentation links. Prior preference to avoid demo/WorkBuddy framing in the README retained.
+- Reviewed current onboarding, navigation, sign-in, runtime scripts and saved S1/E1/UX1 checkpoints before documenting the flows. Existing expanded application, migrations, evidence and historical reference pack are included in the authorised all-changes publication; no application implementation was changed in this request.
+- README relative links and requested sections verified. Secret-pattern candidates were limited to environment placeholders and dynamic test/setup strings. Private .env/.local/dependencies/build outputs remain ignored. The historical reference ZIP has 105 entries and no private runtime paths. No file selected for publication exceeds 10 MB.
+- Existing E1/S1/UX1 passing evidence is preserved. No application suite, lint, typecheck or build rerun for this README/publication change. Deferred actual 200% zoom and exact 360px verification remain unchanged.
+- Local HEAD and remote main both were 9fc0e076dec743628541a475f38801da67487690 before publication. Next action: stage all nonignored changes, check staged whitespace, commit, push main and verify matching remote/local HEAD. Update this checkpoint with actual publication outcome.

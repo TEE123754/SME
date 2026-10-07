@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-07T13:43:56.182Z",
+  "reasonForRegression": "Expanded order state machine, inventory reservation checks, migrations and business-branded documents cross existing commerce/jobs boundaries.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "failed",
+      "message": "Command failed with exit 2: node_modules/typescript/bin/tsc"
+    }
+  ]
+}

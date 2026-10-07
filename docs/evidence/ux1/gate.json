@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-07T16:58:27.936Z",
+  "scope": "UX1 frontend navigation, overview, directories, dialogs and checkout presentation. Existing E1 integration passes preserved.",
+  "results": [
+    {
+      "check": "TypeScript",
+      "status": "failed",
+      "message": "Command failed with exit 2: node_modules/typescript/bin/tsc",
+      "durationMs": 4000
+    },
+    {
+      "check": "TypeScript",
+      "status": "passed",
+      "durationMs": 3986
+    },
+    {
+      "check": "ESLint",
+      "status": "failed",
+      "message": "Command failed with exit 1: node_modules/eslint/bin/eslint.js",
+      "durationMs": 5412
+    },
+    {
+      "check": "ESLint",
+      "status": "passed",
+      "durationMs": 5231
+    },
+    {
+      "check": "Build",
+      "status": "passed",
+      "durationMs": 1348
+    }
+  ],
+  "recordedAt": "2026-10-07T16:59:31.125Z"
+}

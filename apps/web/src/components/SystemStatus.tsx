@@ -58,7 +58,7 @@ export function SystemStatus() {
       ) : null}
       <p className="fine-print">
         This status comes from the API and a real database query. Customer and owner screens save
-        real synthetic records; scripted replies and document workers arrive in Phase 5.
+        real synthetic records; scripted replies and private document workers are active.
       </p>
     </section>
   );

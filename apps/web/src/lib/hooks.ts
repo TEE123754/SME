@@ -5,7 +5,7 @@ import { useSession } from './session-context';
 export function useData<T>(path: string, enabled = true) {
   const { me } = useSession();
   return useQuery({
-    queryKey: ['data', me?.role, me?.profile?.id, path],
+    queryKey: ['data', me?.business.id, me?.role, me?.profile?.id, path],
     queryFn: () => api<T>(path),
     enabled: enabled && !!me,
     retry: false,
@@ -13,6 +13,7 @@ export function useData<T>(path: string, enabled = true) {
   });
 }
 export function useAction() {
+  const { me } = useSession();
   const [pending, setPending] = useState(false),
     [error, setError] = useState<unknown>(null),
     [notice, setNotice] = useState('');
@@ -24,7 +25,7 @@ export function useAction() {
     setPending(true);
     setError(null);
     setNotice('');
-    const identity = `cb.retry:${path}:${method}:${JSON.stringify(body)}`,
+    const identity = `cb.retry:${me?.business.id}:${me?.profile?.id ?? me?.role}:${path}:${method}:${JSON.stringify(body)}`,
       key = sessionStorage.getItem(identity) ?? crypto.randomUUID();
     sessionStorage.setItem(identity, key);
     try {

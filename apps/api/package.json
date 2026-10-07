@@ -9,9 +9,11 @@
   "dependencies": {
     "@customerbuddy/contracts": "workspace:*",
     "@customerbuddy/db": "workspace:*",
+    "@customerbuddy/demo-assistant": "workspace:*",
     "cors": "2.8.6",
     "dotenv": "18.0.6",
     "express": "5.2.1",
+    "pdf-lib": "1.17.1",
     "pg": "8.23.1",
     "zod": "4.6.5"
   },

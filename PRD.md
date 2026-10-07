@@ -2,11 +2,13 @@
 
 ## Product Requirements Document
 
+**Current local-demo expansion (E1, explicitly requested):** The user now authorises building FR-18–FR-27 in Codex using scripted methods, plus Checkout, Members, Appointments/Orders, Sales, Calendar and order tracking. The business profile, facts and product/service catalogue are configurable beyond bakery use. Earlier “specification only / WorkBuddy only implementation” statements about these features are superseded for the local demo. The separate WorkBuddy rebuild and competition provenance distinction still apply. See [local demo capabilities](docs/EXPANDED_DEMO.md) and the E1 checkpoint for actual verification status.
+
 | Field | Value |
 | --- | --- |
 | Version | 0.5 |
 | Date | 7 October 2026 |
-| Status | Phases 1–3 complete; Phase 4 built with automated/browser flow checks passed, 200% zoom gate pending by user choice; Phase 5 not started; usable prototype not complete |
+| Status | Phases 1–6 local prototype built; E1 expanded local demo complete with 65 passing integration/regression cases and browser checks; deferred Phase 4 actual 200% zoom remains pending; independent WorkBuddy rebuild Not started |
 | Track | WorkBuddy Track: Agentic Solutions |
 | Theme | Help students and small businesses solve real business problems and operate more effectively |
 | Demo business | A Malaysian home bakery, selected by the user |
@@ -20,11 +22,11 @@
 
 **Document set:** [TRD](<C:/Users/Edison Tee/Downloads/SME/TRD.md>), [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [Design Brief](<C:/Users/Edison Tee/Downloads/SME/DESIGN_BRIEF.md>), [Backend Schema](<C:/Users/Edison Tee/Downloads/SME/BACKEND_SCHEMA.md>), [Implementation Plan](<C:/Users/Edison Tee/Downloads/SME/IMPLEMENTATION_PLAN.md>), and [WorkBuddy Rebuild Brief](<C:/Users/Edison Tee/Downloads/SME/WORKBUDDY_REBUILD_BRIEF.md>). The implementation plan is the progress and handoff record.
 
-**Build contract:** Implement one phase at a time. Run automated tests and build/quality checks at the phase-end gate, not after each edit. Save completed work, unfinished tasks, unverified changes, and the exact next action in the implementation plan before a usage-limit handoff. Phases 1–3 are complete with passing evidence; the usable business prototype and final WorkBuddy rebuild are not complete or deployed.
+**Build contract:** Implement one phase at a time. Run automated tests and build/quality checks at the phase-end gate, not after each edit. Save completed work, unfinished tasks, unverified changes, and the exact next action in the implementation plan before a usage-limit handoff. The expanded local prototype is complete within its scripted/synthetic boundaries. Actual 200% zoom remains deferred. The final WorkBuddy rebuild is not started or deployed.
 
-**Current user direction:** Codex builds a usable home-bakery prototype. Hardcode the assistant's demo behaviour and use a local scheduler; leave WorkBuddy agentic integration for the later independent rebuild. The prototype must support real saved orders, owner actions, documents and reminders with synthetic data. It runs without WorkBuddy, cloud/model credentials or AI credits. MCP packages, managed-AI adapters and Tencent deployment are future Phase 7 work, not prerequisites for the prototype.
+**Current user direction:** Codex builds a usable general small-business prototype with a home-bakery fixture. Hardcode the assistant's demo behaviour and use a local scheduler; leave WorkBuddy agentic integration for the later independent rebuild. The prototype must support real saved orders, owner actions, documents and reminders with synthetic data. It runs without WorkBuddy, cloud/model credentials or AI credits. MCP packages, managed-AI adapters and Tencent deployment are future Phase 7 work, not prerequisites for the prototype.
 
-**7 October scope update:** The requested owner agent board, owner/customer AI queries, stock and sales forecasting, controlled dynamic pricing, engagement, content/visual generation, transaction-risk review and ethical safeguards are now specified below. Existing ordering, invoices, approvals, consent and repeat-order requirements are reused. This is a specification change only: no new application feature is built, no previous gate is reopened, and the saved Phase 4 checkpoint remains in force. The expanded capabilities belong to the independent WorkBuddy project; they do not add live AI or model keys to the Codex prototype.
+**Historical specification-only scope update (superseded for the local demo by E1 above):** The requested owner agent board, owner/customer AI queries, stock and sales forecasting, controlled dynamic pricing, engagement, content/visual generation, transaction-risk review and ethical safeguards are now specified below. Existing ordering, invoices, approvals, consent and repeat-order requirements are reused. This is a specification change only: no new application feature is built, no previous gate is reopened, and the saved Phase 4 checkpoint remains in force. The expanded capabilities belong to the independent WorkBuddy project; they do not add live AI or model keys to the Codex prototype.
 
 ## 1. Product summary
 
@@ -496,3 +498,16 @@ WorkBuddy from the rebuilt app. Keep truthful reference/rebuild provenance.
 If a required feature is unavailable, record a partial/blocked rebuild;
 do not present the Codex prototype as the completed WorkBuddy project.
 ```
+
+## Phase 5 implementation checkpoint — 7 October 2026
+
+Phase 5 is complete after its focused gate and affected repairs. The prototype now runs persisted, customer-scoped scripted responses with BM/English templates, private snapshot PDFs, bounded local jobs, in-app deposit reminders, saved owner digests and owner clock/pause/reset controls. This supersedes earlier Phase 4 notes that deferred these mechanics. Phase 4's 200% zoom remains pending by user choice. Phase 6 acceptance/reference packaging and all Phase 7 WorkBuddy/FR-18–FR-27 expansion work remain unimplemented. Evidence: [Phase 5 review](docs/evidence/phase5-review.md); [supported inputs](docs/SCRIPTED_INPUTS.md).
+
+## Phase 6 completed local-reference milestone
+
+Phase6 is Complete: usable scripted local prototype,111 integration/acceptance checks, quality/build, actual restart and screenshot/PDF inspection passed after affected repairs. Portable behaviour/design/schema/fixture/contracts/scenarios/evidence pack is handoff/workbuddy-reference, with no app source/migrations/builds/secrets. Health reports phase6; saved messages await scripted dispatch; expired quotes require a fresh quote. No commercial authority/schema change in this phase. Phase4 actual200%zoom remains pending by user choice; exact360px is tool-clamped400. Manual savings baseline is unmeasured. Tencent WorkBuddy independently generates/tests/deploys its new project in7A–7E; all FR18–27/cloud/managedAI expansion work remains Not started. Earlier checkpoints are historical records superseded by this current milestone.
+
+## S1 — Owner setup and customer shopping (8 October 2026)
+
+S1 adds a public landing owner setup workflow and isolated synthetic business creation, a resumable saved-record checklist, a distinct ecommerce customer storefront with product/service illustrations and prices, detail pages and a scoped persistent basket. Customers explicitly join/leave an optional free member programme; owner-configured discounts apply to eligible new quotes. Newsletter consent is separately controlled through existing marketing consent and local inbox delivery. Production registration, real photo uploads/email delivery and live AI remain WorkBuddy rebuild work.
+

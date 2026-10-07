@@ -1,0 +1,108 @@
+{
+  "recordedAt": "2026-10-07T12:48:01.957Z",
+  "phase": 3,
+  "implementation": "Codex local synthetic reference",
+  "disposableDatabaseRemoved": true,
+  "results": [
+    {
+      "name": "P3-01 fresh migration and checksummed replay",
+      "status": "passed"
+    },
+    {
+      "name": "P3-02 RM78/RM39 and RM48/RM24 use integer server pricing",
+      "status": "passed"
+    },
+    {
+      "name": "P3-03 exact pickup lead time, unknown products and duplicate lines denied",
+      "status": "passed"
+    },
+    {
+      "name": "P3-04 forged confirmation, wrong customer and changed hash denied",
+      "status": "passed"
+    },
+    {
+      "name": "P3-05 quote expiry, challenge expiry and edit invalidate old acceptance",
+      "status": "passed"
+    },
+    {
+      "name": "P3-06 parallel duplicate confirmation is atomic and idempotent",
+      "status": "passed"
+    },
+    {
+      "name": "P3-07 last-unit contention produces one order and no partial allocation",
+      "status": "passed"
+    },
+    {
+      "name": "P3-08 duplicate payment commits capacity once and reference mismatch is denied",
+      "status": "passed"
+    },
+    {
+      "name": "P3-09 partial deposit holds until threshold and queues distinct receipts",
+      "status": "passed"
+    },
+    {
+      "name": "P3-10 unpaid hold expiry is idempotent and competing booking lazily releases other customer",
+      "status": "passed"
+    },
+    {
+      "name": "P3-11 expiry/payment race records late payment without overbooking",
+      "status": "passed"
+    },
+    {
+      "name": "P3-12 late-payment approval needs fresh capacity and exact current proposal",
+      "status": "passed"
+    },
+    {
+      "name": "P3-13 approved discount creates new quote requiring customer acceptance",
+      "status": "passed"
+    },
+    {
+      "name": "P3-14 rejected and expired approvals cannot authorize discounts",
+      "status": "passed"
+    },
+    {
+      "name": "P3-15 takeover persists messages and requires explicit owner resume",
+      "status": "passed"
+    },
+    {
+      "name": "P3-16 order handoff rejects stale decisions and preserves financial snapshots",
+      "status": "passed"
+    },
+    {
+      "name": "P3-17 reviewed cancellation releases committed allocation once and retains payments",
+      "status": "passed"
+    },
+    {
+      "name": "P3-18 fulfilment needs full balance and retains completed production capacity",
+      "status": "passed"
+    },
+    {
+      "name": "P3-19 owner capacity cannot fall below booked units or accept stale versions",
+      "status": "passed"
+    },
+    {
+      "name": "P3-20 publishing changes invalidate quotes and approvals without editing old prices",
+      "status": "passed"
+    },
+    {
+      "name": "P3-21 commercial snapshots, audit and owner authority remain protected",
+      "status": "passed"
+    },
+    {
+      "name": "P3-22 transaction outbox records real documents/reminders without fabricating files",
+      "status": "passed"
+    },
+    {
+      "name": "P3-23 HTTP commerce validates scope, CSRF, keys and rejects fabricated totals",
+      "status": "passed"
+    },
+    {
+      "name": "P3-24 HTTP quote to challenge to order persists across new service instance",
+      "status": "passed"
+    },
+    {
+      "name": "P3-25 multi-product capacity failure leaves no order and zero-deposit policy commits directly",
+      "status": "passed"
+    }
+  ]
+}

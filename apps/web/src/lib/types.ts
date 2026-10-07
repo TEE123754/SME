@@ -1,6 +1,6 @@
 export type Me = {
   role: 'owner' | 'customer';
-  business: { id: string; name: string };
+  business: { id: string; name: string; slug: string };
   profile: {
     id: string;
     display_name: string;
@@ -11,6 +11,9 @@ export type Me = {
   consents: Record<string, boolean> | null;
 };
 export type Product = {
+  image_key?: string;
+  available?: boolean;
+  kind?: 'product' | 'service';
   product_id: string;
   sku: string;
   label: string;
@@ -24,6 +27,7 @@ export type Pickup = {
   timezone: string;
 };
 export type Quote = {
+  memberBenefit?: { basisPoints: number; savingsSen: number };
   id: string;
   items: {
     sku: string;

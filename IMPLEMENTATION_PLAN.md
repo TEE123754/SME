@@ -391,7 +391,7 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 - README now includes the current stack, architecture and authority boundaries, Windows prerequisites, pinned installation/start/stop commands, customer/owner walkthrough, configuration, command reference, repository structure, implemented API overview, data/security notes, troubleshooting and specification links.
 - Setup and API descriptions were cross-checked against the published scripts, manifests, configuration, routes and seed behaviour. Roadmap features and assistant/worker foundations remain distinguished from released functionality. No application tests, builds, migration, seed or dependency installation were run for this documentation change.
 - Independent application edits and checkpoint updates are present in the shared workspace. Preserve them and their verification state; publish only README and this documentation checkpoint, excluding unrelated implementation hunks.
-- README local links, navigation/document anchors, Markdown fences, published command names and documentation whitespace checks passed. Exact next action: commit only the documentation changes, push origin/main under the user's existing publication request, and verify the remote commit. Follow the independent active checkpoint for later implementation work.
+- README local links, navigation/document anchors, Markdown fences, published command names and documentation whitespace checks passed. Commit ba5821facf69cb7d82be92ea5b70a319c1e5d990 was pushed to origin/main and the remote commit was verified. README request complete; follow the independent active checkpoint for later implementation work.
 
 ### Template for later checkpoints
 

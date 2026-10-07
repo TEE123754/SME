@@ -307,8 +307,8 @@ Update in this order:
 - User requested publishing the existing workspace to `https://github.com/TEE123754/SME` and a professional business README without demo/WorkBuddy framing.
 - Adopted **CustomerLane** as the public product name. `README.md` now covers business value, current customer/owner workflows, roadmap, setup, architecture, configuration and contributions. `PRD.md` records the name; internal CustomerBuddy identifiers/UI remain unchanged pending a separately requested branding migration.
 - Existing implementation and Phase 4 gate status are unchanged. Planned assistance, documents, jobs, production identity and deployment are distinguished from current capabilities. No application tests, lint, typecheck or builds were rerun for these documentation changes; existing passing evidence is preserved.
-- Target repository inspection returned no refs (empty repository). Source, specifications and saved evidence are included; ignored credentials, local database/runtime, dependencies and build outputs are excluded. Publication: prepared for initial commit and push; verify remote HEAD after pushing.
-- Exact next action for this request: commit and push the prepared repository, then verify local HEAD matches remote HEAD. Implementation next action remains the deferred Phase 4 accessibility check above.
+- Target repository inspection returned no refs (empty repository). Source, specifications and saved evidence are included; ignored credentials, local database/runtime, dependencies and build outputs are excluded. Initial publication commit `cd4c771` was pushed successfully to `origin/main`; remote main was verified against local HEAD. README local links, requested wording and staged whitespace checks passed.
+- This publication request is complete. Implementation next action remains the deferred Phase 4 accessibility check above; application branding migration has not been requested.
 
 ### Template for later checkpoints
 

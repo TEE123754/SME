@@ -385,6 +385,14 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 - Product-only wording, exact tagline, navigation anchors, image links, balanced fences and staged whitespace checks passed. Only README.md and this progress record changed; no app tests/builds were run.
 - Commit `b27756462b8c734bdd9de0b1b45203dc3c78df83` was pushed successfully; remote main was verified against local HEAD. Product README revision complete. A later implementation request resumes the preserved deferred Phase 4 checkpoint; no new implementation work is requested.
 
+### Technical README expansion - 7 October 2026
+
+- User requested the technology stack, run instructions and complete product documentation, retaining the CustomerLane identity, "1 Customer, 1 Agent" and "Customer relationships. Clear orders. Confident operations." tagline.
+- README now includes the current stack, architecture and authority boundaries, Windows prerequisites, pinned installation/start/stop commands, customer/owner walkthrough, configuration, command reference, repository structure, implemented API overview, data/security notes, troubleshooting and specification links.
+- Setup and API descriptions were cross-checked against the published scripts, manifests, configuration, routes and seed behaviour. Roadmap features and assistant/worker foundations remain distinguished from released functionality. No application tests, builds, migration, seed or dependency installation were run for this documentation change.
+- Independent application edits and checkpoint updates are present in the shared workspace. Preserve them and their verification state; publish only README and this documentation checkpoint, excluding unrelated implementation hunks.
+- README local links, navigation/document anchors, Markdown fences, published command names and documentation whitespace checks passed. Exact next action: commit only the documentation changes, push origin/main under the user's existing publication request, and verify the remote commit. Follow the independent active checkpoint for later implementation work.
+
 ### Template for later checkpoints
 
 ```text

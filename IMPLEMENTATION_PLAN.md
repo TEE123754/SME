@@ -382,7 +382,8 @@ This checkpoint supplements, and does not overwrite, the active Phase 4 implemen
 - User requested the exact tagline "Customer relationships. Clear orders. Confident operations." and a business-product-only README using the linked 404Hire README as a presentation reference.
 - Rewrote README.md with a centred product identity, internal navigation, business overview, 1 Customer/1 Agent principles, audience/features tables, customer/owner experience, order journey, real existing previews and a clearly labelled product roadmap. Wrote original CustomerLane copy; the reference's competition, author, architecture and setup material was not adopted.
 - Removed technical setup/configuration, package details, implementation phases, provenance, repository administration, dependency references and contribution/licence sections from README. Available and planned product capabilities remain distinguished; no application behaviour or gate status changed.
-- Product-only wording, exact tagline, navigation anchors, image links, balanced fences and whitespace checks passed. Remote main matches local HEAD `9cca13873094f6e83921b1f0641218cbd24af777`. Only README.md and this progress record are changed; no app tests/builds were run. Exact next action: commit/push the revised published README under the existing user-authorised GitHub workflow and verify remote main.
+- Product-only wording, exact tagline, navigation anchors, image links, balanced fences and staged whitespace checks passed. Only README.md and this progress record changed; no app tests/builds were run.
+- Commit `b27756462b8c734bdd9de0b1b45203dc3c78df83` was pushed successfully; remote main was verified against local HEAD. Product README revision complete. A later implementation request resumes the preserved deferred Phase 4 checkpoint; no new implementation work is requested.
 
 ### Template for later checkpoints
 

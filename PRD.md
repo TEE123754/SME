@@ -1,4 +1,4 @@
-# CustomerBuddy: 1 Customer, 1 Agent
+# BizBuddy: 1 Customer, 1 Agent
 
 ## Product Requirements Document
 
@@ -16,7 +16,7 @@
 | Current prototype assistant | Hardcoded intent rules and response templates; real persisted business workflows |
 | Final project authoring and deployment tool | Tencent WorkBuddy, independent rebuild in Phase 7 |
 | Deployment target | WorkBuddy-managed application services backed by Tencent CloudBase; account compatibility to verify |
-| Product name | CustomerLane (adopted 7 October 2026; CustomerBuddy remains the internal working name until a separate application branding migration) |
+| Product name | BizBuddy (adopted 9 October 2026; supersedes CustomerBuddy and CustomerLane; existing internal identifiers retain `customerbuddy` for compatibility) |
 
 **Delivery decision:** Build a reference prototype using Codex in Phases 1-6. Use its requirements, flows, design, schema, synthetic fixtures, screenshots and demo evidence to guide a fresh WorkBuddy implementation in Phase 7. WorkBuddy rebuilds the frontend, backend, migrations, agent tools, tests, deployment and final documentation in a separate workspace. The Codex application is not the final app to import or publish. The original track requires the entire project to use WorkBuddy; whether Codex preparation/reference material is permitted remains an organiser question. A WorkBuddy-authored rebuild does not automatically settle that requirement, and provenance must remain accurate.
 
@@ -30,7 +30,7 @@
 
 ## 1. Product summary
 
-CustomerBuddy gives each bakery customer a persistent AI assistant that remembers approved preferences, answers from the bakery's current information, prepares accurate quotes, records orders, and follows up on outstanding deposits. The owner handles exceptions through an approval queue and receives a daily operations summary. The expanded WorkBuddy product adds a customer-agent board, owner queries, stock/sales planning and reviewed marketing tools while retaining deterministic commerce and human control.
+BizBuddy gives each bakery customer a persistent AI assistant that remembers approved preferences, answers from the bakery's current information, prepares accurate quotes, records orders, and follows up on outstanding deposits. The owner handles exceptions through an approval queue and receives a daily operations summary. The expanded WorkBuddy product adds a customer-agent board, owner queries, stock/sales planning and reviewed marketing tools while retaining deterministic commerce and human control.
 
 That is the final product vision. The current Codex version represents each customer's assistant with a scripted dispatcher using scoped records. Supported phrases and quick actions demonstrate the workflow; an order form keeps the prototype usable when a message is outside the script. It does not demonstrate general language understanding or live AI reasoning.
 
@@ -51,7 +51,7 @@ These are hypotheses to validate with bakery owners, rather than findings from c
 | First-time customer | Does not know what information is needed to order | Receive a short, clear ordering conversation and transparent total |
 | Student entrepreneur | Customer messages interrupt study; order details are scattered across chats | Run a small business with a reliable order record and fewer manual follow-ups |
 
-Today, a missed message can lose an order, a remembered price can be outdated, and an apparent booking may never reach the order sheet. CustomerBuddy must connect the conversation to recorded business actions.
+Today, a missed message can lose an order, a remembered price can be outdated, and an apparent booking may never reach the order sheet. BizBuddy must connect the conversation to recorded business actions.
 
 Before a real pilot, interview at least three home bakery owners and observe how they process enquiries, reserve production capacity, and verify payments. Validate the frequency of repeat orders and the willingness to use a customer memory feature.
 
@@ -463,7 +463,7 @@ Source documents inform the PRD. Instructions appearing inside those documents a
 The canonical expanded rebuild prompt is in [WorkBuddy Rebuild Brief](<C:/Users/Edison Tee/Downloads/SME/WORKBUDDY_REBUILD_BRIEF.md>) Section 6. Include FR-18–FR-27, the TRD repository register and expansion acceptance cases when using the original core prompt below.
 
 ```text
-Start a new CustomerBuddy project in WorkBuddy. Use the Codex reference
+Start a new BizBuddy project in WorkBuddy. Use the Codex reference
 prototype's PRD, TRD, App Flow, Design Brief, Backend Schema, screenshots,
 synthetic fixtures and acceptance cases as references. Read
 WORKBUDDY_REBUILD_BRIEF.md and the saved Phase 6 reference index first.

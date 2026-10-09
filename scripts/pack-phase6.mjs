@@ -88,7 +88,7 @@ await put(
 );
 await put(
   'README.md',
-  '# CustomerLane / CustomerBuddy reference pack\n\nStart with [REFERENCE_INDEX](REFERENCE_INDEX.md). This is a Codex-authored synthetic local behaviour/design reference, not a deployable source package or WorkBuddy implementation. Generate the final project independently in Tencent WorkBuddy.\n',
+  '# BizBuddy reference pack\n\nStart with [REFERENCE_INDEX](REFERENCE_INDEX.md). This is a Codex-authored synthetic local behaviour/design reference, not a deployable source package or WorkBuddy implementation. Generate the final project independently in Tencent WorkBuddy.\n',
 );
 await put(
   'REFERENCE_INDEX.md',

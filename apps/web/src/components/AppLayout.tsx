@@ -63,7 +63,7 @@ function Brand({ close }: { close: () => void }) {
         <Layers3 size={22} />
       </span>
       <span>
-        CustomerBuddy<small>YOUR BUSINESS, CONNECTED</small>
+        BizBuddy<small>YOUR BUSINESS, CONNECTED</small>
       </span>
     </Link>
   );
@@ -164,7 +164,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
   const page = currentPage(pages, pathname);
   const closeNavigation = () => mobile.current?.close();
   useEffect(() => {
-    document.title = `CustomerBuddy · ${session.me?.business.name ?? 'Business workspace'}`;
+    document.title = `BizBuddy · ${session.me?.business.name ?? 'Business workspace'}`;
   }, [session.me?.business.name]);
   useEffect(() => {
     document.getElementById('main-content')?.focus({ preventScroll: true });

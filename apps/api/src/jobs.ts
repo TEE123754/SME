@@ -207,7 +207,7 @@ export function createJobs(pool: Pool, storage: PrivateDocumentStorage) {
             )
           ).rows[0];
           const lines = [
-            `CustomerBuddy - ${(await c.query('SELECT name FROM app.businesses WHERE id=$1', [s.businessId])).rows[0]?.name ?? 'Small business'}`,
+            `BizBuddy - ${(await c.query('SELECT name FROM app.businesses WHERE id=$1', [s.businessId])).rows[0]?.name ?? 'Small business'}`,
             `SYNTHETIC DEMO ${kind.toUpperCase()} / DOKUMEN SINTETIK`,
             o ? `Order: ${o.display_code}` : `Quote: ${q.id}`,
             `Pickup: ${(o ?? q).pickup_date} ${slot.code} ${slot.start_local.slice(0, 5)}-${slot.end_local.slice(0, 5)} MYT`,

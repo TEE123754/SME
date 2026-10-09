@@ -1,6 +1,6 @@
-# CustomerLane — Expanded local business demo
+# BizBuddy — Expanded local business demo
 
-This release is a Codex-authored, local, synthetic demonstration. CustomerBuddy remains the internal package name. It covers the user's expanded feature list through real saved services and labelled scripted/template simulations. It is not a live AI release or a WorkBuddy-authored competition submission.
+This release is a Codex-authored, local, synthetic demonstration. BizBuddy is the product name; `customerbuddy` remains the internal package namespace for compatibility. It covers the user's expanded feature list through real saved services and labelled scripted/template simulations. It is not a live AI release or a WorkBuddy-authored competition submission.
 
 ## Feature map and demo walkthrough
 

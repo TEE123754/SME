@@ -1,6 +1,6 @@
-# CustomerBuddy workspace guidance
+# BizBuddy workspace guidance
 
-This workspace contains the CustomerBuddy specifications. Follow the user's current request; the existence of an implementation plan does not itself request that code be built.
+This workspace contains the BizBuddy specifications. Follow the user's current request; the existence of an implementation plan does not itself request that code be built.
 
 ## Specifications and progress
 

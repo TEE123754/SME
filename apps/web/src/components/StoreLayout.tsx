@@ -36,8 +36,8 @@ export function StoreLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.title =
       pathname === '/'
-        ? 'CustomerBuddy · Set up your business'
-        : `CustomerBuddy · ${store.data?.business.name ?? 'Shop'}`;
+        ? 'BizBuddy · Set up your business'
+        : `BizBuddy · ${store.data?.business.name ?? 'Shop'}`;
   }, [pathname, store.data?.business.name]);
   useEffect(() => {
     main.current?.focus({ preventScroll: true });
@@ -74,8 +74,8 @@ export function StoreLayout({ children }: { children: ReactNode }) {
           <Store size={26} />
           <span>
             {pathname === '/' || pathname === '/start-business'
-              ? 'CustomerBuddy'
-              : (store.data?.business.name ?? 'CustomerBuddy')}
+              ? 'BizBuddy'
+              : (store.data?.business.name ?? 'BizBuddy')}
             <small>Your neighbourhood, online</small>
           </span>
         </Link>
@@ -106,7 +106,7 @@ export function StoreLayout({ children }: { children: ReactNode }) {
       <footer className="store-footer">
         <div>
           <Link to="/">
-            CustomerBuddy <ArrowUpRight size={14} />
+            BizBuddy <ArrowUpRight size={14} />
           </Link>
           <p>Demo assistant — scripted responses</p>
           {signOutError ? <p role="alert">{errorText(signOutError)}</p> : null}

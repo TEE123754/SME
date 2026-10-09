@@ -1,4 +1,4 @@
-# CustomerBuddy - Backend / Database Schema
+# BizBuddy - Backend / Database Schema
 
 ## Expanded local demo E1 (current user authorisation)
 

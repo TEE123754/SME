@@ -1,4 +1,4 @@
-# CustomerBuddy - Technical Requirements Document
+# BizBuddy - Technical Requirements Document
 
 Version 0.6 | 7 October 2026 | Expanded local demo E1 complete; scripted/synthetic operation; independent WorkBuddy rebuild Not started; no cloud deployment.
 

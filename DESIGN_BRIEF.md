@@ -1,4 +1,4 @@
-# CustomerBuddy - Design Brief
+# BizBuddy - Design Brief
 
 ## Expanded local demo E1 (current user authorisation)
 
@@ -12,7 +12,7 @@ Related: [App Flow](<C:/Users/Edison Tee/Downloads/SME/APP_FLOW.md>), [PRD](<C:/
 
 Create a calm, practical workspace for small retail and service businesses. The bakery remains the initial synthetic fixture. The customer experience should feel personal and clear; the owner experience should make decisions and upcoming fulfilment easy to scan.
 
-Working identity: **CustomerBuddy**, with the configured business name in the header. Public product name: **CustomerLane**; internal identifiers/UI retain CustomerBuddy until a separate branding migration. UX1 uses a general layered mark, restrained indigo accents and white panels. Typography, catalogue records and transaction details communicate the local demo without invented product photography. The Instagram reference was unavailable, so no unseen reference style is claimed. PRD FR-18–FR-27 continue to define the independent final-project requirements.
+Product and visible interface identity: **BizBuddy**, with the configured business name in the header. Existing internal package/database identifiers retain `customerbuddy` for compatibility; historical screenshots and reference packs retain their original branding. UX1 uses a general layered mark, restrained indigo accents and white panels. Typography, catalogue records and transaction details communicate the local demo without invented product photography. The Instagram reference was unavailable, so no unseen reference style is claimed. PRD FR-18–FR-27 continue to define the independent final-project requirements.
 
 The main design priority is confidence in the next business action: what is being ordered, what it costs, what has been reserved, and who must act next.
 

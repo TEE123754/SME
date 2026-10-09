@@ -20,7 +20,7 @@ pool.on('error', () =>
 const local = localRuntime(config.documentPath);
 const server = createApp(config, pool, local.reset).listen(config.API_PORT, config.API_HOST, () => {
   console.log(
-    `CustomerBuddy API http://${config.API_HOST}:${config.API_PORT} (local scripted demo)`,
+    `BizBuddy API http://${config.API_HOST}:${config.API_PORT} (local scripted demo)`,
   );
 });
 

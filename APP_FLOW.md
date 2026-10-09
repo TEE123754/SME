@@ -1,4 +1,4 @@
-# CustomerBuddy - App Flow
+# BizBuddy - App Flow
 
 ## Expanded local demo E1 (current user authorisation)
 

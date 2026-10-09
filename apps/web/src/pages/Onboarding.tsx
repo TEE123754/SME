@@ -22,7 +22,7 @@ export function Landing() {
     <>
       <section className="landing-hero">
         <div>
-          <span className="shop-kicker">CustomerBuddy · Small business, less busywork</span>
+          <span className="shop-kicker">BizBuddy · Small business, less busywork</span>
           <h1>
             Your business.
             <br />

@@ -1,4 +1,4 @@
-# CustomerBuddy - WorkBuddy Independent Rebuild Brief
+# BizBuddy - WorkBuddy Independent Rebuild Brief
 
 ## Expanded local demo E1 (current user authorisation)
 
@@ -120,7 +120,7 @@ No external HF inference account/API, competing agent framework, replacement clo
 ## 6. Prompt to give WorkBuddy after the reference pack is ready
 
 ```text
-Rebuild CustomerBuddy completely in a fresh WorkBuddy project using the
+Rebuild BizBuddy completely in a fresh WorkBuddy project using the
 attached reference pack. Read REFERENCE_INDEX.md, then the PRD, TRD,
 App Flow, Design Brief, Backend Schema, fixtures and acceptance cases.
 

@@ -1,10 +1,10 @@
 <div align="center">
-  <h1>CustomerLane</h1>
+  <h1>BizBuddy</h1>
   <h3>The connected customer and operations workspace for SMEs.</h3>
   <p><strong>1 Customer, 1 Agent. Every relationship connected to the next business action.</strong></p>
   <p>Bring your storefront, customer conversations, orders and daily decisions into one place.</p>
   <p>
-    <a href="#why-customerlane-for-your-sme">Why CustomerLane</a> &nbsp;|&nbsp;
+    <a href="#why-bizbuddy-for-your-sme">Why BizBuddy</a> &nbsp;|&nbsp;
     <a href="#what-you-can-do">Features</a> &nbsp;|&nbsp;
     <a href="#how-to-run-locally">Run Locally</a> &nbsp;|&nbsp;
     <a href="#app-flow">App Flow</a> &nbsp;|&nbsp;
@@ -15,17 +15,17 @@
 
 ---
 
-## Why CustomerLane for Your SME
+## Why BizBuddy for Your SME
 
 **Your next order should move your business forward, without adding another spreadsheet or another conversation to chase.**
 
-CustomerLane helps **small and medium-sized enterprises (SMEs)** connect the customer relationship to the work behind it. Publish your products or services, let customers browse and book, review exact quotes, track deposits and balances, and see the decisions that need your attention in one workspace.
+BizBuddy helps **small and medium-sized enterprises (SMEs)** connect the customer relationship to the work behind it. Publish your products or services, let customers browse and book, review exact quotes, track deposits and balances, and see the decisions that need your attention in one workspace.
 
-For an SME owner, personal service is a strength. CustomerLane keeps that personal touch connected to a reliable record: what the customer asked for, what they agreed to, what has been paid and what happens next.
+For an SME owner, personal service is a strength. BizBuddy keeps that personal touch connected to a reliable record: what the customer asked for, what they agreed to, what has been paid and what happens next.
 
 The current experience supports small retail and service businesses, with a Malaysian home bakery as the first example. It is particularly suited to businesses with repeat customers, scheduled fulfilment and limited daily capacity.
 
-| When your business needs… | CustomerLane helps you… |
+| When your business needs… | BizBuddy helps you… |
 | --- | --- |
 | A clearer way to take orders | Offer a storefront, shopping bag and guided checkout |
 | Customer service with continuity | Keep each customer's conversations, history and permitted preferences together |
@@ -39,7 +39,7 @@ The current experience supports small retail and service businesses, with a Mala
 
 ## 1 Customer, 1 Agent
 
-One customer should feel recognised across visits. CustomerLane keeps a persistent customer context that connects saved conversations, order history and consented preferences. The owner gets one customer-agent card per relationship, with a focused interaction view and direct takeover when human help is needed.
+One customer should feel recognised across visits. BizBuddy keeps a persistent customer context that connects saved conversations, order history and consented preferences. The owner gets one customer-agent card per relationship, with a focused interaction view and direct takeover when human help is needed.
 
 Customers review their purchases explicitly. Owners retain control over payments, exceptions and business commitments. Optional preference memory, reminder settings and marketing consent remain separate choices.
 
@@ -105,7 +105,7 @@ pnpm dev
 | `pnpm db:seed` | Adds the initial bakery, owner, customers and history; repeated seeding preserves existing edits |
 | `pnpm dev` | Starts the database, web/API services and the local job scheduler |
 
-Open **[CustomerLane locally](http://127.0.0.1:5173)**. Use `127.0.0.1` consistently because protected writes check the configured origin. The [API health endpoint](http://127.0.0.1:3001/api/v1/health) reports service readiness.
+Open **[BizBuddy locally](http://127.0.0.1:5173)**. Use `127.0.0.1` consistently because protected writes check the configured origin. The [API health endpoint](http://127.0.0.1:3001/api/v1/health) reports service readiness.
 
 Already have this checkout? Run the install/setup steps from its root directory. Keep the generated `.env`; do not overwrite it with placeholder values from `.env.example`.
 
@@ -220,7 +220,7 @@ This walkthrough shows the central product promise: **a customer commitment and 
 
 ![Customer checkout on mobile](docs/evidence/ux1/checkout-mobile.png)
 
-The public product name is CustomerLane. The current interface and internal package namespace retain the earlier CustomerBuddy name.
+The product and interface name is BizBuddy (adopted 9 October 2026). Internal package namespaces, database identifiers and existing route aliases retain `customerbuddy` for compatibility. Historical screenshots and reference packs retain their original branding. Tencent WorkBuddy is the separate rebuild platform.
 
 ## Technology and Architecture
 
@@ -296,4 +296,4 @@ Run the appropriate verification gate after completing its build checklist in [t
 
 Report problems or suggest improvements through [GitHub Issues](https://github.com/TEE123754/SME/issues). Include the affected workflow, reproduction steps and expected behaviour, with private information removed from screenshots or logs.
 
-**See how CustomerLane fits your SME:** run it locally, create your business workspace, and follow one order from first enquiry to fulfilment.
+**See how BizBuddy fits your SME:** run it locally, create your business workspace, and follow one order from first enquiry to fulfilment.
